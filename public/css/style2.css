@@ -1,0 +1,321 @@
+.logo{
+	width: 300px;
+
+}
+.navmenu{
+	background: #fff;
+}
+
+.navmenu1{
+	margin-left: 17%;
+	color: #777;
+
+}
+.nav1 li{
+        position: relative;
+        float: left;
+        list-style-type: none;    	
+    }
+
+.nav1 .sub-menu{
+    display: none;
+    position: absolute;
+    top: 10;
+    left: 0;
+    width: 150px;
+    z-index: 1;
+    background-color: #fff;
+    padding: 5px 20px;
+}
+.sub-menu li{
+	width: 130px;
+	height: 30px;
+}
+.nav1 li a{
+	color: #777;
+}
+.nav1 li a:hover{
+	color: #000;
+}
+.sub-menu1 li{
+	width: 130px;
+	height: 25px;
+}
+.nav1 li:hover>.sub-menu{
+    display: block;
+}
+
+.nav1>li>.sub-menu{
+    top: 40px;
+    left: 0;
+}
+
+/* .nav1 .sub-menu1{
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 100%;
+    width: 200px;
+    background-color: #fff;
+    padding: 5px 20px;
+}
+ 
+.nav1 li:hover>.sub-menu1{
+    display: block;
+}
+
+.nav1>li>.sub-menu1{
+    top: 40px;
+    left: 0;
+}
+ */
+
+.spanright{
+	margin-left: 7px;
+	padding-right: 0px;
+}
+
+
+.divslide{
+	margin-top: -20px;
+	}
+.divmain1{
+	text-align: center;
+}
+.p2{
+	color: #777;
+	font-size: 13px;
+}
+.imgmain1{
+	height: 50px;
+	margin-bottom: 10px;
+	margin-top: 30px;
+}
+.p3{
+	color: #777;
+	font-size: 13px;
+	padding-bottom: 10px;
+	border-bottom: 2px solid #000;
+	margin-bottom: 20px;
+}
+
+.imghover:hover{
+	transition: all 0.5s ease-in;
+	filter: brightness(.5);	
+}
+.xemtatca{
+	background: #ccc;
+	padding: 10px 20px;
+	border-radius: 20px;
+	color: #000;
+	margin-left: 45%;
+}
+.divxemtatca{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.divthuonghieu{
+	padding-top: 40px;
+	padding-bottom: 90px;
+
+}
+.textbot{
+	color:#ffa200;
+}
+.textbot1{
+	color: white;
+}
+.divfooter{
+	background-color: #000;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.divfooter a{
+	color: #777;
+}
+.divfooter a:hover{
+	color: #fff;
+	text-decoration: none;
+}
+.back-to-top{
+	position: absolute;
+	right: 10px;
+	bottom: -460%;
+	font-size: 30px;
+
+}
+.back-to-top-gioithieu{
+	position: absolute;
+	right: 20px;
+	bottom: -270%;
+	font-size: 30px;
+
+}
+.sale{
+	padding: 2px 6px;
+	border-radius: 30px;
+	background: #ffa200;
+	color: #fff;
+}
+.slgiohang{
+	padding: 2px 6px;
+	border-radius: 30px;
+	background: #ffa200;
+	color: #fff;
+}
+.spangia{
+	float: right;	
+	color: #777;
+}
+.spangia1{
+	color: red;
+	font-size: 15px;
+}
+.main1 a:hover{
+	text-decoration: none;
+}
+.sanpham{
+	margin-top: 15px;
+}
+.thumbnail1{
+	box-shadow: 3px 0px 7px 1px #ccc;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+/* .thumbnail1:hover{
+	transition: all 0.5s ease-in;
+	filter: brightness(.3);	
+	box-shadow: 3px 0px 15px 1px #D17E7E;
+}
+ */
+ .thumbnail1:hover{
+	box-shadow: 3px 0px 15px 1px #D17E7E;
+}
+.divborder{
+	border-bottom: 1px solid #e8e8e8; 
+	margin-bottom: 10px;
+}
+.ulcon{
+	display: none;
+}
+/* end form home */
+/* form gioi thieu */
+
+.imggioithieu{
+	margin-left: 25%;
+	margin-top: 30px;
+	margin-bottom: 50px;
+}
+.imggioithieu1{
+	width:700px;
+	margin-bottom: 40px;
+}
+.textgioithieu{
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+/* end form gioi thieu */
+/* from dang nhap */
+.formdangnhap{
+	margin-top: 130px;	
+}
+.dangnhap{
+	margin-left: 30%;
+	padding-top: 20px;
+	padding-bottom: 30px;
+	margin-bottom: 20px;
+	box-shadow: 3px 0px 3px 3px #ccc;
+}
+.textbox{
+	font-size: 20px;
+}
+.btndangnhapdangky{
+	background: #ffa200;
+	border:none;
+	padding: 10px 40px;
+	color: #fff;
+	float: right;
+}
+.spandk{
+	font-size: 30px;
+	color: #777;
+
+}
+.adk1{
+	margin-left: 43%;
+	color: #ffa200;
+}
+.adk1:hover{
+	color: #ffa200;
+
+}
+.divlogin1{
+	margin-bottom: 15px;
+	margin-top: 30px;
+}
+.divlogin2{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.spanlogin{
+	border: 1px solid #000;
+	font-size: 20px;
+	padding: 3px;
+	vertical-align: bottom;	
+
+}
+.form-control{
+	border-radius: 0;
+
+}
+.input-group-addon{
+	border-radius: 0;
+	
+}
+/* end fomr dang nhap */
+/* form dang ky  */
+.adk{
+	color: #ffa200;
+}
+.adk:hover{
+	color: #ffa200;
+}
+/* end form dang ky */
+
+/* form chi tiet san pham */
+
+/* end chi tiet san pham */
+/* form gio hang */
+.th1{
+	text-align: center;
+	width: 12.5%;
+	color: #777;
+}
+.td1{
+	width: 12.5%;
+	text-align: center;
+	color: #777;
+}
+
+.spansp{
+	line-height: 140px;
+}
+.spanprice1{
+	color: red;
+	margin-right: 10px;
+}
+.total{
+	font-size: 25px;
+	color: #ffa200;
+}
+.totalprice{
+	font-size: 25px;
+	color: red;
+}
+
+/* end gio hang */
+.navbar-fixed-top{
+	border-bottom: 2px solid #fa2;
+}
