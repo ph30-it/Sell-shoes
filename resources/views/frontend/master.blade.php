@@ -4,7 +4,7 @@
 <title>MV Shoes | @yield('title')</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="{{asset('css/style1.css')}}" rel="stylesheet" type="text/css" media="all" />
+<link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/style2.css')}}">
 <link rel="stylesheet" href="{{asset('css/product.css')}}">
@@ -44,13 +44,13 @@
         });
      </script>
 <!-- start menu -->     
-<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/megamenu.js"></script>
+<link href="{{asset('css/megamenu.css')}}" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="{{asset('js/megamenu.js')}}"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 <!-- end menu -->
 <!-- top scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="{{asset('js/move-top.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/easing.js')}}"></script>
    <script type="text/javascript">
 		jQuery(document).ready(function($) {
 			$(".scroll").click(function(event){		
@@ -61,30 +61,43 @@
 	</script>
 </head>
 <body>
-  <div class="header-top">
-	 <div class="wrap"> 
-		<div class="logo">
-			<a href="index.html"><img src="images/logo.png" alt=""/></a>
-	    </div>
-	    <div class="cssmenu">
-		   <ul>
-			 <li class="active"><a href="register.html">Sign up & Save</a></li> 
-			 <li><a href="shop.html">Store Locator</a></li> 
-			 <li><a href="login.html">My Account</a></li> 
-			 <li><a href="checkout.html">CheckOut</a></li> 
-		   </ul>
-		</div>
-		<ul class="icon2 sub-icon2 profile_img">
-			<li><a class="active-icon c2" href="#"> </a>
-				<ul class="sub-icon2 list">
-					<li><h3>Products</h3><a href=""></a></li>
-					<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-				</ul>
-			</li>
-		</ul>
-		<div class="clear"></div>
- 	</div>
-   </div>
+	<div class="header-top">
+	<div class="container-fluid navmenu">	
+			<div class="container ">
+					<ul class="nav navbar-nav" style="height: 40px;">
+						<li><a href="{{ route('home-user')}}"><img src="{{asset('images/logo2.png')}}" class="logo" style="width: 218px"></a></li>
+						<!-- <li class="li1"><a href="#">Hỗ trợ: 0356796738 - DucManhIT</a></li> -->
+					</ul>
+					
+					<ul class="nav navbar-nav navbar-right ulnav" style="margin-top: 20px;">
+						<li>
+							<form class="navbar-form navbar-left" role="search" action="{{asset('search/')}}" method="GET">
+								<div class="form-group">
+									<input name="result" type="text" class="form-control" placeholder="Tìm kiếm..." style="width: 100%; margin-right: 150px;">
+								</div>
+							</form>
+						</li>
+						@if(Auth::check())
+							<li><a><span>Xin Chào!</span><span style='color:#4CAF50; font-weight:bold; font-size:17px;'>{{ Auth::user()->name }}</span></a></li>
+							<li><a href='{{route('logout')}}'><span style="color: #000">ĐăngXuất</span></a></li>
+						@else
+							<li><a href="{{route('login')}}"><span class="glyphicon glyphicon-user" style="font-size: 20px; color: #000;"></span></a></li>
+						@endif
+						<li>
+							<ul class="icon2 sub-icon2 profile_img">
+								<li><a class="active-icon c2" href="#"  style="margin-top: 1%"> </a>
+									<ul class="sub-icon2 list">
+										<li><h3>Products</h3><a href=""></a></li>
+										<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+		</div>	
+  	</div>
+	
    <div class="header-bottom">
    	<div class="wrap">
    		<!-- start header menu -->
