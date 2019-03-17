@@ -15,13 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('test', function () {
-    return view('frontend.login');
+    return view('frontend.checkout');
 });
 
 Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 	
 	Route::group(['prefix'=> 'admin'], function(){
 		Route::get('/', 'AdminController@index')->name('home-admin');
+		//user management
+		Route::group(['prefix'=>'user'], function(){
+			Route::get('/', 'UserController@index')->name('user-admin');
+			Route::get('add', 'UserController@create')->name('show-add-user');
+			Route::post('add', 'UserController@store')->name('add-user');
+			Route::get('{id}/edit', 'UserController@edit')->name('show-edit-user');
+			Route::put('{id}/edit', 'UserController@update')->name('edit-user');
+			Route::delete('{id}/delete', 'UserController@destroy')->name('delete-user');
+		});
 	});
 });
 
