@@ -4,12 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AddUserRequest;
-use App\Http\Requests\EditUserRequest;
-use App\User;
-use Hash;
 
-class UserController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data['users'] = User::select()->paginate(10);
-        return view('admin.user.admin',$data);
+        //
     }
 
     /**
@@ -29,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.add');
+        //
     }
 
     /**
@@ -38,15 +33,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AddUserRequest $request)
+    public function store(Request $request)
     {
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role_id = $request->role_id;
-        $user->save();
-        return redirect()->intended('admin/user')->with('status','Thêm tài khoản thành công!');
+        //
     }
 
     /**
@@ -68,8 +57,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $data['users'] = User::find($id);
-        return view('admin.user.edit', $data);
+        //
     }
 
     /**
@@ -79,16 +67,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EditUserRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        //dd($request);
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role_id = $request->role_id;
-        $user->save();
-        return redirect()->intended('admin/user')->with('status','Sửa tài khoản thành công!');
+        //
     }
 
     /**
@@ -99,7 +80,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return redirect()->back()->with('status','Xóa tài khoản thành công!');
+        //
     }
 }

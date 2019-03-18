@@ -4,12 +4,11 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AddUserRequest;
-use App\Http\Requests\EditUserRequest;
-use App\User;
-use Hash;
+use App\Category;
+use App\Http\Requests\AddCategoryRequest;
+use App\Http\Requests\EditCategoryRequest;
 
-class UserController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data['users'] = User::select()->paginate(10);
-        return view('admin.user.admin',$data);
+        $data['category_list'] = Category::all();
+        return view('admin.category.category',$data);
     }
 
     /**
@@ -29,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.add');
+        //
     }
 
     /**
@@ -38,15 +37,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AddUserRequest $request)
+    public function store(AddCategoryRequest $request)
     {
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role_id = $request->role_id;
-        $user->save();
-        return redirect()->intended('admin/user')->with('status','Thêm tài khoản thành công!');
+        $category = new Category;
+        $category->name = $request->name;
+        $category->slug = str_slug($request->name);
+        $category->description = $request->description;
+        $category->save();
+        return redirect()->route('category-admin')->with('status','Thêm danh mục thành công!');
     }
 
     /**
@@ -68,8 +66,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $data['users'] = User::find($id);
-        return view('admin.user.edit', $data);
+        $category = Category::find($id);
+        return view('admin.category.editcategory',compact('category'));
     }
 
     /**
@@ -79,16 +77,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EditUserRequest $request, $id)
+    public function update(EditCategoryRequest $request, $id)
     {
-        //dd($request);
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role_id = $request->role_id;
-        $user->save();
-        return redirect()->intended('admin/user')->with('status','Sửa tài khoản thành công!');
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->slug = str_slug($request->name);
+        $category->description = $request->description;
+        $category->save();
+        return redirect()->route('category-admin')->with('status','Sửa danh mục thành công!');
     }
 
     /**
@@ -99,7 +95,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return redirect()->back()->with('status','Xóa tài khoản thành công!');
+        Category::destroy($id);
+        return redirect()->back()->with('status','Xóa danh mục thành công!');
     }
 }
