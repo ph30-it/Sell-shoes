@@ -31,6 +31,14 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::put('{id}/edit', 'UserController@update')->name('edit-user');
 			Route::delete('{id}/delete', 'UserController@destroy')->name('delete-user');
 		});
+		//Category management
+		Route::group(['prefix' => 'category'], function(){
+			Route::get('/', 'CategoryController@index')->name('category-admin');
+			Route::post('add', 'CategoryController@store')->name('add-category');
+			Route::get('{id}/edit', 'CategoryController@edit')->name('show-edit-category');
+			Route::put('{id}/edit', 'CategoryController@update')->name('edit-category');
+			Route::delete('{id}/delete', 'CategoryController@destroy')->name('delete-category');
+		});
 	});
 });
 
