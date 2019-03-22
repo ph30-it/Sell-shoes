@@ -102,7 +102,7 @@ class ProductController extends Controller
         $product_size = Product_size::find($id);
         $product_size->quantity = $request->qty;
         $product_size->save();
-        return response()->json([], 400);
+        // return response()->json([], 400);
 
     }
 

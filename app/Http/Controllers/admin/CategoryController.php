@@ -44,16 +44,23 @@ class CategoryController extends Controller
         // $category->slug = str_slug($request->name);
         // $category->description = $request->description;
         // $category->save();
-        $data = $request->all();
-        $data['slug'] = str_slug($data['slug']);
-        $cate= Category::create($data);
-        if ($cate) {
-        // session()->flash('status', 'Thêm danh mục thành công!')
-        return redirect()->route('category-admin')->with('status','Thêm danh mục thành công!');
+        try {
+
+            DB::beginTransaction();
+            $data = $request->all();
+            $data['slug'] = str_slug($data['slug']);
+            $cate= Category::create($data);
+            DB::commit();
+            if ($cate) {
+            // session()->flash('status', 'Thêm danh mục thành công!')
+            return redirect()->route('category-admin')->with('status','Thêm danh mục thành công!');
+                
+            }
+        } catch (\Exception $ex) {
+            
+            return redirect()->back()->with('status','Thêm danh mục fail!');
             
         }
-        return redirect()->back()->with('status','Thêm danh mục fail!');
-        
 
     }
 
