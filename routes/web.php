@@ -39,6 +39,21 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::put('{id}/edit', 'CategoryController@update')->name('edit-category');
 			Route::delete('{id}/delete', 'CategoryController@destroy')->name('delete-category');
 		});
+		//Product management
+		Route::group(['prefix'=>'product'], function(){
+			Route::get('/', 'ProductController@index')->name('product-admin');
+			Route::get('add', 'ProductController@create')->name('show-add-product');
+			Route::post('add', 'ProductController@store')->name('add-product');
+			//view list product size
+			Route::get('{id}/view-product-size', 'ProductController@productSize')->name('view-product-size');
+			//update quantity product size
+			Route::get('view-product-size/update', 'ProductController@updateQuantity')->name('update-product-size');
+			//delete size
+			Route::delete('{id}/view-product-size/delete','ProductController@destroySize')->name('delete-product-size');
+			Route::get('edit/{id}', 'ProductController@edit');
+			Route::put('edit/{id}', 'ProductController@update');
+			Route::delete('delete/{id}', 'ProductController@destroy');
+		});
 	});
 });
 

@@ -17,7 +17,7 @@ class CreateProductSizesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('product_id');
             $table->integer('size_id');
-            $table->integer('quantity');
+            $table->integer('quantity')->default(0);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             //$table->timestamps();

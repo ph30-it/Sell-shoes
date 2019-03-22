@@ -1,7 +1,7 @@
 @extends('admin.master')
 @section('title','Add User')
 @section('content')
-<div class="container pull-right">
+<div class="container" style="margin-left: 17%">
     <div id="navbar" class="row">
         <div class="col-sm-12">
             <nav class="navbar navbar-default">

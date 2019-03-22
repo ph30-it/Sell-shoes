@@ -7,6 +7,8 @@
 <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{asset('css/datepicker3.css')}}" rel="stylesheet">
 <link href="{{asset('css/admin.css')}}" rel="stylesheet">
+<link href="{{asset('css/form.css')}}" rel="stylesheet">
+<!-- <link href="{{asset('css/custom.css')}}" rel="stylesheet"> -->
 <script type="text/javascript" src="{{asset('editor/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('js/lumino.glyphs.js')}}"></script>
 </head>
@@ -32,7 +34,7 @@
 		<ul class="nav menu">
 			<li role="presentation" class="divider"></li>
 			<li class="active"><a href="{{ route('home-admin')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Trang chủ</a></li>
-			<li><a href=""><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Sản phẩm</a></li>
+			<li><a href="{{route('product-admin')}}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Sản phẩm</a></li>
 			<li><a href="{{route('category-admin')}}"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Danh mục</a></li>
 			<li><a href="{{route('user-admin')}}"><svg class="glyph stroked male user"><use xlink:href="#stroked-male-user"></use></svg> Tài khoản</a></li>
 			<li><a href=""><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"></use></svg> Đơn hàng</a></li>

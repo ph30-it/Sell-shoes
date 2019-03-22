@@ -1,7 +1,7 @@
 @extends('admin.master')
 @section('title','User Management')
 @section('content')
-<div class="container pull-right">
+<div class="container" style="margin-left: 17%">
     <div id="navbar" class="row">
     	<div class="col-sm-12">
         	<nav class="navbar navbar-default">
@@ -46,11 +46,11 @@
                             <span class="btn-info">User</span>
                         @endif
                     </td>
-                    <td><a href="{{route('show-edit-user',$user->id)}}">Edit</a></td>
+                    <td><a href="{{route('show-edit-user',$user->id)}}" class="btn btn-default">Edit</a></td>
                     <td><form action="{{route('delete-user',$user->id)}}" method="POST">
                         @method('DELETE')
                         @csrf()
-                        <button onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Delete</button>
+                        <button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="btn btn-warning">Delete</button>
                     </form>
                     </td>
                 </tr>
