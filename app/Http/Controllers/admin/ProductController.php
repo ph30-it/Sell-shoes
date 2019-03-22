@@ -60,6 +60,7 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
         $product->save();
+        // $product= Product::create($data);
 
 
 
@@ -91,7 +92,7 @@ class ProductController extends Controller
     }
     public function productSize($id)
     {
-        $data['product_size'] = Product_size::select()->where('product_id',$id)->get();
+        $data['product_size'] = Product_size::where('product_id',$id)->get();
         
         return view('admin.product.viewProductSize',$data);
     }
@@ -101,6 +102,8 @@ class ProductController extends Controller
         $product_size = Product_size::find($id);
         $product_size->quantity = $request->qty;
         $product_size->save();
+        return response()->json([], 400);
+
     }
 
     public function destroySize($id)

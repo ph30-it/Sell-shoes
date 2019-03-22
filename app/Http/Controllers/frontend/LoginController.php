@@ -42,7 +42,7 @@ class LoginController extends Controller
         if(Auth::attempt($user_data,$remember)){
             return redirect()->route('home-user');
         }else{
-            return redirect()->back()->with('status', 'Sai tài khoản hoặc mật khẩu');
+            return redirect()->back()->with('status', trans('message.login_fail'));
         }
     }
 

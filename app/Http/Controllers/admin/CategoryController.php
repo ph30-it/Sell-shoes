@@ -39,12 +39,22 @@ class CategoryController extends Controller
      */
     public function store(AddCategoryRequest $request)
     {
-        $category = new Category;
-        $category->name = $request->name;
-        $category->slug = str_slug($request->name);
-        $category->description = $request->description;
-        $category->save();
+        // $category = new Category;
+        // $category->name = $request->name;
+        // $category->slug = str_slug($request->name);
+        // $category->description = $request->description;
+        // $category->save();
+        $data = $request->all();
+        $data['slug'] = str_slug($data['slug']);
+        $cate= Category::create($data);
+        if ($cate) {
+        // session()->flash('status', 'Thêm danh mục thành công!')
         return redirect()->route('category-admin')->with('status','Thêm danh mục thành công!');
+            
+        }
+        return redirect()->back()->with('status','Thêm danh mục fail!');
+        
+
     }
 
     /**
@@ -96,6 +106,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::destroy($id);
+        // $category= Category:find(1);
+        // $category->product()->delete();
+        // $category->delete();
         return redirect()->back()->with('status','Xóa danh mục thành công!');
     }
 }

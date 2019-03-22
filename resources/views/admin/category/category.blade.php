@@ -27,6 +27,9 @@
 								<div class="form-group">
 									<label>Tên danh mục:</label>
 	    							<input required type="text" name="name" class="form-control" placeholder="Tên danh mục...">
+	    							@if($errors->has('name'))
+	    							<p class="alert alert-danger">{{$errors->first('name')}}</p>
+	    							@endif
 								</div>
 								<div class="form-group">
 									<label>Mô tả:</label><br>
