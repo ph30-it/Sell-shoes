@@ -34,6 +34,43 @@ class Product_sizeTableSeeder extends Seeder
             'product_id' => 2,
             'size_id' => 2,
             'quantity' => 500,  
+        ],
+        [
+            'product_id' => 2,
+            'size_id' => 3,
+            'quantity' => 500,  
+        ],
+        [
+            'product_id' => 3,
+            'size_id' => 2,
+            'quantity' => 300,  
+        ],
+        [
+            'product_id' => 3,
+            'size_id' => 3,
+            'quantity' => 300,  
+        ],
+        [
+            'product_id' => 3,
+            'size_id' => 4,
+            'quantity' => 400,  
+        ],
+        [
+            'product_id' => 4,
+            'size_id' => 2,
+            'quantity' => 500,  
+        ],[
+            'product_id' => 4,
+            'size_id' => 4,
+            'quantity' => 200,  
+        ],[
+            'product_id' => 4,
+            'size_id' => 5,
+            'quantity' => 200,  
+        ],[
+            'product_id' => 4,
+            'size_id' => 6,
+            'quantity' => 200,  
         ]
     ]); 
     }

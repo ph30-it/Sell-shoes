@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/style2.css')}}">
 <link rel="stylesheet" href="{{asset('css/product.css')}}">
+<link href="{{asset('css/form.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{asset('css/detail1.css')}}">
 <link rel="stylesheet" href="{{asset('css/bootstrap-theme.min.css')}}">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>

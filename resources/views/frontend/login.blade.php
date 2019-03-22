@@ -28,6 +28,7 @@
 								<span>*</span>
 								<input type="password" value="" name="password">
 							</p>
+
 							@if(count($errors) > 0)
 								<div class="alert alert-danger">
 									@foreach($errors->all() as $error)
@@ -40,6 +41,12 @@
 									{{ session('status') }}
 								</div>
 						 	@endif
+						 	 <div class="sky-form">
+						 	 	<label>
+									<input type="checkbox" value="remember">
+									Ghi nhớ đăng nhập
+								</label>
+						 	 </div>
 							 <p id="login-form-remember">
 								<label><a href="#">Forget Your Password ? </a></label>
 							 </p>

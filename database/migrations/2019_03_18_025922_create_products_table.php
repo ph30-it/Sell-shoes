@@ -19,9 +19,9 @@ class CreateProductsTable extends Migration
             $table->string('slug');
             $table->text('description')->default(Null);
             $table->integer('price');
-            $table->integer('quantity');
+            $table->integer('quantity')->default(0);
             $table->integer('sale');
-            $table->integer('feagured')->default(0);
+            $table->integer('featured')->default(0);
             $table->integer('status');
             $table->integer('category_id');
             $table->integer('brand_id');
