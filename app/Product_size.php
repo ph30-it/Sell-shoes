@@ -12,12 +12,12 @@ class Product_size extends Model
         'product_id', 'size_id', 'quantity',
     ];
 
-    /*public function product()
+    public function product()
     {
     	return $this->belongsTo('App\Product');
     }
 
-    public function size()
+   /* public function size()
     {
     	return $this->belongsTo('App\Size');
     }*/

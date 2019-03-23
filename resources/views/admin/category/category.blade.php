@@ -68,7 +68,7 @@
 				                    		<form action="{{route('delete-category',$item->id)}}" method="POST">
 				                    			@csrf()
 				                    			@method('DELETE')
-				                    			<button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="btn btn-danger">
+				                    			<button onclick="return confirm('Bạn có chắc chắn muốn xóa? Warning: Tất cả những sản phẩm thuộc danh mục này cũng bị xóa!')" class="btn btn-danger">
 				                    				<span class="glyphicon glyphicon-trash"></span> Xóa
 				                    			</button>
 				                    		</form>

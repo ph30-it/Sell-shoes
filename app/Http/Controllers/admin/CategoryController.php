@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Category;
 use App\Http\Requests\AddCategoryRequest;
 use App\Http\Requests\EditCategoryRequest;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -39,28 +40,19 @@ class CategoryController extends Controller
      */
     public function store(AddCategoryRequest $request)
     {
-        // $category = new Category;
-        // $category->name = $request->name;
-        // $category->slug = str_slug($request->name);
-        // $category->description = $request->description;
-        // $category->save();
         try {
-
-            DB::beginTransaction();
-            $data = $request->all();
-            $data['slug'] = str_slug($data['slug']);
-            $cate= Category::create($data);
-            DB::commit();
-            if ($cate) {
-            // session()->flash('status', 'Thêm danh mục thành công!')
-            return redirect()->route('category-admin')->with('status','Thêm danh mục thành công!');
-                
+                DB::beginTransaction();
+                $data = $request->all();
+                $data['slug'] = str_slug($data['name']);
+                $cate= Category::create($data);
+                DB::commit();
+                // session()->flash('status', 'Thêm danh mục thành công!')
+                return redirect()->route('category-admin')->with('status','Thêm danh mục thành công!');  
+            }catch (\Exception $ex) {
+            
+                return redirect()->back()->with('status','Thêm danh mục thất bại!');
+            
             }
-        } catch (\Exception $ex) {
-            
-            return redirect()->back()->with('status','Thêm danh mục fail!');
-            
-        }
 
     }
 
@@ -100,8 +92,12 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->slug = str_slug($request->name);
         $category->description = $request->description;
-        $category->save();
-        return redirect()->route('category-admin')->with('status','Sửa danh mục thành công!');
+        if ($category->save()) {
+           return redirect()->route('category-admin')->with('status','Sửa danh mục thành công!');
+        }else{
+            return redirect()->route('category-admin')->with('status','Sửa danh mục thành thất bại!');
+        }
+        
     }
 
     /**
@@ -112,10 +108,19 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::destroy($id);
-        // $category= Category:find(1);
-        // $category->product()->delete();
-        // $category->delete();
-        return redirect()->back()->with('status','Xóa danh mục thành công!');
+
+        try{
+        DB::beginTransaction();
+            $category= Category::find($id);
+            //dd($category->products());
+            $category->products()->delete();
+            $category->delete();
+            DB::commit();
+            return redirect()->back()->with('status','Xóa danh mục thành công!');  
+        } catch (\Exception $ex) {
+            
+            return redirect()->back()->with('status','Xóa danh mục thất bại!');
+            
+        }
     }
 }

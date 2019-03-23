@@ -31,5 +31,9 @@ class Product extends Model
     {
     	return $this->belongstoMany('App\Size', 'product_sizes');
 	}
+    public function productSize()
+    {
+        return $this->hasMany('App\Product_size');
+    }
 
 }

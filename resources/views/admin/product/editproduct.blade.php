@@ -15,23 +15,22 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">Sửa sản phẩm</div>
 					<div class="panel-body">
-						<form method="POST" enctype="multipart/form-data">
+						<form method="POST" enctype="multipart/form-data" action="{{route('edit-product',$product->id)}}">
 							@csrf()
-							@include('errors.error')
+							@method('PUT')
 							<div class="row" style="margin-bottom:40px">
 								<div class="col-xs-8">
 									<div class="form-group" >
 										<label>Tên sản phẩm</label>
 										<input required type="text" name="name" class="form-control" value="{{$product->name}}">
+										@if($errors->has('name'))
+		    								<p class="alert alert-danger">{{$errors->first('name')}}</p>
+		    							@endif
 									</div>
 									<div class="form-group" >
 										<label>Giá sản phẩm(VNĐ)</label>
-										<input required type="text" name="price" class="form-control" value="{{number_format($product->price)}}">
-									</div>
-									<div class="form-group">
-										<label>Số lượng</label>
-										<input type="text" name="quantity" class="form-control" value="{{$product->quantity}}">
-									</div>
+										<input required type="text" name="price" class="form-control" value="{{$product->price}}">
+									</div>									
 									<div class="form-group">
 										<label>Size Giày</label>
 										    
@@ -83,7 +82,7 @@
 								<div class="form-group col-xs-4">
 										<label>Ảnh sản phẩm</label>
 										<input id="img" type="file" name="img" class="form-control hidden" onchange="changeImg(this)">
-					                    <img id="avatar" class="thumbnail" width="300px" src="{{asset('images/'.$images->name)}}">
+					                    <img id="avatar" class="thumbnail" width="300px" src="{{asset($images->slug)}}">
 								</div>
 							</div>
 							<input type="submit" name="submit" value="Sửa" class="btn btn-primary"/>

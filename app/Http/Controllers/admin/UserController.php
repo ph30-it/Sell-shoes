@@ -40,13 +40,14 @@ class UserController extends Controller
      */
     public function store(AddUserRequest $request)
     {
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role_id = $request->role_id;
-        $user->save();
-        return redirect()->intended('admin/user')->with('status','Thêm tài khoản thành công!');
+        $data = $request->except('_token','submit');
+        $data['password'] = Hash::make($request->password);
+        $user = User::create($data);
+        if ($user) {
+            return redirect()->route('user-admin')->with('status','Thêm tài khoản thành công!');
+        }else{
+            return redirect()->route('user-admin')->with('status','Thêm tài khoản thất bại!');
+        }
     }
 
     /**
@@ -82,13 +83,14 @@ class UserController extends Controller
     public function update(EditUserRequest $request, $id)
     {
         //dd($request);
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role_id = $request->role_id;
-        $user->save();
-        return redirect()->intended('admin/user')->with('status','Sửa tài khoản thành công!');
+        $data = $request->except('_token','submit','_method');
+        $data['password'] = Hash::make($request->password);
+        $user = User::where('id',$id)->update($data);
+        if ($user) {
+            return redirect()->route('user-admin')->with('status','Sửa tài khoản thành công!');
+        }else{
+            return redirect()->route('user-admin')->with('status','Sửa tài khoản thất bại!');
+        }
     }
 
     /**
@@ -99,7 +101,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return redirect()->back()->with('status','Xóa tài khoản thành công!');
+        $user = User::destroy($id);
+        if ($user) {
+            return redirect()->back()->with('status','Xóa tài khoản thành công!');
+        }else{
+            return redirect()->back()->with('status','Xóa tài khoản thất bại!');
+        }
     }
 }

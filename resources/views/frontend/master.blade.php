@@ -4,7 +4,7 @@
 <title>MV Shoes | @yield('title')</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
+<link href="{{asset('css/style3.css')}}" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/style2.css')}}">
 <link rel="stylesheet" href="{{asset('css/product.css')}}">
@@ -66,7 +66,7 @@
 	<div class="container-fluid navmenu">	
 			<div class="container ">
 					<ul class="nav navbar-nav" style="height: 40px;">
-						<li><a href="{{ route('home-user')}}"><img src="{{asset('images/logo2.png')}}" class="logo" style="width: 218px"></a></li>
+						<li><a href="{{ route('home-user')}}" id="logohover"><img src="{{asset('images/logo2.png')}}" class="logo" style="width: 218px;"></a></li>
 						<!-- <li class="li1"><a href="#">Hỗ trợ: 0356796738 - DucManhIT</a></li> -->
 					</ul>
 					

@@ -89,9 +89,13 @@
 												<td>{{$product->created_at}}</td>
 												<td>{{$product->updated_at}}</td>
 												<td style="line-height: 25px">
-													<a href="{{asset('admin/product/edit/'.$product->id)}}" class="btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a><br>
-													<a href="{{asset('admin/product/delete/'.$product->id)}}" 
-														onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a><br>
+													<a href="{{route('show-edit-product',$product->id)}}" class="btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a><br>
+													<form action="{{route('delete-product',$product->id)}}" method="POST">
+														@csrf
+														@method('DELETE')
+														<button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="btn-danger">Xóa</button>
+													</form>
+													
 													<a href="{{route('view-product-size',$product->id)}}" class="btn-success">Sizes</a><br>
 													<a href="{{route('view-product-size',$product->id)}}" class="btn-info">Images</a>
 												</td>

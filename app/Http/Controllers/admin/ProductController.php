@@ -22,7 +22,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data['productlist'] = Product::select()->paginate(8);
+        $data['productlist'] = Product::paginate(8);
        
         return view('admin.product.product',$data);
     }
@@ -46,48 +46,39 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddProductRequest $request)
     {
         //dd($request);
-        $product = new Product;
-        $product->name = $request->name;
-        $product->slug = str_slug($request->name);
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->sale = $request->sale;
-        $product->featured = $request->featured;
-        $product->status = $request->status;
-        $product->category_id = $request->category_id;
-        $product->brand_id = $request->brand_id;
-        $product->save();
-        // $product= Product::create($data);
+        try {
+            DB::beginTransaction();
+            $data = $request->except('_token','img','size');
+            $data['slug'] = str_slug($data['name']);
+            $product = Product::create($data);
 
-
-
-
-        $product_id = DB::table('products')->max('id');
-
-        if ($request->hasFile('img')) {
-            $filename = $request->img->getClientOriginalName();
-            $newName = '/images/product/'.md5(microtime(true)).$filename;
-            $request->img->move(public_path('/images/product'), $newName);
-
-            $images = new Image;
-            $images->name = $filename;
-            $images->product_id = $product_id;
-            $images->slug = $newName;
-            $images->status = 1;
-            $images->save();
-
-        }
-
-        foreach ($request->size as $item) {
+            foreach ($request->size as $item) {
             Product_size::insert([
-            'product_id' => $product_id,
+            'product_id' => $product->id,
             'size_id' => $item,
              ]);
-        }
-        return redirect()->route('admin-product');
+            }
+
+            if ($request->hasFile('img')) {
+                $filename = $request->img->getClientOriginalName();
+                $newName = '/images/product/'.md5(microtime(true)).$filename;
+                $request->img->move(public_path('/images/product'), $newName);
+                Image::create([
+                   'name' => $filename,
+                   'product_id' => $product->id,
+                   'slug' => $newName,
+                   'status' => 1,
+                ]);        
+            }
+            DB::commit();
+             return redirect()->route('product-admin')->with('status','Thêm sản phẩm thành công!');
+        } catch (\Exception $e) {
+            return redirect()->route('product-admin')->with('status','Thêm sản phẩm thất bại!');
+        }   
+        
 
     }
     public function productSize($id)
@@ -108,8 +99,12 @@ class ProductController extends Controller
 
     public function destroySize($id)
     {
-        Product_size::destroy($id);
-        return back()->with('status','Xóa kích thước thành công!');
+        $size = Product_size::destroy($id);
+        if ($size) {
+            return back()->with('status','Xóa kích thước thành công!');
+        }else{
+            return back()->with('status','Xóa kích thước thất bại!');
+        }
     }
     /**
      * Display the specified resource.
@@ -135,7 +130,6 @@ class ProductController extends Controller
         $data['product_size'] = Product::find($id)->sizes;
         $data['categories'] = Category::all();
         $data['images'] = Product::find($id)->images->where('status',1)->first();
-  
         return view('admin.product.editproduct',$data);
     }
 
@@ -147,10 +141,29 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-    }
+    {         
+          try {
+            DB::beginTransaction();
+            $data = $request->except('_token','img','size','_method','submit');
+            $data['slug'] = str_slug($data['name']);
+            //dd($data);
+            Product::where('id',$id)->update($data);
 
+            if ($request->hasFile('img')) {
+                $filename = $request->img->getClientOriginalName();
+                $newName = '/images/product/'.md5(microtime(true)).$filename;
+                $request->img->move(public_path('/images/product'), $newName);
+                Image::where('product_id',$id)->update([
+                   'name' => $filename,
+                   'slug' => $newName,
+                ]);        
+            }
+            DB::commit();
+             return redirect()->route('product-admin')->with('status','Sửa sản phẩm thành công!');
+        } catch (\Exception $e) {
+            return redirect()->route('product-admin')->with('status','Sửa sản phẩm thất bại!');
+        }  
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -159,6 +172,15 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+        DB::beginTransaction();
+            $product = Product::find($id);
+            $product->productSize()->delete();
+            $product->delete();
+            DB::commit();
+            return redirect()->back()->with('status','Xóa sản phẩm thành công!');  
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('status','Xóa sản phẩm thất bại!');
+        }
     }
 }

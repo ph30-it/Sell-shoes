@@ -50,9 +50,9 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::get('view-product-size/update', 'ProductController@updateQuantity')->name('update-product-size');
 			//delete size
 			Route::delete('{id}/view-product-size/delete','ProductController@destroySize')->name('delete-product-size');
-			Route::get('edit/{id}', 'ProductController@edit');
-			Route::put('edit/{id}', 'ProductController@update');
-			Route::delete('delete/{id}', 'ProductController@destroy');
+			Route::get('{id}/edit', 'ProductController@edit')->name('show-edit-product');
+			Route::put('{id}/edit', 'ProductController@update')->name('edit-product');
+			Route::delete('{id}/delete', 'ProductController@destroy')->name('delete-product');
 		});
 	});
 });
