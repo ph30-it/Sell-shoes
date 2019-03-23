@@ -23,6 +23,9 @@
 									<div class="form-group" >
 										<label>Tên sản phẩm</label>
 										<input required type="text" name="name" class="form-control">
+										@if($errors->has('name'))
+		    								<p class="alert alert-danger">{{$errors->first('name')}}</p>
+		    							@endif
 									</div>
 									<div class="form-group" >
 										<label>Giá sản phẩm</label>

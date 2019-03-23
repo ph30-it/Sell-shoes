@@ -24,12 +24,14 @@ class AddProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'img'=>'image'
+            'name'=> 'unique:products,name',
+            //'img'=>'image'
         ];
     }
     public function messages(){
         return [
-            'img.image'=>'Hãy chọn đúng định dạng ảnh'
+            'name.unique' => 'Tên sản phẩm đã bị trùng',
+            //'img.image'=>'Hãy chọn đúng định dạng ảnh'
         ];
     }
 }

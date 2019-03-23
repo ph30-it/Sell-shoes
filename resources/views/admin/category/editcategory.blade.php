@@ -19,13 +19,15 @@
 							<form action="{{route('edit-category',$category->id)}}" method="POST">
 								@method('PUT')
 								@csrf()
-								@include('errors.error')
 								<div class="form-group">
 									<label>Tên danh mục:</label>
 	    							<input required type="text" name="name" class="form-control" placeholder="Tên danh mục..." value="{{$category->name}}">
+	    							@if($errors->has('name'))
+	    							<p class="alert alert-danger">{{$errors->first('name')}}</p>
+	    							@endif
 								</div>
 								<div class="form-group">
-									<label>Mô tả:</label>
+									<div><label>Mô tả:</label></div>
 									<textarea name="description" id="" cols="54" rows="10" class="" style="padding: 10px">
 										{{$category->description}}
 									</textarea>

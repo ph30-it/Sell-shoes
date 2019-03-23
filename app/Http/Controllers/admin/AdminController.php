@@ -4,6 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Category;
+use App\Product;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -14,7 +17,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $product = Product::count('id');
+        $category = Category::count('id');
+        $user = User::count('id');
+        return view('admin.index',compact('product','category','user'));
     }
 
     /**

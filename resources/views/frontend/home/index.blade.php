@@ -1,388 +1,179 @@
 @extends('frontend.master')
 @section('title', 'Home')
 @section('content')
-       <div class="index-banner">
-       	  <div class="wmuSlider example1" style="height: 560px;">
-			  <div class="wmuSliderWrapper">
-				  <article style="position: relative; width: 100%; opacity: 1;"> 
-				   	<div class="banner-wrap">
-					   	<div class="slider-left">
-							<img src="images/banner1.jpg" alt=""/> 
-						</div>
-						 <div class="slider-right">
-						    <h1>Classic</h1>
-						    <h2>White</h2>
-						    <p>Lorem ipsum dolor sit amet</p>
-						    <div class="btn"><a href="shop.html">Shop Now</a></div>
-						 </div>
-						 <div class="clear"></div>
-					 </div>
-					</article>
-				   <article style="position: absolute; width: 100%; opacity: 0;"> 
-				   	 <div class="banner-wrap">
-					   	<div class="slider-left">
-							<img src="images/banner2.jpg" alt=""/> 
-						</div>
-						 <div class="slider-right">
-						    <h1>Classic</h1>
-						    <h2>White</h2>
-						    <p>Lorem ipsum dolor sit amet</p>
-						    <div class="btn"><a href="shop.html">Shop Now</a></div>
-						 </div>
-						 <div class="clear"></div>
-					 </div>
-				   </article>
-				   <article style="position: absolute; width: 100%; opacity: 0;">
-				   	<div class="banner-wrap">
-					   	<div class="slider-left">
-							<img src="images/banner1.jpg" alt=""/> 
-						</div>
-						 <div class="slider-right">
-						    <h1>Classic</h1>
-						    <h2>White</h2>
-						    <p>Lorem ipsum dolor sit amet</p>
-						    <div class="btn"><a href="shop.html">Shop Now</a></div>
-						 </div>
-						 <div class="clear"></div>
-					 </div>
-				   </article>
-				   <article style="position: absolute; width: 100%; opacity: 0;">
-				   	<div class="banner-wrap">
-					   	<div class="slider-left">
-							<img src="images/banner2.jpg" alt=""/> 
-						</div>
-						 <div class="slider-right">
-						    <h1>Classic</h1>
-						    <h2>White</h2>
-						    <p>Lorem ipsum dolor sit amet</p>
-						    <div class="btn"><a href="shop.html">Shop Now</a></div>
-						 </div>
-						 <div class="clear"></div>
-					 </div>
-				   </article>
-				   <article style="position: absolute; width: 100%; opacity: 0;"> 
-				   	 <div class="banner-wrap">
-					   	<div class="slider-left">
-							<img src="images/banner1.jpg" alt=""/> 
-						</div>
-						 <div class="slider-right">
-						    <h1>Classic</h1>
-						    <h2>White</h2>
-						    <p>Lorem ipsum dolor sit amet</p>
-						    <div class="btn"><a href="shop.html">Shop Now</a></div>
-						 </div>
-						 <div class="clear"></div>
-					 </div>
-			      </article>
-				</div>
-                <a class="wmuSliderPrev">Previous</a><a class="wmuSliderNext">Next</a>
-                <ul class="wmuSliderPagination">
-                	<li><a href="#" class="">0</a></li>
-                	<li><a href="#" class="">1</a></li>
-                	<li><a href="#" class="wmuActive">2</a></li>
-                	<li><a href="#">3</a></li>
-                	<li><a href="#">4</a></li>
-                  </ul>
-                 <a class="wmuSliderPrev">Previous</a><a class="wmuSliderNext">Next</a><ul class="wmuSliderPagination"><li><a href="#" class="wmuActive">0</a></li><li><a href="#" class="">1</a></li><li><a href="#" class="">2</a></li><li><a href="#" class="">3</a></li><li><a href="#" class="">4</a></li></ul></div>
-            	 <script src="js/jquery.wmuSlider.js"></script> 
-				 <script type="text/javascript" src="js/modernizr.custom.min.js"></script> 
-						<script>
-       						 $('.example1').wmuSlider();         
-   						</script> 	           	      
-             </div>
-             <div class="main">
-                <div class="wrap">
-             	  <div class="content-top">
-             		<div class="lsidebar span_1_of_c1">
-					  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing</p>
-					</div>
-					<div class="cont span_2_of_c1">
-					  <div class="social">	
-					     <ul>	
-						  <li class="facebook"><a href="#"><span> </span></a><div class="radius"> <img src="images/radius.png"><a href="#"> </a></div><div class="border hide"><p class="num">1.51K</p></div></li>
-						 </ul>
-			   		   </div>
-					   <div class="social">	
-						   <ul>	
-							  <li class="twitter"><a href="#"><span> </span></a><div class="radius"> <img src="images/radius.png"></div><div class="border hide"><p class="num">1.51K</p></div></li>
-						  </ul>
-			     		</div>
-						 <div class="social">	
-						   <ul>	
-							  <li class="google"><a href="#"><span> </span></a><div class="radius"> <img src="images/radius.png"></div><div class="border hide"><p class="num">1.51K</p></div></li>
-						   </ul>
-			    		 </div>
-						 <div class="social">	
-						   <ul>	
-							  <li class="dot"><a href="#"><span> </span></a><div class="radius"> <img src="images/radius.png"></div><div class="border hide"><p class="num">1.51K</p></div></li>
-						  </ul>
-			     		</div>
-						<div class="clear"> </div>
-					  </div>
-					  <div class="clear"></div>			
-				   </div>
-				  <div class="content-bottom">
-				   <div class="box1">
-				    <div class="col_1_of_3 span_1_of_3"><a href="single.html">
-				     <div class="view view-fifth">
-				  	  <div class="top_box">
-					  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
-					  	<p class="m_2">Lorem ipsum</p>
-				         <div class="grid_img">
-						   <div class="css3"><img src="images/pic.jpg" alt=""/></div>
-					          <div class="mask">
-	                       		<div class="info">Quick View</div>
-			                  </div>
-	                    </div>
-                       <div class="price">£480</div>
-					   </div>
-					    </div>
-					   <span class="rating">
-				        <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
-				        <label for="rating-input-1-5" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
-				        <label for="rating-input-1-4" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
-				        <label for="rating-input-1-3" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
-				        <label for="rating-input-1-2" class="rating-star"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
-				        <label for="rating-input-1-1" class="rating-star"></label>&nbsp;
-		        	  (45)
-		    	      </span>
-						 <ul class="list">
-						  <li>
-						  	<img src="images/plus.png" alt=""/>
-						  	<ul class="icon1 sub-icon1 profile_img">
-							  <li><a class="active-icon c1" href="#">Add To Bag </a>
-								<ul class="sub-icon1 list">
-									<li><h3>sed diam nonummy</h3><a href=""></a></li>
-									<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-								</ul>
-							  </li>
-							 </ul>
-						   </li>
-					     </ul>
-			    	    <div class="clear"></div>
-			    	</a></div>
-				    <div class="col_1_of_3 span_1_of_3"><a href="single.html">
-				     <div class="view view-fifth">
-				  	  <div class="top_box">
-					  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
-					  	<p class="m_2">Lorem ipsum</p>
-					    <div class="grid_img">
-						   <div class="css3"><img src="images/pic1.jpg" alt=""/></div>
-					          <div class="mask">
-	                       		<div class="info">Quick View</div>
-			                  </div>
-	                    </div>
-                       <div class="price">£480</div>
-					   </div>
-					    </div>
-					   <span class="rating">
-				        <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
-				        <label for="rating-input-1-5" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
-				        <label for="rating-input-1-4" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
-				        <label for="rating-input-1-3" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
-				        <label for="rating-input-1-2" class="rating-star"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
-				        <label for="rating-input-1-1" class="rating-star"></label>&nbsp;
-		        	  (45)
-		    	      </span>
-						 <ul class="list">
-						  <li>
-						  	<img src="images/plus.png" alt=""/>
-						  	<ul class="icon1 sub-icon1 profile_img">
-							  <li><a class="active-icon c1" href="#">Add To Bag </a>
-								<ul class="sub-icon1 list">
-									<li><h3>sed diam nonummy</h3><a href=""></a></li>
-									<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-								</ul>
-							  </li>
-							 </ul>
-						   </li>
-					     </ul>
-			    	    <div class="clear"></div>
-			    	</a></div>
-				    <div class="col_1_of_3 span_1_of_3"><a href="single.html">
-				     <div class="view view-fifth">
-				  	  <div class="top_box">
-					  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
-					  	<p class="m_2">Lorem ipsum</p>
-				         <div class="grid_img">
-						   <div class="css3"><img src="images/pic2.jpg" alt=""/></div>
-					          <div class="mask">
-	                       		<div class="info">Quick View</div>
-			                  </div>
-	                    </div>
-                       <div class="price">£480</div>
-					   </div>
-					    </div>
-					   <span class="rating">
-				        <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
-				        <label for="rating-input-1-5" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
-				        <label for="rating-input-1-4" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
-				        <label for="rating-input-1-3" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
-				        <label for="rating-input-1-2" class="rating-star"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
-				        <label for="rating-input-1-1" class="rating-star"></label>&nbsp;
-		        	  (45)
-		    	      </span>
-						 <ul class="list">
-						  <li>
-						  	<img src="images/plus.png" alt=""/>
-						  	<ul class="icon1 sub-icon1 profile_img">
-							  <li><a class="active-icon c1" href="#">Add To Bag </a>
-								<ul class="sub-icon1 list">
-									<li><h3>sed diam nonummy</h3><a href=""></a></li>
-									<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-								</ul>
-							  </li>
-							 </ul>
-						   </li>
-					     </ul>
-			    	    <div class="clear"></div>
-			    	</a></div>
-				  <div class="clear"></div>
-			  </div>
-			  <div class="box1">
-				  <div class="col_1_of_3 span_1_of_3"><a href="single.html">
-				     <div class="view view-fifth">
-				  	  <div class="top_box">
-					  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
-					  	<p class="m_2">Lorem ipsum</p>
-				         <div class="grid_img">
-						   <div class="css3"><img src="images/pic3.jpg" alt=""/></div>
-					          <div class="mask">
-	                       		<div class="info">Quick View</div>
-			                  </div>
-	                    </div>
-                       <div class="price">£480</div>
-					   </div>
-					    </div>
-					   <span class="rating">
-				        <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
-				        <label for="rating-input-1-5" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
-				        <label for="rating-input-1-4" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
-				        <label for="rating-input-1-3" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
-				        <label for="rating-input-1-2" class="rating-star"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
-				        <label for="rating-input-1-1" class="rating-star"></label>&nbsp;
-		        	  (45)
-		    	      </span>
-						 <ul class="list">
-						  <li>
-						  	<img src="images/plus.png" alt=""/>
-						  	<ul class="icon1 sub-icon1 profile_img">
-							  <li><a class="active-icon c1" href="#">Add To Bag </a>
-								<ul class="sub-icon1 list">
-									<li><h3>sed diam nonummy</h3><a href=""></a></li>
-									<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-								</ul>
-							  </li>
-							 </ul>
-						   </li>
-					     </ul>
-			    	    <div class="clear"></div>
-			    	</a></div>
-				    <div class="col_1_of_3 span_1_of_3"><a href="single.html">
-				     <div class="view view-fifth">
-				  	  <div class="top_box">
-					  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
-					  	<p class="m_2">Lorem ipsum</p>
-				         <div class="grid_img">
-						   <div class="css3"><img src="images/pic4.jpg" alt=""/></div>
-					          <div class="mask">
-	                       		<div class="info">Quick View</div>
-			                  </div>
-	                    </div>
-                       <div class="price">£480</div>
-					   </div>
-					    </div>
-					   <span class="rating">
-				        <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
-				        <label for="rating-input-1-5" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
-				        <label for="rating-input-1-4" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
-				        <label for="rating-input-1-3" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
-				        <label for="rating-input-1-2" class="rating-star"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
-				        <label for="rating-input-1-1" class="rating-star"></label>&nbsp;
-		        	  (45)
-		    	      </span>
-						 <ul class="list">
-						  <li>
-						  	<img src="images/plus.png" alt=""/>
-						  	<ul class="icon1 sub-icon1 profile_img">
-							  <li><a class="active-icon c1" href="#">Add To Bag </a>
-								<ul class="sub-icon1 list">
-									<li><h3>sed diam nonummy</h3><a href=""></a></li>
-									<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-								</ul>
-							  </li>
-							 </ul>
-						   </li>
-					     </ul>
-			    	    <div class="clear"></div>
-			    	</a></div>
-				   <div class="col_1_of_3 span_1_of_3"><a href="single.html">
-				     <div class="view view-fifth">
-				  	  <div class="top_box">
-					  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
-					  	<p class="m_2">Lorem ipsum</p>
-				         <div class="grid_img">
-						   <div class="css3"><img src="images/pic5.jpg" alt=""/></div>
-					          <div class="mask">
-	                       		<div class="info">Quick View</div>
-			                  </div>
-	                    </div>
-                       <div class="price">£480</div>
-					   </div>
-					    </div>
-					   <span class="rating">
-				        <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1">
-				        <label for="rating-input-1-5" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1">
-				        <label for="rating-input-1-4" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1">
-				        <label for="rating-input-1-3" class="rating-star1"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1">
-				        <label for="rating-input-1-2" class="rating-star"></label>
-				        <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
-				        <label for="rating-input-1-1" class="rating-star"></label>&nbsp;
-		        	  (45)
-		    	      </span>
-						 <ul class="list">
-						  <li>
-						  	<img src="images/plus.png" alt=""/>
-						  	<ul class="icon1 sub-icon1 profile_img">
-							  <li><a class="active-icon c1" href="#">Add To Bag </a>
-								<ul class="sub-icon1 list">
-									<li><h3>sed diam nonummy</h3><a href=""></a></li>
-									<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-								</ul>
-							  </li>
-							 </ul>
-						   </li>
-					     </ul>
-			    	    <div class="clear"></div>
-			    	</a></div>
-				  <div class="clear"></div>
-			    </div>
-			  </div>
-			 </div>
+			@include('frontend.home.banner')
+             @include('frontend.home.follow')
+				   @include('frontend.home.giaohang')
         </div>
+		  <div class="content-bottom">
+				  <div style="background: #000; color: #fff; padding: 0.5px 10px;">
+				  		<div class="container">
+				  			<h4>SẢN PHẨM MỚI</h3>
+				  			<p style="font-size: 12px;">Hàng luôn được cật nhật thường xuyên</p>
+				  		</div>
+				  </div>
+				   <div class="container" style="margin-top: 20px">
+				     @for($i=1; $i<=8; $i++)
+				    
+				     	<div class="col-sm-3">
+				    	<div style="border: 1px solid #ccc; padding: 2%; padding-left: 0; padding-bottom: 0;margin-bottom: 30px">
+				    		<div class="view view-fifth">
+							  	  <div class="top_box">
+								  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
+								  	<p class="m_2">Adidas</p>
+							         <div class="grid_img">
+									   <div class="css3"><img src="images/giay1.jpg" alt=""/></div>
+								          <div class="mask">
+				                       		<div class="info">Quick View</div>
+						                  </div>
+				                    </div>
+			                       <div><span style="margin-right: 10px" class="price-del"><del>750,000 ₫</del></span><span class="price">750,000 ₫</span></div>
+								   </div>
+								    </div>
+								   <span class="rating" style="line-height: 10px">
+								   		<span style="margin-left: 15px">Chọn một kích thước</span><br>
+								   		<label for="'custom_radio'.$i">
+								   			<input type="radio" value="38" name=size id="'custom_radio'.$i">
+								   			<span>41</span>
+								   		</label>
+								   		<label for="'custom_radio1'.$i">
+								   			<input type="radio" value="38" name=size id="'custom_radio1'.$i">
+								   			<span>42</span>
+								   		</label>
+								   		<label for="'custom_radio2'.$i">
+								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
+								   			<span>43</span>
+								   		</label>
+								   		<label for="'custom_radio2'.$i">
+								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
+								   			<span>43</span>
+								   		</label>
+								   		<label for="'custom_radio2'.$i">
+								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
+								   			<span>43</span>
+								   		</label>
+							         
+							         
+					    	      </span>
+									 <ul class="list">
+									  <li>
+									  	<img src="images/anh1.png" alt=""/>
+									  	<ul class="icon1 sub-icon1 profile_img">
+										  <li><a class="active-icon c1" href="#">+ Add To Card </a>
+											<ul class="sub-icon1 list">
+												<li><h3>sed diam nonummy</h3><a href=""></a></li>
+												<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+											</ul>
+										  </li>
+										 </ul>
+									   </li>
+								     </ul>
+						    	    <div class="clear"></div>
+						    	</a>
+				    	</div>
+				     </div>
+				     @endfor
+				    
+				  <div class="clear"></div>
+			  </div>
+			  <div style="background: #000; color: #fff; padding: 0.5px 10px;">
+				  		<div class="container">
+				  			<h4>SẢN PHẨM HOT</h3>
+				  			<p style="font-size: 12px;">Hàng luôn được cật nhật thường xuyên</p>
+				  		</div>
+				  </div>
+				   <div class="container" style="margin-top: 20px">
+				     @for($i=1; $i<=4; $i++)
+				    
+				     	<div class="col-sm-3">
+				    	<div style="border: 1px solid #ccc; padding: 2%; padding-left: 0; padding-bottom: 0;margin-bottom: 30px">
+				    		<div class="view view-fifth">
+							  	  <div class="top_box">
+								  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
+								  	<p class="m_2">Adidas</p>
+							         <div class="grid_img">
+									   <div class="css3"><img src="images/giay1.jpg" alt=""/></div>
+								          <div class="mask">
+				                       		<div class="info">Quick View</div>
+						                  </div>
+				                    </div>
+			                       <div><span style="margin-right: 10px" class="price-del"><del>750,000 ₫</del></span><span class="price">750,000 ₫</span></div>
+								   </div>
+								    </div>
+								   <span class="rating" style="line-height: 10px">
+								   		<span style="margin-left: 15px">Chọn một kích thước</span><br>
+								   		<label for="'custom_radio'.$i">
+								   			<input type="radio" value="38" name=size id="'custom_radio'.$i">
+								   			<span>41</span>
+								   		</label>
+								   		<label for="'custom_radio1'.$i">
+								   			<input type="radio" value="38" name=size id="'custom_radio1'.$i">
+								   			<span>42</span>
+								   		</label>
+								   		<label for="'custom_radio2'.$i">
+								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
+								   			<span>43</span>
+								   		</label>
+								   		<label for="'custom_radio2'.$i">
+								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
+								   			<span>43</span>
+								   		</label>
+								   		<label for="'custom_radio2'.$i">
+								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
+								   			<span>43</span>
+								   		</label>
+							         
+							         
+					    	      </span>
+									 <ul class="list">
+									  <li>
+									  	<img src="images/anh1.png" alt=""/>
+									  	<ul class="icon1 sub-icon1 profile_img">
+										  <li><a class="active-icon c1" href="#">+ Add To Card </a>
+											<ul class="sub-icon1 list">
+												<li><h3>sed diam nonummy</h3><a href=""></a></li>
+												<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+											</ul>
+										  </li>
+										 </ul>
+									   </li>
+								     </ul>
+						    	    <div class="clear"></div>
+						    	</a>
+				    	</div>
+				     </div>
+				     @endfor
+				    
+				  <div class="clear"></div>
+			  </div>
+			  </div>
+		
+					<div  style="background: #000; color: #fff; padding: 0.5px 10px;">
+						<div class="container">
+							<h4>THƯƠNG HIỆU NỔI TIẾNG</h3>
+				  			<p style="font-size: 12px;">Những thương hiệu hàng đầu thế giới</p>
+						</div>
+					</div>
+				<div class="container" style="padding: 30px">
+					<div class="col-sm-2">
+						<a href="@"><img src="{{asset('images/thuonghieu/adidas.png')}}" width="130px"></a>
+					</div>
+					<div class="col-sm-2">
+						<a href="@"><img src="{{asset('images/thuonghieu/nike.png')}}" width="130px"></a>
+					</div>
+					<div class="col-sm-2">
+						<a href="@"><img src="{{asset('images/thuonghieu/puma.png')}}" width="130px"></a>
+					</div>
+					<div class="col-sm-2">
+						<a href="@"><img src="{{asset('images/thuonghieu/jordam.png')}}" width="130px"></a>
+					</div>
+					<div class="col-sm-2">
+						<a href="@"><img src="{{asset('images/thuonghieu/fila.png')}}" width="130px"></a>
+					</div>
+					<div class="col-sm-2">
+						<a href="@"><img src="{{asset('images/thuonghieu/newbalanece.png')}}" width="130px"></a>
+					</div>
+				</div>
         <div class="footer">
        	  <div class="footer-top">
        		<div class="wrap">
