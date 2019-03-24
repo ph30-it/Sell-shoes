@@ -64,5 +64,9 @@ Route::group(['namespace'=>'frontend'], function(){
 	Route::get('login','LoginController@index')->name('login')->middleware('CheckLogedIn');
 	Route::post('login','LoginController@postLogin')->name('postLogin');
 	Route::get('logout','LoginController@logout')->name('logout');
+
+	Route::get('san-pham','ProductController@index')->name('list-all-product');
+	Route::get('gioi-thieu','FrontendController@indexGioiThieu')->name('info-shop');
+	Route::get('lien-he','ContactController@index')->name('contact-user');
 	
 });
