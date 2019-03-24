@@ -6,7 +6,7 @@
 				   @include('frontend.home.giaohang')
         </div>
 		  <div class="content-bottom">
-				  <div style="background: #000; color: #fff; padding: 0.5px 10px;">
+				  <div style="background: #000; color: #fff; padding: 10px 10px;margin-top: 10px;">
 				  		<div class="container">
 				  			<h4>SẢN PHẨM MỚI</h3>
 				  			<p style="font-size: 12px;">Hàng luôn được cật nhật thường xuyên</p>
@@ -31,7 +31,7 @@
 								   </div>
 								    </div>
 								   <span class="rating" style="line-height: 10px">
-								   		<span style="margin-left: 15px">Chọn một kích thước</span><br>
+								   		<span style="margin-left: 7px">Chọn một kích thước</span><br>
 								   		<label for="'custom_radio'.$i">
 								   			<input type="radio" value="38" name=size id="'custom_radio'.$i">
 								   			<span>41</span>
@@ -59,7 +59,7 @@
 									  <li>
 									  	<img src="images/anh1.png" alt=""/>
 									  	<ul class="icon1 sub-icon1 profile_img">
-										  <li><a class="active-icon c1" href="#">+ Add To Card </a>
+										  <li><a class="active-icon c1" href="#">+ Thêm Vào Giỏ </a>
 											<ul class="sub-icon1 list">
 												<li><h3>sed diam nonummy</h3><a href=""></a></li>
 												<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
@@ -76,7 +76,7 @@
 				    
 				  <div class="clear"></div>
 			  </div>
-			  <div style="background: #000; color: #fff; padding: 0.5px 10px;">
+			  <div style="background: #000; color: #fff; padding: 10px 10px;">
 				  		<div class="container">
 				  			<h4>SẢN PHẨM HOT</h3>
 				  			<p style="font-size: 12px;">Hàng luôn được cật nhật thường xuyên</p>
@@ -148,7 +148,7 @@
 			  </div>
 			  </div>
 		
-					<div  style="background: #000; color: #fff; padding: 0.5px 10px;">
+					<div  style="background: #000; color: #fff; padding: 10px 10px;">
 						<div class="container">
 							<h4>THƯƠNG HIỆU NỔI TIẾNG</h3>
 				  			<p style="font-size: 12px;">Những thương hiệu hàng đầu thế giới</p>

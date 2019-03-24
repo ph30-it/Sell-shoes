@@ -34,7 +34,7 @@ body{
 	background:#fff;
 }
 .wrap{
-	width:80%;
+	width:77%;
 	margin:0 auto;
 	-moz-transition:all .2s linear;
 	-webkit-transition:all .2s linear; 
@@ -1274,7 +1274,7 @@ p.code {
 }
 /*--shop--*/
 .span_2_of_3 {
-	width: 77.1%;
+	width: 100%;
 }
 .span_1_of_left {
 	width:19.2%;
@@ -1377,7 +1377,8 @@ h3.m_s{
 	margin:0 3.6% 0 0;
 }
 .span_2_of_a1 {
-	width: 65.1%;
+	width: 40.1%;
+	float: left;
 }
 .cont1 {
 	display: block;
@@ -3131,11 +3132,12 @@ p.cart a:hover {
 }	
 label input[type=radio]+span{
 	display: block;
-    padding: 6px 6px;
+    padding: 4px 4.5px;
     background: #fff;
     cursor: pointer;
     border: 1px solid #ccc;
     font-weight: 400;
+    font-size: 12px;
 }					
 input[type = radio]{
 	width: 0;
