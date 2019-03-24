@@ -7,9 +7,11 @@
 <link href="{{asset('css/style3.css')}}" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/style2.css')}}">
+<link rel="stylesheet" href="{{asset('css/style9.css')}}">
 <link rel="stylesheet" href="{{asset('css/product.css')}}">
 <link href="{{asset('css/form.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{asset('css/detail1.css')}}">
+<link rel="stylesheet" href="{{asset('css/etalage.css')}}">
 <link rel="stylesheet" href="{{asset('css/bootstrap-theme.min.css')}}">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
@@ -49,6 +51,31 @@
 <script type="text/javascript" src="{{asset('js/megamenu.js')}}"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 <!-- end menu -->
+<!----details-product-slider--->
+				<!-- Include the Etalage files -->
+					<link rel="stylesheet" href="css/etalage.css">
+					<script src="js/jquery.etalage.min.js"></script>
+				<!-- Include the Etalage files -->
+				<script>
+						jQuery(document).ready(function($){
+			
+							$('#etalage').etalage({
+								thumb_image_width: 300,
+								thumb_image_height: 400,
+								
+								show_hint: true,
+								click_callback: function(image_anchor, instance_id){
+									alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+								}
+							});
+							// This is for the dropdown list example:
+							$('.dropdownlist').change(function(){
+								etalage_show( $(this).find('option:selected').attr('class') );
+							});
+
+					});
+				</script>
+				<!----//details-product-slider--->	
 <!-- top scrolling -->
 <script type="text/javascript" src="{{asset('js/move-top.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/easing.js')}}"></script>

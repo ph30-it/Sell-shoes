@@ -2,6 +2,7 @@
 @section('title', 'Shop')
 @section('content')
        <div class="">
+       	<img src="{{asset('images/collection_image.jpg')}}" alt="">
          <div class="container">
      	    <div class="rsidebar span_1_of_left">
 				   <section  class="sky-form">              	  
@@ -64,7 +65,7 @@
 						</div>
 		       </section>
 		</div>
-		<div class="cont span_2_of_3">
+		<div class="cont" style="width: 77.1%">
 		  <div class="mens-toolbar">
               <div class="sort">
                	<div class="sort-by">
@@ -112,7 +113,9 @@
 								  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
 								  	<p class="m_2">Adidas</p>
 							         <div class="grid_img">
-									   <div class="css3"><img src="images/giay1.jpg" alt=""/></div>
+									   <div class="css3">
+									   		<a href="{{route('detail-product-user')}}"><img src="images/giay1.jpg" alt=""/></a>
+									   </div>
 								          <div class="mask">
 				                       		<div class="info">Quick View</div>
 						                  </div>

@@ -68,5 +68,10 @@ Route::group(['namespace'=>'frontend'], function(){
 	Route::get('san-pham','ProductController@index')->name('list-all-product');
 	Route::get('gioi-thieu','FrontendController@indexGioiThieu')->name('info-shop');
 	Route::get('lien-he','ContactController@index')->name('contact-user');
+
+	Route::group(['prefix'=>'detail'], function(){
+			Route::get('/', 'DetailProductController@index')->name('detail-product-user');
+			
+		});
 	
 });
