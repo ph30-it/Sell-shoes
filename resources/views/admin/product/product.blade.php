@@ -26,7 +26,7 @@
 								<table class="table table-bordered" style="margin-top:20px;text-align: center;">				
 									<thead>
 										<tr class="bg-primary">
-											<th style="text-align: center;">ID</th>
+											<th style="text-align: center; ">ID</th>
 											<th width="20%" style="text-align: center;">Tên Sản phẩm</th>
 											<th style="text-align: center;">Giá sản phẩm</th>
 											<th style="text-align: center;">Khuyến mãi</th>
@@ -48,7 +48,7 @@
 												<td>{{$product->id}}</td>
 												<td>{{$product->name}}</td>
 												<td>{{number_format($product->price,0)}}</td>
-												<td>{{$product->sale}}%</td>
+												<td><span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">{{$product->sale}}%</span></td>
 												<td>
 													<?php 
 														 $sizes = App\Product::find($product->id)->sizes;
@@ -96,16 +96,16 @@
 												</td>
 												<td>{{$product->created_at}}</td>
 												<td>{{$product->updated_at}}</td>
-												<td style="line-height: 25px">
-													<a href="{{route('show-edit-product',$product->id)}}" class="btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a><br>
+												<td style="line-height: 50px">
+													<a href="{{route('show-edit-product',$product->id)}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a><br>
 													<form action="{{route('delete-product',$product->id)}}" method="POST">
 														@csrf
 														@method('DELETE')
-														<button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="btn-danger">Xóa</button>
+														<button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="btn btn-danger">Xóa</button>
 													</form>
 													
-													<a href="{{route('view-product-size',$product->id)}}" class="btn-success">Sizes</a><br>
-													<a href="{{route('view-product-size',$product->id)}}" class="btn-info">Images</a>
+													<a href="{{route('view-product-size',$product->id)}}" class="btn btn-success">Size</a><br>
+													<a href="{{route('view-product-size',$product->id)}}" class="btn btn-info">Ảnh</a>
 												</td>
 											</tr>
 										@endforeach

@@ -3,6 +3,9 @@
 				     		$brand = App\Brand::select('name')->where('id',$product->brand_id)->first();
 				     		$image = App\Image::select('slug')->where('product_id',$product->id)->where('status',1)->first();
 				     		$sizes = App\Product::find($product->id)->sizes;
+				     		if(empty($image)){
+							 	 $image['slug'] = 'images/image.png';
+							 }
 				     	 ?>
 				     	<div class="col-sm-3">
 				    	<div style="border: 1px solid #ccc; padding: 2%; padding-left: 0; padding-bottom: 0;margin-bottom: 30px">
@@ -15,7 +18,13 @@
 								  	<p class="m_2">{{$brand->name}}</p>
 							         <div class="grid_img">
 									   <div class="css3">
-									   	<a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}"><img src="{{asset($image->slug)}}" alt=""/></a>
+									   	<a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}">
+									   		@if($image['slug'])
+									   			<img src="{{asset($image['slug'])}}" alt=""/>
+									   		@else
+												<img src="{{asset($image->slug)}}" alt=""/>
+									   		@endif
+									   	</a>
 									   </div>
 								          <div class="mask">
 				                       		<div class="info"><a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}" style="color: #fff;">Quick View</a></div>
@@ -37,10 +46,10 @@
 									  <li>
 									  	<img src="images/anh1.png" alt=""/>
 									  	<ul class="icon1 sub-icon1 profile_img">
-										  <li><a class="active-icon c1" href="#">+ Thêm Vào Giỏ </a>
+										  <li><button type="submit" class="active-icon c1" style="text-decoration: none; background: #000;color: #fff; border: none;">+ Thêm Vào Giỏ </button>
 											<ul class="sub-icon1 list">
-												<li><h3>sed diam nonummy</h3><a href=""></a></li>
-												<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+												<li><h3>{{$product->name}}</h3><a href=""></a></li>
+												<li><p>{{$product->description}}<a href="">Mạnh Viết - CIT</a></p></li>
 											</ul>
 										  </li>
 										 </ul>

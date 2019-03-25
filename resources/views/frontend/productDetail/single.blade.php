@@ -50,9 +50,9 @@
 								  <span class="reducedfrom">{{number_format($product->price)}}₫</span>
 								  <span class="actual">{{number_format($product->price - $product->price*$product->sale/100)}}₫</span><a href="#">click for offer</a>
 								</div>
-								<h3 class="m_9">Sale off: <span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">41%</span></h3>
+								<h3 class="m_9">Sale off: <span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">{{$product->sale}}%</span></h3>
 					<div class="btn_form" style="margin-top: -30px">
-						<form action="" method="POST">
+						<form action="" method="GET">
 						<div class="options" style="line-height: 15px">
 							<h4 class="m_9">Chọn một kích thước(*)</h4>
 							<div style="padding: 0px 0px 15px 0px;">
@@ -68,7 +68,7 @@
 								@csrf
 								<!-- <input type="submit" value="THÊM VÀO GIỎ" title="" style="margin-right: 15px"><input type="submit" value="MUA NGAY" title=""> -->
 								<button class="btn btnaddcart btn-success" style="margin-right: 10px;padding: 10px; border-radius: 0"><span class="glyphicon glyphicon-shopping-cart" style="margin-right: 10px"></span>THÊM VÀO GIỎ</button>
-								<button  class="btn btnaddcart btn-info" style="width: 150px;padding: 10px; border-radius: 0"><span class="glyphicon glyphicon-ok" style="margin-right: 10px"></span>MUA NGAY</button>
+								<button type="submit"  class="btn btnaddcart btn-info" style="width: 150px;padding: 10px; border-radius: 0"><span class="glyphicon glyphicon-ok" style="margin-right: 10px"></span>MUA NGAY</button>
 					 	</form>
 					</div>
 
@@ -79,10 +79,10 @@
 	    			
 	                <div class="social_single">	
 					   <ul>	
-						  <li class="fb"><a href="#"><span> </span></a></li>
+						  <li class="fb"><a href="https://www.facebook.com/anhthikhonge.anhthichnhuthe"><span> </span></a></li>
 						  <li class="tw"><a href="#"><span> </span></a></li>
-						  <li class="g_plus"><a href="#"><span> </span></a></li>
-						  <li class="rss"><a href="#"><span> </span></a></li>		
+						  <li class="g_plus"><a href="https://mail.google.com"><span> </span></a></li>
+						  <li class="rss"><a href="https://www.instagram.com/lleducmanh/"><span> </span></a></li>		
 					   </ul>
 				    </div>
 				</div>
