@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <title>@yield('title')</title>
 <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{asset('css/datepicker3.css')}}" rel="stylesheet">
@@ -88,7 +89,33 @@
 		        $('#img').click();
 		    });
 		});
+		
+		$(document).ready(function(){
+			function updateQuantity(qty, id){
+			/*console.log(qty);	
+			console.log(id);*/
+
+			$.ajax( function () {
+				url: "{{route('update-product-size')}}", /*url*/
+				method: "GET",
+				data: {
+					qty:qty, 
+					id:id,
+					_token: $('meta[name="csrf-token"]').attr('content')
+				}, 
+				success: function(data) {
+					alert('Số lượng của bạn đã được cập nhật thành công^^'); 
+					location.reload();
+				},
+				error: function($error) {
+					alert('Cật nhật fail!');
+				}
+			});		
+	
+		}
+	});
 	</script>
+
 </body>
 
 </html>

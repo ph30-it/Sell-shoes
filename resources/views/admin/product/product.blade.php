@@ -54,8 +54,11 @@
 														 $sizes = App\Product::find($product->id)->sizes;
 														 $categorys = App\Product::find($product->id)->category;
 														 $images = App\Product::find($product->id)->images->where('status',1)->first();
+														 if(empty($images)){
+														 	 $images['slug'] = 'images/image.png';
+														 }
 														 $quantity = 0;
-														 $total_quantity = App\Product_size::select('quantity')->where('product_id',$product->id)->get();
+														 $total_quantity = App\ProductSize::select('quantity')->where('product_id',$product->id)->get();
 														 //dd($total_quantity);
 													 ?>
 													@foreach($sizes as $item)
@@ -70,7 +73,12 @@
 													@endforeach
 													{{$quantity}}
 												</td>
-												<td><img src="{{asset($images->slug)}}" alt="" width="150px">
+												<td>
+													@if($images['slug'])
+														<img src="{{asset($images['slug'])}}" alt="" width="150px">
+													@else
+														<img src="{{asset($images->slug)}}" alt="" width="150px">
+													@endif
 												</td>
 												<td>{{$product->description}}</td>
 												<td>{{$categorys->name}}</td>
