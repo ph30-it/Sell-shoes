@@ -73,7 +73,7 @@ Route::group(['namespace'=>'frontend'], function(){
 	Route::get('lien-he','ContactController@index')->name('contact-user');
 
 	Route::group(['prefix'=>'detail'], function(){
-			Route::get('/', 'DetailProductController@index')->name('detail-product-user');
+			Route::get('{id}/{slug}.html', 'DetailProductController@index')->name('show-detail-product');
 			
 		});
 	

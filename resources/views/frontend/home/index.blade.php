@@ -13,67 +13,7 @@
 				  		</div>
 				  </div>
 				   <div class="container" style="margin-top: 20px">
-				     @for($i=1; $i<=8; $i++)
-				    
-				     	<div class="col-sm-3">
-				    	<div style="border: 1px solid #ccc; padding: 2%; padding-left: 0; padding-bottom: 0;margin-bottom: 30px">
-				    		<div class="view view-fifth">
-							  	  <div class="top_box">
-								  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
-								  	<p class="m_2">Adidas</p>
-							         <div class="grid_img">
-									   <div class="css3"><img src="images/giay1.jpg" alt=""/></div>
-								          <div class="mask">
-				                       		<div class="info">Quick View</div>
-						                  </div>
-				                    </div>
-			                       <div><span style="margin-right: 10px" class="price-del"><del>750,000 ₫</del></span><span class="price">750,000 ₫</span></div>
-								   </div>
-								    </div>
-								   <span class="rating" style="line-height: 10px">
-								   		<span style="margin-left: 7px">Chọn một kích thước</span><br>
-								   		<label for="'custom_radio'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio'.$i">
-								   			<span>41</span>
-								   		</label>
-								   		<label for="'custom_radio1'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio1'.$i">
-								   			<span>42</span>
-								   		</label>
-								   		<label for="'custom_radio2'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
-								   			<span>43</span>
-								   		</label>
-								   		<label for="'custom_radio2'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
-								   			<span>43</span>
-								   		</label>
-								   		<label for="'custom_radio2'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
-								   			<span>43</span>
-								   		</label>
-							         
-							         
-					    	      </span>
-									 <ul class="list">
-									  <li>
-									  	<img src="images/anh1.png" alt=""/>
-									  	<ul class="icon1 sub-icon1 profile_img">
-										  <li><a class="active-icon c1" href="#">+ Thêm Vào Giỏ </a>
-											<ul class="sub-icon1 list">
-												<li><h3>sed diam nonummy</h3><a href=""></a></li>
-												<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-											</ul>
-										  </li>
-										 </ul>
-									   </li>
-								     </ul>
-						    	    <div class="clear"></div>
-						    	</a>
-				    	</div>
-				     </div>
-				     @endfor
-				    
+				      @include('frontend.home.product-cart')@
 				  <div class="clear"></div>
 			  </div>
 			  <div style="background: #000; color: #fff; padding: 10px 10px;">
@@ -83,66 +23,7 @@
 				  		</div>
 				  </div>
 				   <div class="container" style="margin-top: 20px">
-				     @for($i=1; $i<=4; $i++)
-				    
-				     	<div class="col-sm-3">
-				    	<div style="border: 1px solid #ccc; padding: 2%; padding-left: 0; padding-bottom: 0;margin-bottom: 30px">
-				    		<div class="view view-fifth">
-							  	  <div class="top_box">
-								  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
-								  	<p class="m_2">Adidas</p>
-							         <div class="grid_img">
-									   <div class="css3"><img src="images/giay1.jpg" alt=""/></div>
-								          <div class="mask">
-				                       		<div class="info">Quick View</div>
-						                  </div>
-				                    </div>
-			                       <div><span style="margin-right: 10px" class="price-del"><del>750,000 ₫</del></span><span class="price">750,000 ₫</span></div>
-								   </div>
-								    </div>
-								   <span class="rating" style="line-height: 10px">
-								   		<span style="margin-left: 15px">Chọn một kích thước</span><br>
-								   		<label for="'custom_radio'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio'.$i">
-								   			<span>41</span>
-								   		</label>
-								   		<label for="'custom_radio1'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio1'.$i">
-								   			<span>42</span>
-								   		</label>
-								   		<label for="'custom_radio2'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
-								   			<span>43</span>
-								   		</label>
-								   		<label for="'custom_radio2'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
-								   			<span>43</span>
-								   		</label>
-								   		<label for="'custom_radio2'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
-								   			<span>43</span>
-								   		</label>
-							         
-							         
-					    	      </span>
-									 <ul class="list">
-									  <li>
-									  	<img src="images/anh1.png" alt=""/>
-									  	<ul class="icon1 sub-icon1 profile_img">
-										  <li><a class="active-icon c1" href="#">+ Add To Card </a>
-											<ul class="sub-icon1 list">
-												<li><h3>sed diam nonummy</h3><a href=""></a></li>
-												<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-											</ul>
-										  </li>
-										 </ul>
-									   </li>
-								     </ul>
-						    	    <div class="clear"></div>
-						    	</a>
-				    	</div>
-				     </div>
-				     @endfor
+				     @include('frontend.home.product-hot-cart')
 				    
 				  <div class="clear"></div>
 			  </div>
@@ -228,4 +109,4 @@
 			   </div>
        	 	</div>
        	 </div>
-@endsection      	
+@endsection

@@ -5,67 +5,75 @@
          <div class="wrap">
      	    
 		<div class="cont span_2_of_3">
-			  <div class="labout span_1_of_a1">
+			  <div class="labout span_1_of_a1" style="width: 30%">
 				<!-- start product_slider -->
 				     <ul id="etalage">
 							<li>
 								<a href="optionallink.html">
-									<img class="etalage_thumb_image" src="images/t1.jpg" />
-									<img class="etalage_source_image" src="images/t2.jpg" />
+									<img class="etalage_thumb_image" src="{{asset($image->slug)}}" style="width: 100px"/>
+									<img class="etalage_source_image" src="{{asset($image->slug)}}" />
 								</a>
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="images/t2.jpg" />
-								<img class="etalage_source_image" src="images/t2.jpg" />
+								<img class="etalage_thumb_image" src="{{asset('images/t2.jpg')}}" />
+								<img class="etalage_source_image" src="{{asset('images/t2.jpg')}}" />
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="images/t3.jpg" />
-								<img class="etalage_source_image" src="images/t3.jpg" />
+								<img class="etalage_thumb_image" src="{{asset('images/t3.jpg')}}" />
+								<img class="etalage_source_image" src="{{asset('images/t3.jpg')}}" />
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="images/t4.jpg" />
-								<img class="etalage_source_image" src="images/t4.jpg" />
+								<img class="etalage_thumb_image" src="{{asset('images/t4.jpg')}}" />
+								<img class="etalage_source_image" src="{{asset('images/t4.jpg')}}" />
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="images/t5.jpg" />
-								<img class="etalage_source_image" src="images/t5.jpg" />
+								<img class="etalage_thumb_image" src="{{asset('images/t5.jpg')}}" />
+								<img class="etalage_source_image" src="{{asset('images/t5.jpg')}}" />
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="images/t6.jpg" />
-								<img class="etalage_source_image" src="images/t6.jpg" />
+								<img class="etalage_thumb_image" src="{{asset('images/t6.jpg')}}" />
+								<img class="etalage_source_image" src="{{asset('images/t6.jpg')}}" />
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="images/t1.jpg" />
-								<img class="etalage_source_image" src="images/t1.jpg" />
+								<img class="etalage_thumb_image" src="{{asset('images/t1.jpg')}}" />
+								<img class="etalage_source_image" src="{{asset('images/t1.jpg')}}" />
 							</li>
 						</ul>
 					
 					
 			<!-- end product_slider -->
 			</div>
-			<div class="cont1 span_2_of_a1" style="">
-				<div style="float: left; width: 80%">
-					<h3 class="m_3">Lorem ipsum dolor sit amet</h3>
-				
+			<div class="cont1 span_2_of_a1" style="width: 60.9%">
+				<div style="float: left; width: 75%">
+					<h3 class="m_3" style="font-size: 25px">{{$product->name}}</h3>
 					<div class="price_single">
-								  <span class="reducedfrom">$66.00</span>
-								  <span class="actual">$12.00</span><a href="#">click for offer</a>
+								  <span class="reducedfrom">{{number_format($product->price)}}₫</span>
+								  <span class="actual">{{number_format($product->price - $product->price*$product->sale/100)}}₫</span><a href="#">click for offer</a>
 								</div>
-					<ul class="options">
-						<h4 class="m_9">Select a Size</h4>
-						<li><a href="#">6</a></li>
-						<li><a href="#">7</a></li>
-						<li><a href="#">8</a></li>
-						<li><a href="#">9</a></li>
-						<div class="clear"></div>
-					</ul>
-					<div class="btn_form">
-					   <form>
-						 <input type="submit" value="buy now" title="">
-					  </form>
+								<h3 class="m_9">Sale off: <span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">41%</span></h3>
+					<div class="btn_form" style="margin-top: -30px">
+						<form action="" method="POST">
+						<div class="options" style="line-height: 15px">
+							<h4 class="m_9">Chọn một kích thước(*)</h4>
+							<div style="padding: 0px 0px 15px 0px;">
+								@foreach($sizes as $size)
+						   			<label for="{{'custom_radio'.$product->id.$size->name}}">
+						   				<input type="radio" value="{{$size->id}}" name=size id="{{'custom_radio'.$product->id.$size->name}}">
+						   				<span  style="padding:7px 9px;">{{$size->name}}</span>
+						   			</label>
+					   			@endforeach
+							</div>
+							
+						</div>
+								@csrf
+								<!-- <input type="submit" value="THÊM VÀO GIỎ" title="" style="margin-right: 15px"><input type="submit" value="MUA NGAY" title=""> -->
+								<button class="btn btnaddcart btn-success" style="margin-right: 10px;padding: 10px; border-radius: 0"><span class="glyphicon glyphicon-shopping-cart" style="margin-right: 10px"></span>THÊM VÀO GIỎ</button>
+								<button  class="btn btnaddcart btn-info" style="width: 150px;padding: 10px; border-radius: 0"><span class="glyphicon glyphicon-ok" style="margin-right: 10px"></span>MUA NGAY</button>
+					 	</form>
 					</div>
+
 					<ul class="add-to-links">
-	    			   <li><img src="images/wish.png" alt=""/><a href="#">Add to wishlist</a></li>
+	    			   <li><img src="{{asset('images/wish.png')}}" alt=""/><a href="#">Add to wishlist</a></li>
 	    			</ul>
 	    			<p class="m_desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
 	    			
@@ -78,7 +86,7 @@
 					   </ul>
 				    </div>
 				</div>
-				<div style="width: 20%; float: left;">
+				<div style="width: 25%; float: left;">
 					<table class="table tabletag">
 							<tr>
 								<td colspan="2" style="background:rgba(0,0,0,0.1);">
@@ -113,13 +121,14 @@
 			</div>
 			<div class="clear"></div>
      
-     
+     	<h3 class="m_3">Sản phẩm liên quan</h3>
          <ul id="flexiselDemo3">
-			<li><img src="images/pic11.jpg" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-			<li><img src="images/pic10.jpg" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
-			<li><img src="images/pic9.jpg" /><div class="grid-flex"><a href="#">Zumba</a><p>Rs 850</p></div></li>
-			<li><img src="images/pic8.jpg" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-			<li><img src="images/pic7.jpg" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
+			@foreach($products_lienquan as $item)
+				<?php $img = App\Image::where('product_id',$item->id)->where('status',1)->first(); 
+					  $brand = App\Brand::select('name')->where('id',$item->brand_id)->first(); 
+				?>
+				<li><img src="{{asset($img->slug)}}" /><div class="grid-flex"><a href="#">{{$brand->name}}</a><p>{{number_format($item->price - $item->price*$item->sale/100)}}₫</p></div></li>
+			@endforeach
 		 </ul>
 	    <script type="text/javascript">
 		 $(window).load(function() {
@@ -167,17 +176,64 @@
 		    
 		});
 	</script>
-	<script type="text/javascript" src="js/jquery.flexisel.js"></script>
+	<script type="text/javascript" src="{{asset('js/jquery.flexisel.js')}}"></script>
 	 <div class="toogle">
-     	<h3 class="m_3">Product Details</h3>
-     	<p class="m_text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+     	<h3 class="m_3">Mô tả sản phẩm</h3>
+     	<p class="m_text">[{{$product->name}}]</p>
+     	<p class="m_text">{{$product->description}}</p>
+     	<p class="m_text">-----------------------------------------</p>
+		<p class="m_text">Hotline: 0356796738 - Mạnh Viết IT</p>
+		<p class="m_text">Add: [ Lê Thiện Trị, Hòa Hải, Q.Ngũ Hành Sơn, Tp.Đà Nẵng ]</p>
+		<p class="m_text">Facebook: Lê Đức Mạnh, Trần Văn Viết</p>
+		<p class="m_text">Instagram: lleducmanh</p>
      </div>					
 	 <div class="toogle">
-     	<h3 class="m_3">Product Reviews</h3>
-     	<p class="m_text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
-     </div>
-     </div>
-     <div class="clear"></div>
+     	<h3 class="m_3">Bình luận sản phẩm</h3>
+     	<div style="margin-bottom: 30px;" class="col-sm-8">
+						<form action="" method="GET" role="form">
+							@csrf()
+							<div class="form-group">
+								<label for="">Email:</label>
+								<input required type="email" name="email" class="form-control" id="" placeholder="Email">
+							</div>
+							<div class="form-group">
+								<label for="">Tên:</label>
+								<input required type="text" name="name" class="form-control" id="" placeholder="Họ Tên">
+							</div>
+							<div class="form-group">
+								<label for="textara">Nội dung:</label><br>
+								<textarea required name="content" cols="90" rows="7" placeholder="Nhập bình luận của bạn..." style="padding: 10px"></textarea>
+							</div>		
+							<button type="submit" class="btn btn-info" style="border-radius: 0;padding: 10px 50px;">Gửi</button>
+						</form>
+					    <div class="actionBox" style="margin-top: 20px">
+					        <ul class="commentList">
+					            <li>
+					                <div class="commenterImage">
+					                  <img src="http://placekitten.com/50/50" />
+					                </div>
+					                <div class="commentText">
+					                	<p>Lê Đức Mạnh</p>
+					                    <p class="" style="font-size: 13px">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
+
+					                </div>
+					            </li>
+					            <li>
+					                <div class="commenterImage">
+					                  <img src="http://placekitten.com/45/45" />
+					                </div>
+					                <div class="commentText">
+					                	<p>Lê Đức Mạnh</p>
+					                    <p class=""  style="font-size: 13px">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
+
+					                </div>
+					            </li>
+					        </ul>
+					    </div>
+		</div>
+    </div>
+    </div>
+    <div class="clear"></div>
 	 </div>
      </div>
 	  <div class="footer">
