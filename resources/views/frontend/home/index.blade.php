@@ -13,7 +13,7 @@
 				  		</div>
 				  </div>
 				   <div class="container" style="margin-top: 20px">
-				      @include('frontend.home.product-cart')@
+				      @include('frontend.home.product-cart')
 				  <div class="clear"></div>
 			  </div>
 			  <div style="background: #000; color: #fff; padding: 10px 10px;">
