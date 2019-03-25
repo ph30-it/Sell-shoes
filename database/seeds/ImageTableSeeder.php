@@ -39,25 +39,25 @@ class ImageTableSeeder extends Seeder
         [
             'name' => 'pic4.jpg',
             'slug' => '/images/product/439ca56af256231930e4625167bcf19dgioithieu3.png',
-            'product_id' => 4,
+            'product_id' => 5,
             'status'=> 1,
         ],
         [
             'name' => 'pic5.jpg',
             'slug' => '/images/product/16413d3cb4c09c36bc18d9e5738a1ef8anh4.jpg',
-            'product_id' => 4,
+            'product_id' => 6,
             'status'=> 1,
         ],
         [
             'name' => 'pic6.jpg',
             'slug' => '/images/product/16413d3cb4c09c36bc18d9e5738a1ef8anh4.jpg',
-            'product_id' => 4,
+            'product_id' => 7,
             'status'=> 1,
         ],
         [
             'name' => 'pic7.jpg',
             'slug' => '/images/product/046ac2b494eab602d8445b2b450866f6giay7.jpg',
-            'product_id' => 4,
+            'product_id' => 8,
             'status'=> 1,
         ]
     ]);

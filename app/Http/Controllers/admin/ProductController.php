@@ -63,10 +63,9 @@ class ProductController extends Controller
             }
 
             if ($request->hasFile('img')) {
-                foreach ($request->file('img') as  $item) {
-                    $filename = $item->getClientOriginalName();
+                    $filename = $request->img->getClientOriginalName();
                     $newName = '/images/product/'.md5(microtime(true)).$filename;
-                    $item->move(public_path('/images/product'), $newName);
+                    $request->img->move(public_path('/images/product'), $newName);
                     Image::create([
                    'name' => $filename,
                    'product_id' => $product->id,
@@ -74,7 +73,7 @@ class ProductController extends Controller
                    'status' => 1,
                 ]);        
             }
-                }
+                
                 
             DB::commit();
              return redirect()->route('product-admin')->with('status','Thêm sản phẩm thành công!');

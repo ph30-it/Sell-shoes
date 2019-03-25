@@ -84,14 +84,11 @@
 										<textarea required name="description" class="" cols="100" rows="5" style="padding: 10px;"></textarea>
 									</div>		
 								</div>
-								<div class="form-group col-xs-4">
+								<div class="form-group" >
 										<label>Ảnh sản phẩm</label>
-										<input required id="img" type="file" name="img[]" multiple="multiple" class="form-control hidden" onchange="changeImg(this)">
+										<input required id="img" type="file" name="img" class="form-control hidden" onchange="changeImg(this)">
 					                    <img id="avatar" class="thumbnail" width="300px" src="{{asset('images/new_seo-10-512.png')}}">
-					                   
-
 								</div>
-
 							</div>
 							<input type="submit" name="submit" value="Thêm" class="btn btn-primary">
 							<a href="{{route('product-admin')}}" class="btn btn-danger">Hủy bỏ</a>
