@@ -4,6 +4,8 @@ namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Product;
+
 
 class HomeController extends Controller
 {
@@ -14,7 +16,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.home.index');
+        $data['products'] = Product::orderBy('id','desc')->paginate(8);
+        $data['products_hot'] = Product::where('featured',1)->orderBy('id','desc')->take(4)->get();
+        return view('frontend.home.index',$data);
     }
 
     /**

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Product;
+use App\ProductSize;
+use App\Image;
 
 class DetailProductController extends Controller
 {
@@ -12,9 +15,14 @@ class DetailProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return view('frontend.productDetail.single');
+        $product = Product::find($id);
+        $sizes = Product::find($id)->sizes;
+        $image = Image::select('slug')->where('product_id',$id)->where('status',1)->first();
+        $products_lienquan = Product::where('brand_id',$product->brand_id)->inRandomOrder()->limit(5)->get();
+
+        return view('frontend.productDetail.single',compact('product','sizes','image','products_lienquan'));
     }
 
     /**
