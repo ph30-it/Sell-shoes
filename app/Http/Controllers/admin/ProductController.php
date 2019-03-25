@@ -9,7 +9,7 @@ use App\Category;
 use App\Size;
 use App\Brand;
 use App\Image;
-use App\Product_size;
+use App\ProductSize;
 use App\Http\Requests\AddProductRequest;
 use DB;
 
@@ -56,23 +56,26 @@ class ProductController extends Controller
             $product = Product::create($data);
 
             foreach ($request->size as $item) {
-            Product_size::insert([
+            ProductSize::create([
             'product_id' => $product->id,
             'size_id' => $item,
              ]);
             }
 
             if ($request->hasFile('img')) {
-                $filename = $request->img->getClientOriginalName();
-                $newName = '/images/product/'.md5(microtime(true)).$filename;
-                $request->img->move(public_path('/images/product'), $newName);
-                Image::create([
+                foreach ($request->file('img') as  $item) {
+                    $filename = $item->getClientOriginalName();
+                    $newName = '/images/product/'.md5(microtime(true)).$filename;
+                    $item->move(public_path('/images/product'), $newName);
+                    Image::create([
                    'name' => $filename,
                    'product_id' => $product->id,
                    'slug' => $newName,
                    'status' => 1,
                 ]);        
             }
+                }
+                
             DB::commit();
              return redirect()->route('product-admin')->with('status','Thêm sản phẩm thành công!');
         } catch (\Exception $e) {
@@ -80,31 +83,6 @@ class ProductController extends Controller
         }   
         
 
-    }
-    public function productSize($id)
-    {
-        $data['product_size'] = Product_size::where('product_id',$id)->get();
-        
-        return view('admin.product.viewProductSize',$data);
-    }
-
-    public function updateQuantity(Request $request){
-        $id = $request->id;
-        $product_size = Product_size::find($id);
-        $product_size->quantity = $request->qty;
-        $product_size->save();
-        // return response()->json([], 400);
-
-    }
-
-    public function destroySize($id)
-    {
-        $size = Product_size::destroy($id);
-        if ($size) {
-            return back()->with('status','Xóa kích thước thành công!');
-        }else{
-            return back()->with('status','Xóa kích thước thất bại!');
-        }
     }
     /**
      * Display the specified resource.

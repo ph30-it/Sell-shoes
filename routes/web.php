@@ -45,11 +45,14 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::get('add', 'ProductController@create')->name('show-add-product');
 			Route::post('add', 'ProductController@store')->name('add-product');
 			//view list product size
-			Route::get('{id}/view-product-size', 'ProductController@productSize')->name('view-product-size');
+			Route::get('{id}/view-product-size', 'ProductSizeController@index')->name('view-product-size');
 			//update quantity product size
-			Route::get('view-product-size/update', 'ProductController@updateQuantity')->name('update-product-size');
+			Route::get('view-product-size/update', 'ProductSizeController@updateQuantity')->name('update-product-size');
 			//delete size
-			Route::delete('{id}/view-product-size/delete','ProductController@destroySize')->name('delete-product-size');
+			Route::delete('{id}/view-product-size/delete','ProductSizeController@destroy')->name('delete-product-size');
+			//add size
+			Route::post('{id}/view-product-size', 'ProductSizeController@store')->name('add-size-product');
+
 			Route::get('{id}/edit', 'ProductController@edit')->name('show-edit-product');
 			Route::put('{id}/edit', 'ProductController@update')->name('edit-product');
 			Route::delete('{id}/delete', 'ProductController@destroy')->name('delete-product');
