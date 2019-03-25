@@ -1,6 +1,32 @@
 @extends('admin.master')
 @section('title', 'Sản Phẩm | MV Shoes')
 @section('content')
+<script>
+	$(document).ready(function(){
+			function updateQuantity(qty, id){
+			/*console.log(qty);	
+			console.log(id);*/
+
+			$.ajax( function () {
+				url: "{{route('update-product-size')}}", /*url*/
+				method: "GET",
+				data: {
+					qty:qty, 
+					id:id,
+					_token: $('meta[name="csrf-token"]').attr('content')
+				}, 
+				success: function(data) {
+					alert('Số lượng của bạn đã được cập nhật thành công^^'); 
+					location.reload();
+				},
+				error: function($error) {
+					alert('Cật nhật fail!');
+				}
+			});		
+	
+		}
+	});
+</script>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<div class="col-lg-12">
