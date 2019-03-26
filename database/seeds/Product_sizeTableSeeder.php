@@ -25,6 +25,13 @@ class Product_sizeTableSeeder extends Seeder
             
         ],
         [
+            'product_id' => 1,
+            'size_id' => 4,
+            'quantity' => 400,
+            
+            
+        ],
+        [
             'product_id' => 2,
             'size_id' => 1,
             'quantity' => 300,
@@ -39,6 +46,13 @@ class Product_sizeTableSeeder extends Seeder
             'product_id' => 2,
             'size_id' => 3,
             'quantity' => 500,  
+        ],
+        [
+            'product_id' => 2,
+            'size_id' => 4,
+            'quantity' => 400,
+            
+            
         ],
         [
             'product_id' => 3,
@@ -74,69 +88,69 @@ class Product_sizeTableSeeder extends Seeder
         ],
         [
             'product_id' => 5,
-            'size_id' => 6,
+            'size_id' => 2,
             'quantity' => 200,  
         ],
         [
             'product_id' => 5,
-            'size_id' => 6,
+            'size_id' => 3,
             'quantity' => 200,  
         ],
         [
             'product_id' => 5,
-            'size_id' => 6,
+            'size_id' => 4,
             'quantity' => 200,  
         ],
         [
             'product_id' => 5,
-            'size_id' => 6,
+            'size_id' => 5,
             'quantity' => 200,  
         ],[
             'product_id' => 6,
-            'size_id' => 6,
+            'size_id' => 1,
             'quantity' => 200,  
         ],
         [
             'product_id' => 6,
-            'size_id' => 6,
+            'size_id' => 2,
             'quantity' => 200,  
         ],[
             'product_id' => 6,
-            'size_id' => 6,
+            'size_id' => 3,
             'quantity' => 200,  
         ],
         [
             'product_id' => 6,
-            'size_id' => 6,
+            'size_id' => 4,
             'quantity' => 200,  
         ],
         [
             'product_id' => 6,
-            'size_id' => 6,
+            'size_id' => 5,
             'quantity' => 200,  
         ],
         [
             'product_id' => 7,
-            'size_id' => 6,
+            'size_id' => 3,
             'quantity' => 200,  
         ],
         [
             'product_id' => 7,
-            'size_id' => 6,
+            'size_id' => 4,
             'quantity' => 200,  
         ],[
             'product_id' => 7,
-            'size_id' => 6,
+            'size_id' => 5,
             'quantity' => 200,  
         ],
         [
             'product_id' => 8,
-            'size_id' => 6,
+            'size_id' => 3,
             'quantity' => 200,  
         ],
         [
             'product_id' => 8,
-            'size_id' => 6,
+            'size_id' => 4,
             'quantity' => 200,  
         ],
     ]); 

@@ -23,7 +23,9 @@
 	padding: 6px;
 }
 /* Large thumbnail - image (in case you want to add a border around the image within the frame) */
-#etalage .etalage_thumb_image{ }
+#etalage .etalage_thumb_image{
+	width: 500px;
+}
 
 /* Small thumbnails: */
 #etalage .etalage_small_thumbs li{
@@ -56,15 +58,15 @@
 /* Icon that will apear at the left bottom of the large thumbnail (optional): */
 #etalage .etalage_icon{
 	background: url(../images/zoom.png) no-repeat rgba(184, 183, 181, 0.32);
-	width: 104px;
-	height: 104px;
+	width: 80px;
+	height: 80px;
 }
 
 /* Hint that will apear at the top right of the large thumbnail (optional): */
 #etalage .etalage_hint{
 	background: url(../images/hint.gif) no-repeat;
 	width: 130px;
-	height: 57px;
+	height: 	57px;
 }
 
 /* Description area (optional) */

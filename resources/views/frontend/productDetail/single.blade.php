@@ -10,10 +10,10 @@
 				     <ul id="etalage">
 							<li>
 								<a href="optionallink.html">
-									<img class="etalage_thumb_image" src="{{asset($image->slug)}}" style="width: 100px"/>
+									<img class="etalage_thumb_image" src="{{asset($image->slug)}}" style="width: 400px;"/>
 									<img class="etalage_source_image" src="{{asset($image->slug)}}" />
 								</a>
-							</li>
+							</li>	
 							<li>
 								<img class="etalage_thumb_image" src="{{asset('images/t2.jpg')}}" />
 								<img class="etalage_source_image" src="{{asset('images/t2.jpg')}}" />
@@ -38,9 +38,7 @@
 								<img class="etalage_thumb_image" src="{{asset('images/t1.jpg')}}" />
 								<img class="etalage_source_image" src="{{asset('images/t1.jpg')}}" />
 							</li>
-						</ul>
-					
-					
+						</ul> 
 			<!-- end product_slider -->
 			</div>
 			<div class="cont1 span_2_of_a1" style="width: 60.9%">
@@ -48,7 +46,7 @@
 					<h3 class="m_3" style="font-size: 25px">{{$product->name}}</h3>
 					<div class="price_single">
 								  <span class="reducedfrom">{{number_format($product->price)}}₫</span>
-								  <span class="actual">{{number_format($product->price - $product->price*$product->sale/100)}}₫</span><a href="#">click for offer</a>
+								  <span class="actual">{{number_format($product->price - $product->price*$product->sale/100)}}₫</span><span style="font-size: 13px; color: #999">Đã bao gồm VAT(*)</span>
 								</div>
 								<h3 class="m_9">Sale off: <span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">{{$product->sale}}%</span></h3>
 					<div class="btn_form" style="margin-top: -30px">

@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title', 'Sản Phẩm | MV Shoes')
+@section('title', 'Quản lí size sản Phẩm | MV Shoes')
 @section('content')
 <script>
 	$(document).ready(function(){
@@ -42,7 +42,7 @@
 					<div class="panel-body">
 						<div class="bootstrap-table">
 							<div class="table-responsive">
-								<a href="{{route('product-admin',$id)}}" class="btn btn-primary">Quay lại</a>
+								<a href="{{route('product-admin')}}" class="btn btn-primary">Quay lại</a>
 								<form action="{{route('add-size-product',$id)}}" method="POST">
 									@csrf
 									<div class="form-group">

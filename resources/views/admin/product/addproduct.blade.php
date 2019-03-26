@@ -75,8 +75,8 @@
 									<div class="form-group" >
 										<label>Trạng thái</label>
 										<select required name="status" class="form-control">
-											<option value="1">Còn hàng</option>
-											<option value="0">Hết hàng</option>
+											<option value="1">Hiển thị</option>
+											<option value="0">Ẩn</option>
 					                    </select>
 									</div>
 									<div class="form-group" >

@@ -22,7 +22,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data['productlist'] = Product::paginate(8);
+        $data['productlist'] = Product::orderBy('id','desc')->paginate(8);
        
         return view('admin.product.product',$data);
     }
