@@ -54,7 +54,7 @@
 <!----details-product-slider--->
 				<!-- Include the Etalage files -->
 					<link rel="stylesheet" href="{{asset('css/etalage.css')}}">
-					<script src="{{asset('js/jquery.etalage.min.js')}}"></script>
+					<script src="{{asset('js/jquery.etalage1.min.js')}}"></script>
 				<!-- Include the Etalage files -->
 				<script>
 						jQuery(document).ready(function($){
@@ -155,6 +155,31 @@
 .actionBox {
     border-top:1px dotted #bbb;
     padding:10px;
+}
+
+/* aaa */
+* {box-sizing: border-box;}
+
+.img-zoom-container {
+  position: relative;
+}
+
+.img-zoom-lens {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  /*set the size of the lens:*/
+  width: 80px;
+  height: 80px;
+}
+
+.img-zoom-result {
+  border: 1px solid #d4d4d4;
+  /*set the size of the result div:*/
+  width: 250px;
+  height: 250px;
+}
+.img2{
+	display:none;
 }
 </style>
 </head>

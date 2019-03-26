@@ -1,7 +1,7 @@
 						@foreach($products as $product)
 				     	<?php 
 				     		$brand = App\Brand::select('name')->where('id',$product->brand_id)->first();
-				     		$image = App\Image::select('slug')->where('product_id',$product->id)->where('status',1)->first();
+				     		$image = App\Image::select('slug')->where('product_id',$product->id)->where('status',1)->orderBy('updated_at','desc')->first();
 				     		$sizes = App\Product::find($product->id)->sizes;
 				     		if(empty($image)){
 							 	 $image['slug'] = 'images/image.png';
@@ -33,6 +33,7 @@
 			                       <div><span style="margin-right: 10px" class="price-del"><del>{{number_format($product->price)}} ₫</del></span><span class="price">{{number_format($product->price - ($product->price*$product->sale/100))}} ₫</span></div>
 								   </div>
 								    </div>
+								    <form action="">
 								   <span class="rating" style="line-height: 10px">
 								   		<span style="margin-left: 7px">Chọn một kích thước</span><br>
 								   		@foreach($sizes as $size)
@@ -55,6 +56,7 @@
 										 </ul>
 									   </li>
 								     </ul>
+								     </form>
 						    	    <div class="clear"></div>
 						    	</a>
 				    	</div>

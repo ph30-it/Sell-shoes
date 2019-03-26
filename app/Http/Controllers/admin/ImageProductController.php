@@ -1,24 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Image;
 
-
-class HomeController extends Controller
+class ImageProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $data['products'] = Product::where('status',1)->orderBy('id','desc')->paginate(8);
-        $data['products_hot'] = Product::where('status',1)->where('featured',1)->orderBy('id','desc')->take(4)->get();
-        return view('frontend.home.index',$data);
+        $product_name = Product::select('name')->where('id',$id)->first();
+        $images = Product::find($id)->images;
+        //dd($images);
+        return view('admin.product.viewProductImage',compact('images','product_name'));
     }
 
     /**
@@ -61,7 +62,8 @@ class HomeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $image = Image::find($id);
+        return view('admin.product.updateTypeImage',compact('image'));
     }
 
     /**
@@ -73,7 +75,14 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $data = $request->only('status');
+        $image = Image::where('id',$id)->update($data);
+        if ($image) {
+            return redirect()->route('product-admin')->with('status','Cập nhật type ảnh thành công!');
+        }else{
+             return redirect()->route('product-admin')->with('status','Cập nhật type ảnh thất bại!');
+        }
     }
 
     /**

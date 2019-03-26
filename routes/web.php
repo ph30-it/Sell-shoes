@@ -52,6 +52,12 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::delete('{id}/view-product-size/delete','ProductSizeController@destroy')->name('delete-product-size');
 			//add size
 			Route::post('{id}/view-product-size', 'ProductSizeController@store')->name('add-size-product');
+			//view list images product
+			Route::get('{id}/view-product-image','ImageProductController@index')->name('view-product-image');
+			//view update type image
+			Route::get('product-image/{id}/update','ImageProductController@edit')->name('view-edit-type-product-image');
+			//update type image
+			Route::put('product-image/{id}/update','ImageProductController@update')->name('edit-type-product-image');
 
 			Route::get('{id}/edit', 'ProductController@edit')->name('show-edit-product');
 			Route::put('{id}/edit', 'ProductController@update')->name('edit-product');
@@ -71,10 +77,7 @@ Route::group(['namespace'=>'frontend'], function(){
 	Route::get('san-pham','ProductController@index')->name('list-all-product');
 	Route::get('gioi-thieu','FrontendController@indexGioiThieu')->name('info-shop');
 	Route::get('lien-he','ContactController@index')->name('contact-user');
-
-	Route::group(['prefix'=>'detail'], function(){
-			Route::get('{id}/{slug}.html', 'DetailProductController@index')->name('show-detail-product');
-			
-		});
+	//chi tiet san pham
+	Route::get('detail/{id}/{slug}.html', 'DetailProductController@index')->name('show-detail-product');
 	
 });

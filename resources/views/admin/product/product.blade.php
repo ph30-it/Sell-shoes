@@ -23,7 +23,7 @@
 										{{ session('status') }}
 									</div>
 							 	@endif
-								<table class="table table-bordered" style="margin-top:20px;text-align: center;">				
+								<table class="table table-bordered" style="margin-top:20px;text-align: center;font-size: 13px">				
 									<thead>
 										<tr class="bg-primary">
 											<th style="text-align: center; ">ID</th>
@@ -53,7 +53,7 @@
 													<?php 
 														 $sizes = App\Product::find($product->id)->sizes;
 														 $categorys = App\Product::find($product->id)->category;
-														 $images = App\Product::find($product->id)->images->where('status',1)->first();
+														 $images = App\Image::select('slug')->where('product_id',$product->id)->where('status',1)->orderBy('updated_at','desc')->first();
 														 if(empty($images)){
 														 	 $images['slug'] = 'images/image.png';
 														 }
@@ -89,9 +89,9 @@
 													@endif
 												</td>
 												<td>@if($product->status == 1)
-														<span class="btn-default">Còn hàng</span>
+														<span class="btn-default">Đã hiển thị</span>
 													@else
-														<span class="btn-success">Hết hàng</span>
+														<span class="btn-success">Đang ẩn</span>
 													@endif
 												</td>
 												<td>{{$product->created_at}}</td>
@@ -105,7 +105,7 @@
 													</form>
 													
 													<a href="{{route('view-product-size',$product->id)}}" class="btn btn-success">Size</a><br>
-													<a href="{{route('view-product-size',$product->id)}}" class="btn btn-info">Ảnh</a>
+													<a href="{{route('view-product-image',$product->id)}}" class="btn btn-info">Ảnh</a>
 												</td>
 											</tr>
 										@endforeach
