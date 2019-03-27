@@ -61,6 +61,14 @@
 					                    </select>
 									</div>
 									<div class="form-group" >
+										<label>Hãng sản phẩm</label>
+										<select required name="brand_id" class="form-control">
+											@foreach($brands as $brand)
+												<option value="{{$brand->id}}" @if($product->brand_id == $brand->id) selected @endif>{{$brand->name}}</option>
+											@endforeach
+					                    </select>
+									</div>
+									<div class="form-group" >
 										<label>Sản phẩm đặc biệt</label><br>
 										Có: <input type="radio" name="featured" value="1" @if($product->featured == 1) checked @endif >
 										Không: <input type="radio" name="featured" value="0" @if($product->featured == 0) checked @endif >

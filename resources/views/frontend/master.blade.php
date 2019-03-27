@@ -208,7 +208,7 @@
 						@endif
 						<li>
 							<ul class="icon2 sub-icon2 profile_img">
-								<li><a class="active-icon c2" href="#"  style="margin-top: 1%"> </a>
+								<li><a class="active-icon c2" href="{{route('shoppingCart-user')}}"  style="margin-top: 1%"></a>
 									<ul class="sub-icon2 list">
 										<li><h3>Products</h3><a href=""></a></li>
 										<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>

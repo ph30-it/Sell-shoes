@@ -104,68 +104,7 @@
      	    <div class="clear"></div>
 	       </div>
 			  	<div class="row" style="margin-top: 20px">
-				     @for($i=1; $i<=9; $i++)
-				    
-				     	<div class="col-sm-4">
-				    	<div style="border: 1px solid #ccc; padding: 2%; padding-left: 0; padding-bottom: 0;margin-bottom: 30px">
-				    		<div class="view view-fifth">
-							  	  <div class="top_box">
-								  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
-								  	<p class="m_2">Adidas</p>
-							         <div class="grid_img">
-									   <div class="css3">
-									   		<a href="{{route('detail-product-user')}}"><img src="images/giay1.jpg" alt=""/></a>
-									   </div>
-								          <div class="mask">
-				                       		<div class="info">Quick View</div>
-						                  </div>
-				                    </div>
-			                       <div><span class="price">750,000 ₫</span><span style="margin-left: 10px; font-size: 12px" class="price-del"><del>2,550,000 ₫</del></div>
-								   </div>
-								    </div>
-								   <span class="rating" style="line-height: 10px">
-								   		<span style="margin-left: 15px">Chọn một kích thước</span><br>
-								   		<label for="'custom_radio'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio'.$i">
-								   			<span>41</span>
-								   		</label>
-								   		<label for="'custom_radio1'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio1'.$i">
-								   			<span>42</span>
-								   		</label>
-								   		<label for="'custom_radio2'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
-								   			<span>43</span>
-								   		</label>
-								   		<label for="'custom_radio2'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
-								   			<span>43</span>
-								   		</label>
-								   		<label for="'custom_radio2'.$i">
-								   			<input type="radio" value="38" name=size id="'custom_radio2'.$i">
-								   			<span>43</span>
-								   		</label>
-							         
-							         
-					    	      </span>
-									 <ul class="list">
-									  <li>
-									  	<img src="images/anh1.png" alt=""/>
-									  	<ul class="icon1 sub-icon1 profile_img">
-										  <li><a class="active-icon c1" href="#" >+Thêm Vào Giỏ</a>
-											<ul class="sub-icon1 list">
-												<li><h3>sed diam nonummy</h3><a href=""></a></li>
-												<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-											</ul>
-										  </li>
-										 </ul>
-									   </li>
-								     </ul>
-						    	    <div class="clear"></div>
-						    	</a>
-				    	</div>
-				     </div>
-				     @endfor
+				    @include('frontend.product.product-card')
 			  </div>
 			  <div class="clear"></div>
 			</div>

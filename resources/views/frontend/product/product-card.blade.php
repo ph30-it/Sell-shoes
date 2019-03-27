@@ -1,4 +1,4 @@
-						@foreach($products_hot as $product)
+						@foreach($products as $product)
 				     	<?php 
 				     		$brand = App\Brand::select('name')->where('id',$product->brand_id)->first();
 				     		$image = App\Image::select('slug')->where('product_id',$product->id)->where('status',1)->orderBy('updated_at','desc')->first();
@@ -7,12 +7,12 @@
 							 	 $image['slug'] = 'images/image.png';
 							 }
 				     	 ?>
-				     	<div class="col-sm-3">
+				     	<div class="col-sm-4">
 				    	<div style="border: 1px solid #ccc; padding: 2%; padding-left: 0; padding-bottom: 0;margin-bottom: 30px">
 				    		<div class="view view-fifth">
 							  	  <div class="top_box">
 								  	<h3 class="m_1">
-								  		<a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}" style="color: #000;text-decoration: none;">{{$product->name}}</a>
+								  		<a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}" style="color: #000; text-decoration: none;">{{$product->name}}</a>
 								  		
 								  	</h3>
 								  	<p class="m_2">{{$brand->name}}</p>
@@ -34,12 +34,12 @@
 								   </div>
 								    </div>
 								    <form action="{{route('add-cart-user',$product->id)}}" method="POST">
-								    @csrf
+								    	@csrf
 								   <span class="rating" style="line-height: 10px">
 								   		<span style="margin-left: 7px">Chọn một kích thước</span><br>
 								   		@foreach($sizes as $size)
-								   			<label for="{{'custom_radio1'.$product->id.$size->name}}">
-								   				<input type="radio" value="{{$size->name}}" name=size id="{{'custom_radio1'.$product->id.$size->name}}">
+								   			<label for="{{'custom_radio'.$product->id.$size->name}}">
+								   				<input type="radio" value="{{$size->name}}" name=size id="{{'custom_radio'.$product->id.$size->name}}">
 								   			<span>{{$size->name}}</span>
 								   		</label>
 								   		@endforeach

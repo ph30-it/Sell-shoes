@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('frontend.product.shop');
+        $products = Product::where('status',1)->orderBy('id','desc')->paginate(9);
+        return view('frontend.product.shop',compact('products'));
     }
 
     /**

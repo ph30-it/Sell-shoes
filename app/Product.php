@@ -36,4 +36,9 @@ class Product extends Model
         return $this->hasMany('App\ProductSize');
     }
 
+    public function orderDetails()
+    {
+        return $this->hasMany('App\OrderDetail');
+    }
+
 }

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Product;
+use App\Image;
+use App\ProductSize;
+use Cart;
 class ShoppingCartController extends Controller
 {
     /**
@@ -14,7 +17,9 @@ class ShoppingCartController extends Controller
      */
     public function index()
     {
-        //
+        $data['total'] = Cart::getTotal();
+        $data['items'] = Cart::getContent();
+        return view('frontend.cart.shoppingCart',$data);
     }
 
     /**
@@ -33,9 +38,21 @@ class ShoppingCartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $price_sale = $product->price - ($product->price*$product->sale)/100;
+        $image = Image::select('slug')->where('product_id',$id)->where('status',1)->orderBy('updated_at','desc')->first();
+        Cart::add(array(
+                'id' => $id,
+                'name' => $product->name,
+                'price' => $price_sale,
+                'quantity' => 1,
+                'attributes' => array('image' => $image->slug,'price_goc'=> $product->price, 'slug'=> $product->slug,'sale'=> $product->sale,'size' => $request->size)
+            ));
+        
+        /*return redirect('cart/show');*/
+        return back();
     }
 
     /**
@@ -80,6 +97,7 @@ class ShoppingCartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cart::remove($id);
+        return back();
     }
 }

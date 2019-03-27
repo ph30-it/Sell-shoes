@@ -106,6 +106,7 @@ class ProductController extends Controller
         $data['sizes'] = Size::all();
         $data['product_size'] = Product::find($id)->sizes;
         $data['categories'] = Category::all();
+        $data['brands'] = Brand::all();
         $data['images'] = Product::find($id)->images->where('status',1)->first();
         return view('admin.product.editproduct',$data);
     }
