@@ -2,7 +2,7 @@
                 <div class="wrap">
              	  <div class="content-top">
              		<div class="lsidebar span_1_of_c1">
-					  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing</p>
+					  <p>Theo dõi chúng tôi trên mạng xã hội để cập thông tin một cách nhanh chóng nhất.</p>
 					</div>
 					<div class="cont span_2_of_c1">
 					  <div class="social">	

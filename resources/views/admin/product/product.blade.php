@@ -27,14 +27,15 @@
 									<thead>
 										<tr class="bg-primary">
 											<th style="text-align: center; ">ID</th>
-											<th width="20%" style="text-align: center;">Tên Sản phẩm</th>
+											<th width="10%" style="text-align: center;">Tên Sản phẩm</th>
 											<th style="text-align: center;">Giá sản phẩm</th>
 											<th style="text-align: center;">Khuyến mãi</th>
-											<th style="text-align: center;">Size giày</th>
+											<th style="text-align: center;" width="5%">Size giày</th>
 											<th style="text-align: center;">Số lượng</th>
-											<th width="15%" style="text-align: center;">Ảnh sản phẩm</th>
+											<th width="10%" style="text-align: center;">Ảnh sản phẩm</th>
 											<th style="text-align: center;" width="15%">Mô tả</th>
 											<th style="text-align: center;">Danh mục</th>
+											<th style="text-align: center;">Hãng</th>
 											<th style="text-align: center;">SP Đặc biệt</th>
 											<th style="text-align: center;">Trạng thái</th>
 											<th style="text-align: center;">Ngày tạo</th>
@@ -54,6 +55,7 @@
 														 $sizes = App\Product::find($product->id)->sizes;
 														 $categorys = App\Product::find($product->id)->category;
 														 $images = App\Image::select('slug')->where('product_id',$product->id)->where('status',1)->orderBy('updated_at','desc')->first();
+														 $brand = App\Brand::select('name')->where('id',$product->brand_id)->first();
 														 if(empty($images)){
 														 	 $images['slug'] = 'images/image.png';
 														 }
@@ -82,6 +84,7 @@
 												</td>
 												<td>{{$product->description}}</td>
 												<td>{{$categorys->name}}</td>
+												<td>{{$brand->name}}</td>
 												<td>@if($product->featured == 1)
 														<span class="btn-info">Đặc biệt</span>
 													@else

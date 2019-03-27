@@ -12,7 +12,7 @@
 				    		<div class="view view-fifth">
 							  	  <div class="top_box">
 								  	<h3 class="m_1">
-								  		<a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}" style="color: #000">{{$product->name}}</a>
+								  		<a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}" style="color: #000;text-decoration: none;">{{$product->name}}</a>
 								  		
 								  	</h3>
 								  	<p class="m_2">{{$brand->name}}</p>
@@ -27,18 +27,19 @@
 									   	</a>
 									   </div>
 								          <div class="mask">
-				                       		<div class="info"><a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}" style="color: #fff;">Quick View</a></div>
+				                       		<div class="info"><a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}" style="color: #fff;text-decoration: none;">Xem chi tiết</a></div>
 						                  </div>
 				                    </div>
 			                       <div><span style="margin-right: 10px" class="price-del"><del>{{number_format($product->price)}} ₫</del></span><span class="price">{{number_format($product->price - ($product->price*$product->sale/100))}} ₫</span></div>
 								   </div>
 								    </div>
-								    <form action="">
+								   <form action="{{route('add-cart-user',$product->id)}}" method="POST">
+								   	@csrf
 								   <span class="rating" style="line-height: 10px">
 								   		<span style="margin-left: 7px">Chọn một kích thước</span><br>
 								   		@foreach($sizes as $size)
 								   			<label for="{{'custom_radio'.$product->id.$size->name}}">
-								   				<input type="radio" value="{{$size->id}}" name=size id="{{'custom_radio'.$product->id.$size->name}}">
+								   				<input type="radio" value="{{$size->name}}" name=size id="{{'custom_radio'.$product->id.$size->name}}">
 								   			<span>{{$size->name}}</span>
 								   		</label>
 								   		@endforeach
