@@ -18,7 +18,7 @@ class ProductSizeController extends Controller
      */
     public function index($id)
     {
-        $data['product_size'] = ProductSize::where('product_id',$id)->get();
+        $data['product_size'] = ProductSize::where('product_id',$id)->orderBy('size_id','asc')->get();
         $data['image'] = Image::select('slug')->where('product_id',$id)->where('status',1)->first();
         $data['sizes'] = Size::all();
         $data['id'] = $id;
@@ -33,7 +33,6 @@ class ProductSizeController extends Controller
         $product_size->quantity = $request->qty;
         $product_size->save();
          return response()->json([], 400);
-
     }
 
     /**

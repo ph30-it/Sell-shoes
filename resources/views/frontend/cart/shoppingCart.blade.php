@@ -15,6 +15,22 @@
 			);			
 	}
 </script>
+<script>
+    $(document).on('submit', '#formData', function (event) {
+    event.preventDefault();
+     var formData = $('#formData').serialize();
+    $.ajax({
+        url: url,
+       type: "POST",
+       data : formData,   
+                success: function (result) {
+                    console.log(result);                             
+                }
+           });
+        });
+
+    });
+</script>
 <div class="container" style="margin-top: 30px">
 	<div class="row">
 			<ol class="breadcrumb nen1">
@@ -44,7 +60,7 @@
 					</tbody>	
 				</table>
 			</form>
-			<a href="{{route('list-all-product')}}"  style="background:#fff;color:#fa2000;padding:10px 86px;border: 2px solid #fa2000;font-weight: bold;">
+			<a href="{{route('list-all-product')}}"  style="background:#fff;color:#fa2000;padding:10px 86px;border: 2px solid #fa2000;font-weight: bold;text-decoration: none;">
 				<span class="glyphicon glyphicon-heart"></span> TIẾP TỤC XEM SẢN PHẨM</a>
 		</div>
 		<div class="col-sm-3">
@@ -67,7 +83,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td style="padding-top: 30px"><a href=""  style="background:#3CB371;color:#fff;padding:10px 35px;font-weight:bold;">TIẾN HÀNH THÀNH TOÁN</a></td>
+						<td style="padding-top: 30px"><a href="{{route('show-checkout-user')}}"  style="background:#3CB371;color:#fff;padding:10px 35px;font-weight:bold;text-decoration: none;">TIẾN HÀNH THÀNH TOÁN</a></td>
 					</tr>
 				</thead>	
 			</table>

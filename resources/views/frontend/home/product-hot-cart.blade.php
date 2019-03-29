@@ -39,7 +39,7 @@
 								   		<span style="margin-left: 7px">Chọn một kích thước</span><br>
 								   		@foreach($sizes as $size)
 								   			<label for="{{'custom_radio1'.$product->id.$size->name}}">
-								   				<input type="radio" value="{{$size->name}}" name=size id="{{'custom_radio1'.$product->id.$size->name}}">
+								   				<input type="radio" value="{{$size->name}}" name=size id="{{'custom_radio1'.$product->id.$size->name}}" required>
 								   			<span>{{$size->name}}</span>
 								   		</label>
 								   		@endforeach

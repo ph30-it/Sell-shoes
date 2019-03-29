@@ -40,6 +40,9 @@ class ShoppingCartController extends Controller
      */
     public function store(Request $request, $id)
     {
+        // $a = Cart::get($id);
+        // dd($a->attributes->size);
+        
         $product = Product::find($id);
         $price_sale = $product->price - ($product->price*$product->sale)/100;
         $image = Image::select('slug')->where('product_id',$id)->where('status',1)->orderBy('updated_at','desc')->first();

@@ -3,30 +3,36 @@
 @section('content')
 <script>
 	$(document).ready(function(){
-			function updateQuantity(qty, id){
-			/*console.log(qty);	
-			console.log(id);*/
-
-			$.ajax( function () {
-				url: "{{route('update-product-size')}}", /*url*/
-				method: "GET",
-				data: {
-					qty:qty, 
-					id:id,
-					_token: $('meta[name="csrf-token"]').attr('content')
-				}, 
-				success: function(data) {
-					alert('Số lượng của bạn đã được cập nhật thành công^^'); 
-					location.reload();
-				},
-				error: function($error) {
-					alert('Cật nhật fail!');
-				}
-			});		
-	
-		}
+		$.$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('[name=csrf-token]').attr('content')
+			}
+		});
+		
+		$('#quantity').change(function(event) {
+				var qty = $('#quantity').value;
+				console.log(qty);
+				/*console.log(id);*/
+				$.ajax( function () {
+					url: "{{route('update-product-size')}}", /*url*/
+					method: 'GET',
+					data: {
+						qty:qty, 
+						id:id
+					}, 
+					success: function(data) {
+						alert('Số lượng của bạn đã được cập nhật thành công^^'); 
+						location.reload();
+					},
+					error: function($error) {
+						alert('Cật nhật fail!');
+					}
+				});		
+		});
+			
 	});
 </script>
+
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<div class="col-lg-12">
@@ -92,9 +98,12 @@
 												<td>
 													<div class="form-group">
 														
-															<input type="number" id="quantity" class="form-control" value="{{$item->quantity}}" onchange="updateQuantity(this.value, {{$item->id}})" min="0" max="10000">
+															<form action="">
+																@csrf
+																<input type="number" id="quantity" class="form-control" value="{{$item->quantity}}" min="0" max="10000">
+															</form>
 														
-													</div>	
+													</div>
 												</td>
 												<td>{{$item->created_at}}</td>
 												<td>{{$item->updated_at}}</td>
@@ -124,6 +133,4 @@
 			</div>
 		</div><!--/.row-->
 	</div>	<!--/.main-->
-	<script type="text/javascript">
-</script>
 @stop

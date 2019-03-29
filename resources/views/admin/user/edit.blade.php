@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                 	<label>Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password" value="{{$users->password}}" required />
+                    <input type="password" name="password" class="form-control" placeholder="Password" value="" required />
                 </div>
                 <div class="form-group">
                 	<label>User Level</label>

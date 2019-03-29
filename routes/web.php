@@ -42,6 +42,7 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 		//Product management
 		Route::group(['prefix'=>'product'], function(){
 			Route::get('/', 'ProductController@index')->name('product-admin');
+			Route::get('/action','ProductController@action')->name('search-product-admin');
 			Route::get('add', 'ProductController@create')->name('show-add-product');
 			Route::post('add', 'ProductController@store')->name('add-product');
 			//view list product size
@@ -85,5 +86,7 @@ Route::group(['namespace'=>'frontend'], function(){
 			Route::post('{id}/add', 'ShoppingCartController@store')->name('add-cart-user');
 			Route::get('{id}/delete','ShoppingCartController@destroy')->name('delete-cart-user');
 		});
-	
+	//checkout
+	Route::get('checkout','CheckoutController@index')->name('show-checkout-user');
+	Route::post('checkout','CheckoutController@store')->name('checkout-user');
 });

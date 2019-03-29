@@ -1,7 +1,16 @@
 @extends('admin.master')
 @section('title', 'Sản Phẩm | MV Shoes')
 @section('content')
-
+<script>
+	$(document).ready(function(){
+	
+	$('#quantity').keyup(function(){
+		var query = $('#quantity').val();
+		$.post(route('search-product-admin'), {data: query},function(data){
+			$('tbody').html(data);
+		})
+	});
+</script>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<div class="col-lg-12">
@@ -17,6 +26,11 @@
 					<div class="panel-body">
 						<div class="bootstrap-table">
 							<div class="table-responsive">
+								<form action="">
+									<div style="margin-bottom: 15px">
+										<input type="search" class="form-control" placeholder="Tìm kiếm sản phẩm..." name="search" id="search">
+									</div>
+								</form>
 								<a href="{{route('show-add-product')}}" class="btn btn-primary">Thêm sản phẩm</a>
 								@if(session('status'))
 									<div class="alert alert-success">
