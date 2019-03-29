@@ -65,6 +65,7 @@ class CheckoutController extends Controller
                     $data_orderDetail = [
                     'order_id' => $order->id,
                     'product_id' => $item->id,
+                    'size' => $item->attributes->size,
                     'quantity' => $item->quantity,
                     'price' => $item->attributes->price_goc,
                     'sale' => $item->attributes->sale,
@@ -76,9 +77,9 @@ class CheckoutController extends Controller
                 Mail::to($request->email)->send(new CheckoutMail($data_mail, Cart::getContent(), Cart::getTotal()));
                 Cart::clear();
                 DB::commit();
-                return redirect()->route('shoppingCart-user')->with('success','Hóa đơn của bạn đã được chuyển đến địa chi email có trong phần thông tin khách hàng của chúng tôi.Sản phẩm sẽ được chuyển đến sau từ 3-5 ngày tính từ thời điểm đặt hàng. Cảm ơn bạn chọn mua sản phẩm của chúng tôi, chúng tôi sẽ liên lạc lại với bạn trong thời gian sớm nhất! Trân trọng!!');
+                return redirect()->route('shoppingCart-user')->with('success', trans('message.checkout_susscess'));
         } catch (Exception $e) {
-            return back()->with('status','Thanh toán không thành công');
+            return back()->with('status', trans('message.checkout_fail'));
         }
     }
 
