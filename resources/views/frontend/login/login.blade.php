@@ -8,7 +8,7 @@
 					<h5 class="sub_title">Register Account</h5>
 					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan</p>
 					<div class="button1">
-					   <a href="register.html"><input type="submit" name="Submit" value="Continue"></a>
+					   <a href="{{route('register-user')}}"><input type="submit" name="Submit" value="Continue"></a>
 					 </div>
 					 <div class="clear"></div>
 				</div>
@@ -27,6 +27,17 @@
 								<span>*</span>
 								<input type="password" value="">
 							</p>
+							@if(session('status'))
+								<div class="alert alert-info">
+									{{ session('status') }}
+								</div>
+						 	@endif
+						 	 <div class="sky-form">
+						 	 	<label>
+									<input type="checkbox" value="remember">
+									Ghi nhớ đăng nhập
+								</label>
+						 	 </div>
 							 <p id="login-form-remember">
 								<label><a href="#">Forget Your Password ? </a></label>
 							 </p>

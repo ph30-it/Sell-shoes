@@ -16,7 +16,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('frontend.login');
+        return view('frontend.login.login');
     }
 
     public function postLogin(Request $request)
