@@ -3,8 +3,8 @@
 <head>
 <title>MV Shoes | @yield('title')</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="{{asset('css/style3.css')}}" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/style2.css')}}">
 <link rel="stylesheet" href="{{asset('css/style9.css')}}">
@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="{{asset('css/bootstrap-theme.min.css')}}">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
         $(document).ready(function() {
             $(".dropdown img.flag").addClass("flagvisibility");
@@ -208,12 +209,46 @@
 						@endif
 						<li>
 							<ul class="icon2 sub-icon2 profile_img">
-								<li><a class="active-icon c2" href="{{route('shoppingCart-user')}}"  style="margin-top: 1%"></a>
+								<li><a class="c2" href="{{route('shoppingCart-user')}}"  style="margin-top: 1%"></a>
 									<ul class="sub-icon2 list">
-										<li><h3>Products</h3><a href=""></a></li>
-										<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+										<li>
+											<div class="row" style="margin-bottom: 20px">
+												@foreach(Cart::getContent() as $item)
+													<div class="row" style="padding: 10px">
+														<div class="col-lg-4">
+														<img src="{{asset($item->attributes->image)}}" alt="" style="width: 80px">
+														</div>
+														<div class="col-lg-8" style="padding-right: 20px;line-height: 15px">
+															<span style="font-size: 12px;">{{$item->name}}</span>
+															<div class="col-lg-5">
+																x{{$item->quantity}} <label for="custom_radio" style="margin-top: -10px">
+												   				<input type="radio" value="{{$item->attributes->size}}" name=size id="custom_radio" >
+												   				<span>{{$item->attributes->size}}</span></label>
+															</div>
+															<div class="col-lg-7" style="line-height: 10px">
+																<br><span style="font-size: 12px;color: #ed4e4e">{{ number_format($item->price*$item->quantity,0)}} ₫</span>
+															</div>
+														</div>
+													</div>
+												@endforeach
+											</div>
+											<div class="row" style="text-align: left;">
+												<span style="margin-left: 40px;margin-top: 20px">Tổng tiền:  <span style="font-size: 15px;color: #ed4e4e;margin-left: 40px" >{{number_format(Cart::getTotal())}} ₫</span></span>
+											</div>
+											<div class="row" style="margin-top: 10px">
+												<a href="{{route('shoppingCart-user')}}" style="color: #fff;background: #000;text-decoration: none;padding: 7px 20px;margin-right: 10px;border-radius: 0">XEM GIỎ HÀNG</a>
+												@if(Cart::getTotal() > 0)
+												<a href="{{route('show-checkout-user')}}" style="color: #fff;background: #f72b3f;text-decoration: none;padding: 7px 20px;border-radius: 0">THANH TOÁN</a>
+												@else
+												<a href="{{route('shoppingCart-user')}}" style="color: #fff;background: #f72b3f;text-decoration: none;padding: 7px 20px;border-radius: 0">THANH TOÁN</a>
+												@endif
+											</div>
+										</li>
+
+										
+
 									</ul>
-								</li>
+								</li>	
 							</ul>
 						</li>
 					</ul>
@@ -598,6 +633,18 @@
 					$("#menuTop").removeClass('navbar-fixed-top');
 				}
 			});
+		});
+
+		$(document).ready(function() {
+			/*$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('[name=csrf_token]').attr('content');
+				}
+			});*/
+			$('#submit').click(function(event) {
+				event.preventDefault();
+				
+					alert(111);
 		});
 	</script>
 </body>

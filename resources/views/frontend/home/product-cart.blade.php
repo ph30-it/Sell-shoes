@@ -33,13 +33,13 @@
 			                       <div><span style="margin-right: 10px" class="price-del"><del>{{number_format($product->price)}} ₫</del></span><span class="price">{{number_format($product->price - ($product->price*$product->sale/100))}} ₫</span></div>
 								   </div>
 								    </div>
-								   <form action="{{route('add-cart-user',$product->id)}}" method="POST">
+								   <form action="{{route('add-cart-user',$product->id)}}" method="POST" id="formData">
 								   	@csrf
 								   <span class="rating" style="line-height: 10px">
 								   		<span style="margin-left: 7px">Chọn một kích thước</span><br>
 								   		@foreach($sizes as $size)
 								   			<label for="{{'custom_radio'.$product->id.$size->name}}">
-								   				<input type="radio" value="{{$size->name}}" name=size id="{{'custom_radio'.$product->id.$size->name}}">
+								   				<input type="radio" value="{{$size->name}}" name=size id="{{'custom_radio'.$product->id.$size->name}}" >
 								   			<span>{{$size->name}}</span>
 								   		</label>
 								   		@endforeach
@@ -48,7 +48,7 @@
 									  <li>
 									  	<img src="images/anh1.png" alt=""/>
 									  	<ul class="icon1 sub-icon1 profile_img">
-										  <li><button type="submit" class="active-icon c1" style="text-decoration: none; background: #000;color: #fff; border: none;">+ Thêm Vào Giỏ </button>
+										  <li><button type="submit" id="submit" class="active-icon c1" style="text-decoration: none; background: #000;color: #fff; border: none;">+ Thêm Vào Giỏ </button>
 											<ul class="sub-icon1 list">
 												<li><h3>{{$product->name}}</h3><a href=""></a></li>
 												<li><p>{{$product->description}}<a href="">Mạnh Viết - CIT</a></p></li>

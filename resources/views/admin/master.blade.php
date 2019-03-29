@@ -6,11 +6,13 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>@yield('title')</title>
 <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
-<link href="{{asset('css/datepicker3.css')}}" rel="stylesheet">
 <link href="{{asset('css/admin.css')}}" rel="stylesheet">
 <link href="{{asset('css/form.css')}}" rel="stylesheet">
 <!-- <link href="{{asset('css/custom.css')}}" rel="stylesheet"> -->
-<script type="text/javascript" src="{{asset('editor/ckeditor/ckeditor.js')}}"></script>
+<script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 <script src="{{asset('js/lumino.glyphs.js')}}"></script>
 </head>
 <body>
@@ -49,11 +51,7 @@
 	</div>	
 	<script src="{{asset('js/jquery-1.11.1.min.js')}}"></script>
 	<script src="{{asset('js/bootstrap.min.js')}}"></script>
-	<script src="{{asset('js/chart.min.js')}}"></script>
-	<script src="{{asset('js/chart-data.js')}}"></script>
 	<script src="{{asset('js/easypiechart.js')}}"></script>
-	<script src="{{asset('js/easypiechart-data.js')}}"></script>
-	<script src="{{asset('js/chart-data.js')}}"></script>
 	<script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
 
 	<script>
