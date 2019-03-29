@@ -16,18 +16,25 @@
 				  <div class="login-title">
 	           		<h4 class="title">Registered Customers</h4>
 					 <div class="comments-area">
-						<form>
+						<form action="{{route('postLogin')}}" method="POST">
+							@csrf
 							<p>
 								<label>Name</label>
 								<span>*</span>
-								<input type="text" value="">
+								<input type="text" value="" name="email">
 							</p>
+							@if($errors->has('email'))
+    							<span class="" style="color:red;font-size: 13px">{{$errors->first('email')}}</span>
+    						@endif
 							<p>
 								<label>Password</label>
 								<span>*</span>
-								<input type="password" value="">
+								<input type="password" value="" name="password">
 							</p>
-							 <p id="login-form-remember">
+							@if($errors->has('password'))
+    							<span class="" style="color:red;font-size: 13px">{{$errors->first('password')}}</span>
+    						@endif
+							 <br><p id="login-form-remember">
 								<label><a href="#">Forget Your Password ? </a></label>
 							 </p>
 							 <p>

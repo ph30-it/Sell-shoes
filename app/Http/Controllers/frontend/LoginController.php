@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use Validator;
+use App\Http\Requests\LoginRequest;
 
 class LoginController extends Controller
 {
@@ -16,22 +17,11 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('frontend.login');
+        return view('frontend.login.login');
     }
 
-    public function postLogin(Request $request)
+    public function postLogin(LoginRequest $request)
     {
-        //return dd($request);
-        $request->validate([
-            'email'=>'required|email',
-            'password'=>'required|min:6|max:16'
-        ],[
-            'email.required'=>'Bạn chưa nhập Email',
-            'email.email'=>'Email chưa đúng định dạng',
-            'password.required'=>'Bạn chưa nhập Password',
-            'password.min'=>'Password phải ít nhất 6 ký tự',
-            'password.max'=> 'Password không quá 16 ký tự'
-        ]);
         $remember = $request->has('remember') ? true : false;
 
         $user_data = array(
@@ -48,7 +38,7 @@ class LoginController extends Controller
 
     public function logout(){
         Auth::logout();
-        return redirect('login')->with('status', 'Bạn đã đăng xuất. Hãy đăng nhập lại để tiếp tục');
+        return redirect('login')->with('status', trans('message.logout'));
     }
     /**
      * Show the form for creating a new resource.

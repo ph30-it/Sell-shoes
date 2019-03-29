@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->timestamp('date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('total');
             $table->string('payment');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

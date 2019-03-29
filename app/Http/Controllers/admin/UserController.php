@@ -44,9 +44,9 @@ class UserController extends Controller
         $data['password'] = Hash::make($request->password);
         $user = User::create($data);
         if ($user) {
-            return redirect()->route('user-admin')->with('status','Thêm tài khoản thành công!');
+            return redirect()->route('user-admin')->with('status', trans('message.user_create_susscess'));
         }else{
-            return redirect()->route('user-admin')->with('status','Thêm tài khoản thất bại!');
+            return redirect()->route('user-admin')->with('status',trans('message.user_create_fail'));
         }
     }
 
@@ -87,9 +87,9 @@ class UserController extends Controller
         $data['password'] = Hash::make($request->password);
         $user = User::where('id',$id)->update($data);
         if ($user) {
-            return redirect()->route('user-admin')->with('status','Sửa tài khoản thành công!');
+            return redirect()->route('user-admin')->with('status',trans('message.user_edit_susscess'));
         }else{
-            return redirect()->route('user-admin')->with('status','Sửa tài khoản thất bại!');
+            return redirect()->route('user-admin')->with('status',trans('message.user_edit_fail'));
         }
     }
 
@@ -103,9 +103,9 @@ class UserController extends Controller
     {
         $user = User::destroy($id);
         if ($user) {
-            return redirect()->back()->with('status','Xóa tài khoản thành công!');
+            return redirect()->back()->with('status',trans('message.user_delete_susscess'));
         }else{
-            return redirect()->back()->with('status','Xóa tài khoản thất bại!');
+            return redirect()->back()->with('status',trans('message.user_delete_fail'));
         }
     }
 }
