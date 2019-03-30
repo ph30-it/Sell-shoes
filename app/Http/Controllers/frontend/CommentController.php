@@ -4,6 +4,12 @@ namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Comment;
+use App\Product;
+use App\User;
+use Auth;
+use App\Http\Requests\CommentRequest;
+use App\Http\Requests\UserCommentRequest;
 
 class CommentController extends Controller
 {
@@ -33,11 +39,34 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request, $id)
     {
-        //
+        //chưa đăng nhập
+        $data = $request->except('_token');
+        $data['product_id'] = $id;
+        $comment = Comment::create($data);
+        if ($comment) {
+            return back();
+        }else{
+            return back()->with('status', 'Bình luận fail');
+        }
     }
 
+    public function storeUser(UserCommentRequest $request, $id)
+    {
+        //user
+        $data = $request->only('content');
+        $data['product_id'] = $id;
+        $data['user_id'] = Auth::user()->id;
+        $data['name']  = Auth::user()->name;
+        $data['email']  = Auth::user()->email;
+        $comment = Comment::create($data);
+        if ($comment) {
+            return back();
+        }else{
+            return back()->with('status', 'Bình luận fail');
+        }
+    }
     /**
      * Display the specified resource.
      *

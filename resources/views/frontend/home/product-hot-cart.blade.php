@@ -46,7 +46,6 @@
 					    	      </span>
 									 <ul class="list">
 									  <li>
-									  	<img src="images/anh1.png" alt=""/>
 									  	<ul class="icon1 sub-icon1 profile_img">
 										  <li><button type="submit" class="active-icon c1" style="text-decoration: none; background: #000;color: #fff; border: none;">+ Thêm Vào Giỏ </button>
 											<ul class="sub-icon1 list">
