@@ -87,6 +87,9 @@ Route::group(['namespace'=>'frontend'], function(){
 	Route::get('lien-he','ContactController@index')->name('contact-user');
 	//chi tiet san pham
 	Route::get('detail/{id}/{slug}.html', 'DetailProductController@index')->name('show-detail-product');
+	//comment
+	Route::post('detail/{id}/comment', 'CommentController@store')->name('comment-product');
+	Route::post('detail/{id}/comment-user', 'CommentController@storeUser')->name('user-comment-product');
 	//shopping cart
 	Route::group(['prefix' => 'gio-hang'], function(){
 			Route::get('/', 'ShoppingCartController@index')->name('shoppingCart-user');
@@ -96,4 +99,6 @@ Route::group(['namespace'=>'frontend'], function(){
 	//checkout
 	Route::get('checkout','CheckoutController@index')->name('show-checkout-user');
 	Route::post('checkout','CheckoutController@store')->name('checkout-user');
+	
+
 });

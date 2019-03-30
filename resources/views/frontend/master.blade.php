@@ -3,8 +3,8 @@
 <head>
 <title>MV Shoes | @yield('title')</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{{asset('css/style3.css')}}" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/style2.css')}}">
 <link rel="stylesheet" href="{{asset('css/style9.css')}}">
@@ -15,11 +15,9 @@
 <link rel="stylesheet" href="{{asset('css/bootstrap-theme.min.css')}}">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
         $(document).ready(function() {
             $(".dropdown img.flag").addClass("flagvisibility");
-
             $(".dropdown dt a").click(function() {
                 $(".dropdown dd ul").toggle();
             });
@@ -34,14 +32,11 @@
             function getSelectedValue(id) {
                 return $("#" + id).find("dt a span.value").html();
             }
-
             $(document).bind('click', function(e) {
                 var $clicked = $(e.target);
                 if (! $clicked.parents().hasClass("dropdown"))
                     $(".dropdown dd ul").hide();
             });
-
-
             $("#flagSwitcher").click(function() {
                 $(".dropdown img.flag").toggleClass("flagvisibility");
             });
@@ -73,7 +68,6 @@
 							$('.dropdownlist').change(function(){
 								etalage_show( $(this).find('option:selected').attr('class') );
 							});
-
 					});
 				</script>
 				<!----//details-product-slider--->	
@@ -90,7 +84,6 @@
 	</script>
 <style> /* style comment */
 	@import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);
-
 .detailBox {
     width:320px;
     border:1px solid #bbb;
@@ -105,7 +98,6 @@
   margin:0;
   display:inline-block;
 }
-
 .commentBox {
     padding:10px;
     border-top:1px dotted #bbb;
@@ -157,14 +149,11 @@
     border-top:1px dotted #bbb;
     padding:10px;
 }
-
 /* aaa */
 * {box-sizing: border-box;}
-
 .img-zoom-container {
   position: relative;
 }
-
 .img-zoom-lens {
   position: absolute;
   border: 1px solid #d4d4d4;
@@ -172,7 +161,6 @@
   width: 80px;
   height: 80px;
 }
-
 .img-zoom-result {
   border: 1px solid #d4d4d4;
   /*set the size of the result div:*/
@@ -209,7 +197,7 @@
 						@endif
 						<li>
 							<ul class="icon2 sub-icon2 profile_img">
-								<li><a class="c2" href="{{route('shoppingCart-user')}}"  style="margin-top: 1%"></a>
+								<li><a class="active-icon c2" href="#"  style="margin-top: 1%"> </a>
 									<ul class="sub-icon2 list">
 										<li>
 											<div class="row" style="margin-bottom: 20px">
@@ -244,11 +232,8 @@
 												@endif
 											</div>
 										</li>
-
-										
-
 									</ul>
-								</li>	
+								</li>
 							</ul>
 						</li>
 					</ul>
@@ -257,9 +242,9 @@
   	</div>
 	
    <div class="header-bottom">
-   	<div class="wrap">
+   	<div class="wrap" id="menuTop">
    		<!-- start header menu -->
-		<ul class="megamenu skyblue">
+		<ul class="megamenu skyblue"  style="background-color: #000">
 		    <li><a class="color1" href="{{route('home-user')}}">Home</a></li>
 			<li class="grid"><a class="color2" href="#">Men</a>
 				<div class="megapanel">
@@ -624,7 +609,6 @@
 		jQuery(document).ready(function($){
 			//lay vị trí hiện tại của menu cách top x px
 			pos = $("#menuTop").position();
-
 			$(window).scroll(function(){
 				var possScroll = $(document).scrollTop();
 				if (parseInt(possScroll) > parseInt(pos.top)) {
@@ -633,18 +617,6 @@
 					$("#menuTop").removeClass('navbar-fixed-top');
 				}
 			});
-		});
-
-		$(document).ready(function() {
-			/*$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('[name=csrf_token]').attr('content');
-				}
-			});*/
-			$('#submit').click(function(event) {
-				event.preventDefault();
-				
-					alert(111);
 		});
 	</script>
 </body>

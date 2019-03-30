@@ -1,48 +1,147 @@
 @extends('frontend.master')
 @section('title', 'Detail Product')
 @section('content')
+<style>
+	* {
+  box-sizing: border-box;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+</style>
        <div class="single">
          <div class="wrap">
      	    
 		<div class="cont span_2_of_3">
-			  <div class="labout span_1_of_a1" style="width: 30%">
+			  <div class="col-lg-5" style="padding: 10px">
 				<!-- start product_slider -->
-				     <ul id="etalage">
-							<li>
-								<a href="optionallink.html">
-									<img class="etalage_thumb_image" src="{{asset($image->slug)}}" style="width: 400px;"/>
-									<img class="etalage_source_image" src="{{asset($image->slug)}}" />
-								</a>
-							</li>	
-							<li>
-								<img class="etalage_thumb_image" src="{{asset('images/t2.jpg')}}" />
-								<img class="etalage_source_image" src="{{asset('images/t2.jpg')}}" />
-							</li>
-							<li>
-								<img class="etalage_thumb_image" src="{{asset('images/t3.jpg')}}" />
-								<img class="etalage_source_image" src="{{asset('images/t3.jpg')}}" />
-							</li>
-							<li>
-								<img class="etalage_thumb_image" src="{{asset('images/t4.jpg')}}" />
-								<img class="etalage_source_image" src="{{asset('images/t4.jpg')}}" />
-							</li>
-							<li>
-								<img class="etalage_thumb_image" src="{{asset('images/t5.jpg')}}" />
-								<img class="etalage_source_image" src="{{asset('images/t5.jpg')}}" />
-							</li>
-							<li>
-								<img class="etalage_thumb_image" src="{{asset('images/t6.jpg')}}" />
-								<img class="etalage_source_image" src="{{asset('images/t6.jpg')}}" />
-							</li>
-							<li>
-								<img class="etalage_thumb_image" src="{{asset('images/t1.jpg')}}" />
-								<img class="etalage_source_image" src="{{asset('images/t1.jpg')}}" />
-							</li>
-						</ul> 
-			<!-- end product_slider -->
+				 	<!-- Full-width images with number text -->
+				  <div class="mySlides">
+				    <div class="numbertext">1 / 6</div>
+				      <img src="{{asset($image->slug)}}" style="width:100%">
+				  </div>
+
+				  <div class="mySlides">
+				    <div class="numbertext">2 / 6</div>
+				      <img src="{{asset($image->slug)}}" style="width:100%">
+				  </div>
+
+				  <div class="mySlides">
+				    <div class="numbertext">3 / 6</div>
+				      <img src="{{asset($image->slug)}}" style="width:100%">
+				  </div>
+
+				  <div class="mySlides">
+				    <div class="numbertext">4 / 6</div>
+				      <img src="{{asset($image->slug)}}" style="width:100%">
+				  </div>
+				  <!-- Next and previous buttons -->
+				  
+
+				  <!-- Image text -->
+				  <div class="caption-container">
+				    <p id="caption"></p>
+				  </div>
+
+				  <!-- Thumbnail images -->
+				  <div class="row">
+				    <div class="column">
+				      <img class="demo cursor" src="{{asset($image->slug)}}" style="width:120%" onclick="currentSlide(1)" alt="The Woods">
+				    </div>
+				    <div class="column"> 
+				      <img class="demo cursor" src="{{asset($image->slug)}}" style="width:120%" onclick="currentSlide(2)" alt="Cinque Terre">
+				    </div>
+				    <div class="column">
+				      <img class="demo cursor" src="{{asset($image->slug)}}" style="width:120%" onclick="currentSlide(3)" alt="Mountains and fjords">
+				    </div>
+				    <div class="column">
+				      <img class="demo cursor" src="{{asset($image->slug)}}" style="width:120%" onclick="currentSlide(4)" alt="Northern Lights">
+				    </div>
+				  </div>
+				  <a class="prev" onclick="plusSlides(-1)" style="background: #000">&#10094;</a>
+				  	<a class="next" onclick="plusSlides(1)" style="background: #000;">&#10095;</a>
 			</div>
-			<div class="cont1 span_2_of_a1" style="width: 60.9%">
-				<div style="float: left; width: 75%">
+			<div class="col-lg-5">
 					<h3 class="m_3" style="font-size: 25px">{{$product->name}}</h3>
 					<div class="price_single">
 								  <span class="reducedfrom">{{number_format($product->price)}}₫</span>
@@ -54,7 +153,7 @@
 						<div class="options" style="line-height: 15px">
 							<h4 class="m_9">Chọn một kích thước(*)</h4>
 							<div style="padding: 0px 0px 15px 0px;">
-								@foreach($sizes as $size)
+								@foreach($product->sizes as $size)
 						   			<label for="{{'custom_radio'.$product->id.$size->name}}">
 						   				<input type="radio" value="{{$size->id}}" name=size id="{{'custom_radio'.$product->id.$size->name}}">
 						   				<span  style="padding:7px 9px;">{{$size->name}}</span>
@@ -84,7 +183,7 @@
 					   </ul>
 				    </div>
 				</div>
-				<div style="width: 25%; float: left;">
+				<div class="col-lg-2">
 					<table class="table tabletag">
 							<tr>
 								<td colspan="2" style="background:rgba(0,0,0,0.1);">
@@ -116,7 +215,6 @@
 				
 						</table>
 					</div>	
-			</div>
 			<div class="clear"></div>
      
      	<h3 class="m_3">Sản phẩm liên quan</h3>
@@ -187,105 +285,66 @@
      </div>					
 	 <div class="toogle">
      	<h3 class="m_3">Bình luận sản phẩm</h3>
-     	<div style="margin-bottom: 30px;" class="col-sm-8">
-						<form action="" method="GET" role="form">
-							@csrf()
-							<div class="form-group">
-								<label for="">Email:</label>
-								<input required type="email" name="email" class="form-control" id="" placeholder="Email">
-							</div>
-							<div class="form-group">
-								<label for="">Tên:</label>
-								<input required type="text" name="name" class="form-control" id="" placeholder="Họ Tên">
-							</div>
-							<div class="form-group">
-								<label for="textara">Nội dung:</label><br>
-								<textarea required name="content" cols="90" rows="7" placeholder="Nhập bình luận của bạn..." style="padding: 10px"></textarea>
-							</div>		
-							<button type="submit" class="btn btn-info" style="border-radius: 0;padding: 10px 50px;">Gửi</button>
-						</form>
-					    <div class="actionBox" style="margin-top: 20px">
+     	<div style="margin-bottom: 30px;" class="col-sm-7">
+     					<div class="actionBox" style="margin-top: 20px">
 					        <ul class="commentList">
-					            <li>
-					                <div class="commenterImage">
-					                  <img src="http://placekitten.com/50/50" />
-					                </div>
-					                <div class="commentText">
-					                	<p>Lê Đức Mạnh</p>
-					                    <p class="" style="font-size: 13px">Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
-
-					                </div>
-					            </li>
-					            <li>
-					                <div class="commenterImage">
-					                  <img src="http://placekitten.com/45/45" />
-					                </div>
-					                <div class="commentText">
-					                	<p>Lê Đức Mạnh</p>
-					                    <p class=""  style="font-size: 13px">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
-
-					                </div>
-					            </li>
+								 @foreach($comments as $comment)
+						           		<li>
+							                <div class="commenterImage">
+							                  <img src="http://placekitten.com/50/50" />
+							                </div>
+							                <div class="commentText">
+							                	<p>{{$comment->name}}</p>
+							                    <p class="" style="font-size: 13px">{{$comment->content}}</p> <span class="date sub-text">{{$comment->date}}</span>
+												@if(Auth::check() && $comment->user_id == Auth::user()->id)
+													<a href="" style="margin-left:10px;font-size: 13px">Xóa</a>
+							                    @endif
+							                </div>
+						            	</li>
+					           @endforeach
 					        </ul>
 					    </div>
+						@if(Auth::check())
+							@include('frontend.comment.user-comment')
+						@else
+							@include('frontend.comment.comment')
+						@endif
 		</div>
     </div>
     </div>
     <div class="clear"></div>
 	 </div>
      </div>
-	  <div class="footer">
-       	 <div class="footer-top">
-       		<div class="wrap">
-       			   <div class="col_1_of_footer-top span_1_of_footer-top">
-				  	 <ul class="f_list">
-				  	 	<li><img src="images/f_icon.png" alt=""/><span class="delivery">Free delivery on all orders over £100*</span></li>
-				  	 </ul>
-				   </div>
-				   <div class="col_1_of_footer-top span_1_of_footer-top">
-				  	<ul class="f_list">
-				  	 	<li><img src="images/f_icon1.png" alt=""/><span class="delivery">Customer Service :<span class="orange"> (800) 000-2587 (freephone)</span></span></li>
-				  	 </ul>
-				   </div>
-				   <div class="col_1_of_footer-top span_1_of_footer-top">
-				  	<ul class="f_list">
-				  	 	<li><img src="images/f_icon2.png" alt=""/><span class="delivery">Fast delivery & free returns</span></li>
-				  	 </ul>
-				   </div>
-				  <div class="clear"></div>
-			 </div>
-       	    </div>
-       	    <div class="footer-middle">
-       	 	  <div class="wrap">
-       	 		<div class="section group">
-				<div class="col_1_of_middle span_1_of_middle">
-					<dl id="sample" class="dropdown">
-			        <dt><a href="#"><span>Please Select a Country</span></a></dt>
-			        <dd>
-			            <ul>
-			                <li><a href="#">Australia<img class="flag" src="images/as.png" alt="" /><span class="value">AS</span></a></li>
-			                <li><a href="#">Sri Lanka<img class="flag" src="images/srl.png" alt="" /><span class="value">SL</span></a></li>
-			                <li><a href="#">Newziland<img class="flag" src="images/nz.png" alt="" /><span class="value">NZ</span></a></li>
-			                <li><a href="#">Pakistan<img class="flag" src="images/pk.png" alt="" /><span class="value">Pk</span></a></li>
-			                <li><a href="#">United Kingdom<img class="flag" src="images/uk.png" alt="" /><span class="value">UK</span></a></li>
-			                <li><a href="#">United States<img class="flag" src="images/us.png" alt="" /><span class="value">US</span></a></li>
-			            </ul>
-			         </dd>
-   				    </dl>
-   				 </div>
-				<div class="col_1_of_middle span_1_of_middle">
-					<ul class="f_list1">
-						<li><span class="m_8">Sign up for email and Get 15% off</span>
-						<div class="search">	  
-							<input type="text" name="s" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
-							<input type="submit" value="Subscribe" id="submit" name="submit">
-							<div id="response"> </div>
-			 			</div><div class="clear"></div>
-			 		    </li>
-					</ul>
-				</div>
-				<div class="clear"></div>
-			   </div>
-       	 	</div>
-       	 </div>
+     <script>
+     	var slideIndex = 1;
+		showSlides(slideIndex);
+
+		// Next/previous controls
+		function plusSlides(n) {
+		  showSlides(slideIndex += n);
+		}
+
+		// Thumbnail image controls
+		function currentSlide(n) {
+		  showSlides(slideIndex = n);
+		}
+
+		function showSlides(n) {
+		  var i;
+		  var slides = document.getElementsByClassName("mySlides");
+		  var dots = document.getElementsByClassName("demo");
+		  var captionText = document.getElementById("caption");
+		  if (n > slides.length) {slideIndex = 1}
+		  if (n < 1) {slideIndex = slides.length}
+		  for (i = 0; i < slides.length; i++) {
+		    slides[i].style.display = "none";
+		  }
+		  for (i = 0; i < dots.length; i++) {
+		    dots[i].className = dots[i].className.replace(" active", "");
+		  }
+		  slides[slideIndex-1].style.display = "block";
+		  dots[slideIndex-1].className += " active";
+		  captionText.innerHTML = dots[slideIndex-1].alt;
+		}
+     </script>
 @endsection    
