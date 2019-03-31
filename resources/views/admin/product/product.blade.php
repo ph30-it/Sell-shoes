@@ -63,13 +63,17 @@
 												<td>{{$product->id}}</td>
 												<td>{{$product->name}}</td>
 												<td>{{number_format($product->price,0)}}</td>
-												<td><span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">{{$product->sale}}%</span></td>
+												<td>
+													@if(empty($product->sale))
+														<span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">0%</span>
+													@else
+														<span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">{{$product->sale}}%</span>
+													@endif
+												</td>
 												<td>
 													<?php 
-														 $sizes = App\Product::find($product->id)->sizes;
-														 $categorys = App\Product::find($product->id)->category;
 														 $images = App\Image::select('slug')->where('product_id',$product->id)->where('status',1)->orderBy('updated_at','desc')->first();
-														 $brand = App\Brand::select('name')->where('id',$product->brand_id)->first();
+
 														 if(empty($images)){
 														 	 $images['slug'] = 'images/image.png';
 														 }
@@ -77,7 +81,7 @@
 														 $total_quantity = App\ProductSize::select('quantity')->where('product_id',$product->id)->get();
 														 //dd($total_quantity);
 													 ?>
-													@foreach($sizes as $item)
+													@foreach($product->sizes as $item)
 														<span style="background: url(//theme.hstatic.net/1000243581/1000361905/14/bg-variant-checked.png?v=131) no-repeat right bottom #fff; padding:2px; border: 1px solid #ccc;">{{$item->name}}</span>
 													@endforeach
 														
@@ -96,9 +100,15 @@
 														<img src="{{asset($images->slug)}}" alt="" width="150px">
 													@endif
 												</td>
-												<td>{{$product->description}}</td>
-												<td>{{$categorys->name}}</td>
-												<td>{{$brand->name}}</td>
+												<td>
+													@if(empty($product->description))
+														Chưa có mô tả cho sản phẩm này.
+													@else
+														{{$product->description}}
+													@endif
+												</td>
+												<td>{{$product->category->name}}</td>
+												<td>{{$product->brand->name}}</td>
 												<td>@if($product->featured == 1)
 														<span class="btn-info">Đặc biệt</span>
 													@else
@@ -113,16 +123,16 @@
 												</td>
 												<td>{{$product->created_at}}</td>
 												<td>{{$product->updated_at}}</td>
-												<td style="line-height: 50px">
-													<a href="{{route('show-edit-product',$product->id)}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a><br>
+												<td style="line-height: 50px" style="text-align: center;">
+													<a href="{{route('show-edit-product',$product->id)}}" class="btn glyphicon glyphicon-pencil"></a><br>
 													<form action="{{route('delete-product',$product->id)}}" method="POST">
 														@csrf
 														@method('DELETE')
-														<button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="btn btn-danger">Xóa</button>
+														<button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="glyphicon glyphicon-trash" style="border: none;background: #fff;color: red;"></button>
 													</form>
 													
-													<a href="{{route('view-product-size',$product->id)}}" class="btn btn-success">Size</a><br>
-													<a href="{{route('view-product-image',$product->id)}}" class="btn btn-info">Ảnh</a>
+													<a href="{{route('view-product-size',$product->id)}}" class="btn-success">Size</a><br>
+													<a href="{{route('view-product-image',$product->id)}}" class="btn-primary">ảnh</a>
 												</td>
 											</tr>
 										@endforeach

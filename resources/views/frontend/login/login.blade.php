@@ -34,6 +34,17 @@
 							@if($errors->has('password'))
     							<span class="" style="color:red;font-size: 13px">{{$errors->first('password')}}</span>
     						@endif
+    						@if(session('status'))
+								<div class="alert alert-info">
+									{{ session('status') }}
+								</div>
+						 	@endif
+						 	 <div class="sky-form">
+						 	 	<label>
+									<input type="checkbox" value="remember">
+									Ghi nhớ đăng nhập
+								</label>
+						 	 </div>
 							 <br><p id="login-form-remember">
 								<label><a href="#">Forget Your Password ? </a></label>
 							 </p>

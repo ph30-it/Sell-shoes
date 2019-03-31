@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Comment;
 use App\Product;
+use App\Image;
+use App\Http\Requests\EditCommentRequest;
 
-class ProductController extends Controller
+
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +19,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('brand')->where('status',1)->orderBy('id','desc')->paginate(9);
-        return view('frontend.product.shop',compact('products'));
+        $comments = Comment::with('product')->orderBy('id','desc')->paginate(10);
+        //dd($comments);
+        return view('admin.comment.comment',compact('comments'));
     }
 
     /**
@@ -59,7 +64,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comment = Comment::with('product')->where('id',$id)->first();
+        return view('admin.comment.editcomment',compact('comment'));
     }
 
     /**
@@ -69,9 +75,15 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditCommentRequest $request, $id)
     {
-        //
+        $data = $request->only('name','email','content');
+        $comment = Comment::where('id',$id)->update($data);
+        if ($comment) {
+            return redirect()->route('comment-admin')->with('status','Sửa bình luận thành công!');
+        }else{
+            return back()->with('status','Sửa bình luận thất bại!');
+        }
     }
 
     /**
@@ -82,6 +94,11 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::destroy('id',$id);
+        if ($comment) {
+            return back()->with('status','Xóa bình luận thành công!');
+        }else{
+            return back()->with('status','Xóa bình luận thất bại!');
+        }
     }
 }

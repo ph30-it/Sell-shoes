@@ -144,28 +144,52 @@
 			<div class="col-lg-5">
 					<h3 class="m_3" style="font-size: 25px">{{$product->name}}</h3>
 					<div class="price_single">
-								  <span class="reducedfrom">{{number_format($product->price)}}₫</span>
-								  <span class="actual">{{number_format($product->price - $product->price*$product->sale/100)}}₫</span><span style="font-size: 13px; color: #999">Đã bao gồm VAT(*)</span>
-								</div>
-								<h3 class="m_9">Sale off: <span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">{{$product->sale}}%</span></h3>
+						  <span class="reducedfrom">{{number_format($product->price)}}₫</span>
+						  <span class="actual">{{number_format($product->price - $product->price*$product->sale/100)}}₫</span><span style="font-size: 13px; color: #999">Đã bao gồm VAT(*)</span>
+					</div>
+					<h3 class="m_9">Sale off: <span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">{{$product->sale}}%</span></h3>
+					<h4 class="m_9" style="margin-top: -15px">Thương hiệu {{$product->brand->name}}</h4>
 					<div class="btn_form" style="margin-top: -30px">
-						<form action="" method="GET">
-						<div class="options" style="line-height: 15px">
+						<form action="{{route('add-cart-user',$product->id)}}" method="POST">
+							@csrf
+						<div class="options" style="line-height: 15px">	
 							<h4 class="m_9">Chọn một kích thước(*)</h4>
-							<div style="padding: 0px 0px 15px 0px;">
-								@foreach($product->sizes as $size)
-						   			<label for="{{'custom_radio'.$product->id.$size->name}}">
-						   				<input type="radio" value="{{$size->id}}" name=size id="{{'custom_radio'.$product->id.$size->name}}">
-						   				<span  style="padding:7px 9px;">{{$size->name}}</span>
-						   			</label>
+							<div style="padding: 0px 15px 15px 0px;">
+								@foreach($sizes as $item)
+										<?php 
+											$quantity = App\ProductSize::where('product_id',$item->product_id)->sum('quantity');
+										 ?>
+						   			@if($quantity > 0) 				   	
+							   			@if($item->quantity == 0)
+							   				<span class="nav" style="float:left; " style="padding: 0">
+											  <li role="presentation" class="disabled" ><a  style="padding: 5px 9px;border: 1px solid #ccc;margin-top:14px;margin-right: 4px">{{$item->size->name}}</a></li>
+											</span>
+							   			@else
+							   				<span class="nav" style="float: left;">
+							   				<li><label for="{{'custom_radio'.$item->id}}" style="margin-right: 4px">
+								   				<input type="radio" value="{{$item->size->name}}" name=size id="{{'custom_radio'.$item->id}}" >
+								   				<span style="padding: 5px 9px">{{$item->size->name}}</span>
+							   				</label></li></span>
+							   			@endif
+							   		@else
+							   			<span class="nav" style="float:left; " style="padding: 0">
+										  <li role="presentation" class="disabled" ><a  style="padding: 5px 9px;border: 1px solid #ccc;margin-top:10px;margin-right: 4px">{{$item->size->name}}</a></li>
+										</span>
+							   		@endif	
+									
 					   			@endforeach
 							</div>
-							
+							<div class="clear"></div>
 						</div>
-								@csrf
-								<!-- <input type="submit" value="THÊM VÀO GIỎ" title="" style="margin-right: 15px"><input type="submit" value="MUA NGAY" title=""> -->
-								<button class="btn btnaddcart btn-success" style="margin-right: 10px;padding: 10px; border-radius: 0"><span class="glyphicon glyphicon-shopping-cart" style="margin-right: 10px"></span>THÊM VÀO GIỎ</button>
-								<button type="submit"  class="btn btnaddcart btn-info" style="width: 150px;padding: 10px; border-radius: 0"><span class="glyphicon glyphicon-ok" style="margin-right: 10px"></span>MUA NGAY</button>
+								<div style="margin-top: 20px">
+									@if($quantity > 0)
+									<button class="btn btnaddcart btn-success" style="margin-right: 10px;padding: 10px; border-radius: 0"><span class="glyphicon glyphicon-shopping-cart" style="margin-right: 10px"></span>THÊM VÀO GIỎ</button>
+									<button type="submit"  class="btn btnaddcart btn-info" style="width: 150px;padding: 10px; border-radius: 0"><span class="glyphicon glyphicon-ok" style="margin-right: 10px"></span>MUA NGAY</button>
+									@else
+										<button class="btn btnaddcart btn-success" style="margin-right: 10px;padding: 10px; border-radius: 0" disabled="disabled"><span class="glyphicon glyphicon-shopping-cart" style="margin-right: 10px"></span>TẠM HẾT HÀNG</button>
+									@endif
+								</div>
+								
 					 	</form>
 					</div>
 
@@ -220,10 +244,9 @@
      	<h3 class="m_3">Sản phẩm liên quan</h3>
          <ul id="flexiselDemo3">
 			@foreach($products_lienquan as $item)
-				<?php $img = App\Image::where('product_id',$item->id)->where('status',1)->first(); 
-					  $brand = App\Brand::select('name')->where('id',$item->brand_id)->first(); 
+				<?php $img = App\Image::where('product_id',$item->id)->where('status',1)->first();  
 				?>
-				<li><img src="{{asset($img->slug)}}" /><div class="grid-flex"><a href="#">{{$brand->name}}</a><p>{{number_format($item->price - $item->price*$item->sale/100)}}₫</p></div></li>
+				<li><img src="{{asset($img->slug)}}" /><div class="grid-flex"><a href="{{asset('detail/'.$item->id.'/'.$item->slug.'.html')}}">{{$product->brand->name}}</a><p>{{number_format($item->price - $item->price*$item->sale/100)}}₫</p></div></li>
 			@endforeach
 		 </ul>
 	    <script type="text/javascript">
@@ -290,16 +313,23 @@
 					        <ul class="commentList">
 								 @foreach($comments as $comment)
 						           		<li>
-							                <div class="commenterImage">
-							                  <img src="http://placekitten.com/50/50" />
-							                </div>
-							                <div class="commentText">
-							                	<p>{{$comment->name}}</p>
-							                    <p class="" style="font-size: 13px">{{$comment->content}}</p> <span class="date sub-text">{{$comment->date}}</span>
-												@if(Auth::check() && $comment->user_id == Auth::user()->id)
-													<a href="" style="margin-left:10px;font-size: 13px">Xóa</a>
-							                    @endif
-							                </div>
+						           			<form action="{{route('delete-comment-user',$comment->id)}}" method="POST">
+						           				@csrf
+												@method('DELETE')
+								                <div class="commenterImage">
+								                  <img src="http://placekitten.com/50/50" />
+								                </div>
+								                <div class="commentText">
+								                	<p>{{$comment->name}}</p>
+								                    <p class="" style="font-size: 13px">{{$comment->content}}</p> <span class="date sub-text">{{$comment->date}}</span>
+													@if(Auth::check() && $comment->user_id == Auth::user()->id)
+														
+															
+															<button type="submit" style="margin-left:10px;font-size: 13px;background: #fff;border: none;color: blue" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</button>
+														
+								                    @endif
+								                </div>
+										    </form>            
 						            	</li>
 					           @endforeach
 					        </ul>

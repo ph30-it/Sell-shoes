@@ -23,32 +23,24 @@
                     {{ session('status') }}
                 </div>
             @endif
-        	<form method="POST">
+        	<form method="POST" action="{{route('new-password-admin',$id)}}">
                 @method('PUT')
                 @csrf()
-                @include('errors.error')  
-            	<div class="form-group">
-                	<label>Fullname<span style="color: red">*</span></label>
-                    <input type="text" name="name" class="form-control" placeholder="Fullname" value="{{$users->name}}" />
-                    @if($errors->has('name'))
-                        <span class="" style="color:red;font-size: 13px">{{$errors->first('name')}}</span>
-                    @endif
-                </div>
                 <div class="form-group">
-                	<label>Email<span style="color: red">*</span></label>
-                    <input type="text" name="email" class="form-control" placeholder="Email" value="{{$users->email}}" />
-                    @if($errors->has('email'))
+                	<label>Mật khẩu mới:<span style="color: red">*</span></label>
+                    <input type="password" name="password" class="form-control" placeholder="Mật khẩu mới" value="" />
+                    @if($errors->has('password'))
                         <span class="" style="color:red;font-size: 13px">{{$errors->first('email')}}</span>
                     @endif
                 </div>
-                <div class="form-group">
-                	<label>User Level<span style="color: red">*</span></label>
-                    <select name="role_id" class="form-control">
-                    	<option value="2" @if($users->role_id == 2) selected @endif >SuperAdmin</option>
-                        <option value="1" @if($users->role_id == 1) selected @endif >User</option>
-                    </select>
+                 <div class="form-group">
+                    <label>Nhập lại mật khẩu:<span style="color: red">*</span></label>
+                    <input type="password" name="confirmpassword" class="form-control" placeholder="Nhập lại mật khẩu..." value="" />
+                    @if($errors->has('confirmpassword'))
+                        <span class="" style="color:red;font-size: 13px">{{$errors->first('confirmpassword')}}</span>
+                    @endif
                 </div>
-                <input type="submit" name="submit" value="Sửa" class="btn btn-primary" />
+                <button  type="submit" class="btn btn-primary">Đổi mật khẩu</button>
                 <a href="{{route('user-admin')}}" class="btn btn-danger">Hủy</a>
             </form>
         </div>

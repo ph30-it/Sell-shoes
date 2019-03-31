@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Customer;
 use App\Order;
 use App\OrderDetail;
+use App\ProductSize;
 use App\Http\Requests\StatusOrderRequest;
 use DB;
 
@@ -78,11 +79,22 @@ class OrderController extends Controller
      */
     public function update(StatusOrderRequest $request, $id)
     {
-        $data = $request->only('status');
-        $order = Order::where('id',$id)->update($data);
-        if ($order) {
+        try {
+            DB::beginTransaction();
+            $data = $request->only('status');
+            if ($data['status'] == 1) {
+                //duyệt đơn hàng trừ số lướng
+                $quantityProduct = OrderDetail::select('product_id','size_id','quantity')->where('order_id',$id)->get();
+                foreach ($quantityProduct as $item) {
+                    $productSize = ProductSize::select('quantity')->where('product_id',$item->product_id)->where('size_id',$item->size_id)->first();
+                    $qty['quantity'] = $productSize->quantity - $item->quantity;
+                    ProductSize::where('product_id',$item->product_id)->where('size_id',$item->size_id)->update($qty);
+                }
+            }
+            $order = Order::where('id',$id)->update($data);
+            DB::commit();
             return redirect()->route('order-admin')->with('status', trans('message.status_order_susscess'));
-        }else{
+        } catch (Exception $e) {
             return back()->with('status', trans('message.status_order_fail'));
         }
     }

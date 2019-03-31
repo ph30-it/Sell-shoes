@@ -11,6 +11,7 @@ use App\Brand;
 use App\Image;
 use App\ProductSize;
 use App\Http\Requests\AddProductRequest;
+use App\Http\Requests\EditProductRequest;
 use DB;
 
 class ProductController extends Controller
@@ -22,8 +23,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data['productlist'] = Product::orderBy('id','desc')->paginate(8);
-       
+        $data['productlist'] = Product::with('sizes','category','brand','images')->orderBy('id','desc')->paginate(8);
         return view('admin.product.product',$data);
     }
 
@@ -78,7 +78,7 @@ class ProductController extends Controller
             DB::commit();
              return redirect()->route('product-admin')->with('status', trans('message.prod_create_susscess'));
         } catch (\Exception $e) {
-            return redirect()->route('product-admin')->with('status',trans('message.prod_create_fail'));
+            return back()->with('status',trans('message.prod_create_fail'));
         }   
         
 
@@ -102,9 +102,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $data['product'] = Product::find($id);
+        $data['product'] = Product::with('sizes')->where('id',$id)->first();
         $data['sizes'] = Size::all();
-        $data['product_size'] = Product::find($id)->sizes;
         $data['categories'] = Category::all();
         $data['brands'] = Brand::all();
         $data['images'] = Product::find($id)->images->where('status',1)->first();   
@@ -118,11 +117,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditProductRequest $request, $id)
     {         
           try {
             DB::beginTransaction();
-            $data = $request->except('_token','img','size','_method','submit');
+            $data = $request->except('_token','img','size','_method');
             $data['slug'] = str_slug($data['name']);
             //dd($data);
             Product::where('id',$id)->update($data);
@@ -139,7 +138,7 @@ class ProductController extends Controller
             DB::commit();
              return redirect()->route('product-admin')->with('status', trans('message.prod_edit_susscess'));
         } catch (\Exception $e) {
-            return redirect()->route('product-admin')->with('status',trans('message.prod_edit_fail'));
+            return back()->with('status',trans('message.prod_edit_fail'));
         }  
     }
     /**
@@ -159,49 +158,6 @@ class ProductController extends Controller
             return redirect()->back()->with('status', trans('message.prod_delete_susscess'));  
         } catch (\Exception $ex) {
             return redirect()->back()->with('status',trans('message.prod_delete_susscess'));
-        }
-    }
-    public function action(Request $request){
-        if($request->ajax()){
-            $query = $request->get('quey');
-           /* if ($query ='') {
-                $data = DB::table('products')
-                ->where('name','like','%'.$query.'%')
-                ->orWhere('price','like','%'.$query.'%')
-                ->orderBy('id','desc')
-                ->get();
-            
-            }else{
-               $data = DB::table('products')
-                ->orderBy('id','desc')
-                ->get();
-            }
-            $total_row = $data->count();
-            if ($total_row > 0) {
-                foreach ($data as $row) {
-                    $output = '
-                        <tr>
-                            <td>'.$row->id.'</td>
-                            <td>'.$row->name.'</td>
-                            <td>'.$row->price.'</td>
-                            <td>'.$row->sale.'</td>
-
-                        </tr>
-                    ';
-                }
-            }else{
-                $output = '
-                    <tr>
-                        <td align="center" colspan="15">Không tìm thấy kết quả nào...</td>
-                    </tr>
-                ';
-            }
-            $data = array(
-                'table_data' => $output,
-                'toltal_data' => $toltal_data
-            );
-            echo json_encode($data);*/
-            alert('ok');
         }
     }
 }

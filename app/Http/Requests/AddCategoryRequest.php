@@ -24,11 +24,12 @@ class AddCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=> 'unique:categories,name'
+            'name'=> 'required|unique:categories,name'
         ];
     }
     public function messages(){
         return [
+            'name.required'=>'Bạn chưa nhập tên danh mục!',
             'name.unique'=>'Tên danh mục đã bị trùng!'
         ];
     }

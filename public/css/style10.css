@@ -3147,3 +3147,7 @@ label input[type=radio]:checked+span{
 	border: 1px solid #D87C7C;
     background: url(//theme.hstatic.net/1000243581/1000361905/14/bg-variant-checked.png?v=131) no-repeat right bottom #fff;
 }	
+#spandisable{
+	border: 1px solid #ccc;
+	padding: 2px 4.5px;
+}

@@ -109,6 +109,11 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::destroy('id',$id);
+        if ($comment) {
+            return back()->with('status','Xóa bình luận thành công!');
+        }else{
+            return back()->with('status','Xóa bình luận thất bại!');
+        }
     }
 }

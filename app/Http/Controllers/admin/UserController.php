@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\EditUserRequest;
+use App\Http\Requests\NewPasswordRequest;
 use App\User;
 use Hash;
 
@@ -41,7 +42,6 @@ class UserController extends Controller
     public function store(AddUserRequest $request)
     {
         $data = $request->except('_token','submit');
-        $data['password'] = Hash::make($request->password);
         $user = User::create($data);
         if ($user) {
             return redirect()->route('user-admin')->with('status', trans('message.user_create_susscess'));
@@ -50,15 +50,26 @@ class UserController extends Controller
         }
     }
 
+    public function newPassword(NewPasswordRequest $request, $id)
+    {
+        $data = $request->only('password');
+        $data['password'] = Hash::make($request->password);
+        $user = User::where('id',$id)->update($data);
+        if ($user) {
+            return redirect()->route('user-admin')->with('status', trans('message.user_password_susscess'));
+        }else{
+            return redirect()->route('user-admin')->with('status', trans('message.user_password_fail'));
+        }
+    }
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showNewPassword($id)
     {
-        //
+        return view('admin.user.newpass',compact('id'));
     }
 
     /**

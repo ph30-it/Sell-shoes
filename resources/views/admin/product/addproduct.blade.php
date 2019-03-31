@@ -14,25 +14,32 @@
 				
 				<div class="panel panel-primary">
 					<div class="panel-heading">Thêm sản phẩm</div>
+					@if(session('status'))
+						<div class="alert alert-danger" style="margin-top: 15px">
+							{{ session('status') }}
+						</div>
+				 	@endif
 					<div class="panel-body">
 						<form method="post" action="{{route('add-product')}}" enctype="multipart/form-data">
 							@csrf()
-							@include('errors.error')
 							<div class="row" style="margin-bottom:40px">
 								<div class="col-xs-8">
 									<div class="form-group" >
-										<label>Tên sản phẩm</label>
-										<input required type="text" name="name" class="form-control">
+										<label>Tên sản phẩm<span style="color: red;">*</span></label>
+										<input type="text" name="name" class="form-control">
 										@if($errors->has('name'))
-		    								<p class="alert alert-danger">{{$errors->first('name')}}</p>
-		    							@endif
+			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('name')}}</span>
+			    						@endif
 									</div>
 									<div class="form-group" >
-										<label>Giá sản phẩm</label>
-										<input required type="text" name="price" class="form-control">
+										<label>Giá sản phẩm<span style="color: red;">*</span></label>
+										<input type="text" name="price" class="form-control">
+										@if($errors->has('price'))
+			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('price')}}</span>
+			    						@endif
 									</div>
 									<div class="form-group" >
-										<label>Size Giày</label>
+										<label>Size Giày<span style="color: red;">*</span></label>
 										<?php $i=1; ?>	
 											@foreach($sizes as $item)								
 												<section  class="sky-form">
@@ -45,27 +52,36 @@
 						                   <?php $i++; ?>	
 											@endforeach
 					                    </select>
+					                    @if($errors->has('size'))
+			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('size')}}</span>
+			    						@endif
 									</div>
 									<div class="form-group" >
 										<label>Khuyến mãi(%)</label>
-										<input required type="text" name="sale" class="form-control">
+										<input type="text" name="sale" class="form-control">
 									</div>
 									
 									<div class="form-group" >
-										<label>Danh mục</label>
-										<select required name="category_id" class="form-control">
+										<label>Danh mục<span style="color: red;">*</span></label>
+										<select name="category_id" class="form-control">
 											@foreach($categorylist as $category)
 												<option value="{{$category->id}}">{{$category->name}}</option>
 											@endforeach
 					                    </select>
+					                    @if($errors->has('category_id'))
+			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('category_id')}}</span>
+			    						@endif
 									</div>
 									<div class="form-group" >
-										<label>Hãng sản phẩm</label>
-										<select required name="brand_id" class="form-control">
+										<label>Hãng sản phẩm<span style="color: red;">*</span></label>
+										<select name="brand_id" class="form-control">
 											@foreach($brands as $brand)
 												<option value="{{$brand->id}}">{{$brand->name}}</option>
 											@endforeach
 					                    </select>
+					                    @if($errors->has('brand_id'))
+			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('brand_id')}}</span>
+			    						@endif
 									</div>
 									<div class="form-group" >
 										<label>SP Đặc biệt</label><br>
@@ -74,20 +90,23 @@
 									</div>
 									<div class="form-group" >
 										<label>Trạng thái</label>
-										<select required name="status" class="form-control">
+										<select name="status" class="form-control">
 											<option value="1">Hiển thị</option>
 											<option value="0">Ẩn</option>
 					                    </select>
 									</div>
 									<div class="form-group" >
 										<label>Miêu tả</label><br>
-										<textarea required name="description" class="" cols="100" rows="5" style="padding: 10px;"></textarea>
+										<textarea name="description" class="" cols="100" rows="5" style="padding: 10px;"></textarea>
 									</div>		
 								</div>
 								<div class="form-group" >
-										<label>Ảnh sản phẩm</label>
-										<input required id="img" type="file" name="img" class="form-control hidden" onchange="changeImg(this)">
+										<label>Ảnh sản phẩm<span style="color: red;">*</span></label>
+										<input id="img" type="file" name="img" class="form-control hidden" onchange="changeImg(this)">
 					                    <img id="avatar" class="thumbnail" width="300px" src="{{asset('images/new_seo-10-512.png')}}">
+					                    @if($errors->has('img'))
+			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('img')}}</span>
+			    						@endif
 								</div>
 							</div>
 							<input type="submit" name="submit" value="Thêm" class="btn btn-primary">

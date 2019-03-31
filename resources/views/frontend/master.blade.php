@@ -7,12 +7,15 @@
 <link href="{{asset('css/style3.css')}}" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/style2.css')}}">
-<link rel="stylesheet" href="{{asset('css/style9.css')}}">
+<link rel="stylesheet" href="{{asset('css/style10.css')}}">
 <link rel="stylesheet" href="{{asset('css/product.css')}}">
 <link href="{{asset('css/form.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{asset('css/detail1.css')}}">
 <link rel="stylesheet" href="{{asset('css/etalage.css')}}">
 <link rel="stylesheet" href="{{asset('css/bootstrap-theme.min.css')}}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
 <script type="text/javascript">
