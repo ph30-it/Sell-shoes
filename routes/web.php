@@ -29,6 +29,8 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::post('add', 'UserController@store')->name('add-user');
 			Route::get('{id}/edit', 'UserController@edit')->name('show-edit-user');
 			Route::put('{id}/edit', 'UserController@update')->name('edit-user');
+			Route::get('{id}/show-new-password', 'UserController@showNewPassword')->name('show-new-password');
+			Route::put('{id}/new-password', 'UserController@newPassword')->name('new-password-admin');
 			Route::delete('{id}/delete', 'UserController@destroy')->name('delete-user');
 		});
 		//Category management
@@ -71,6 +73,13 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::post('{id}/show-detail','OrderController@update')->name('status-detail-order');
 			Route::delete('{id}/delete', 'OrderController@destroy')->name('delete-order');
 		});
+		//Comment management
+		Route::group(['prefix' => 'comment'], function(){
+			Route::get('/','CommentController@index')->name('comment-admin');
+			Route::get('{id}/edit','CommentController@edit')->name('show-edit-comment');
+			Route::put('{id}/edit','CommentController@update')->name('edit-comment');
+			Route::delete('{id}/delete', 'CommentController@destroy')->name('delete-comment');
+		});
 	});
 });
 
@@ -90,6 +99,7 @@ Route::group(['namespace'=>'frontend'], function(){
 	//comment
 	Route::post('detail/{id}/comment', 'CommentController@store')->name('comment-product');
 	Route::post('detail/{id}/comment-user', 'CommentController@storeUser')->name('user-comment-product');
+	Route::delete('detail/{id}/delete', 'CommentController@destroy')->name('delete-comment-user');
 	//shopping cart
 	Route::group(['prefix' => 'gio-hang'], function(){
 			Route::get('/', 'ShoppingCartController@index')->name('shoppingCart-user');

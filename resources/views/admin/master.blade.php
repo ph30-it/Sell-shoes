@@ -41,7 +41,7 @@
 			<li><a href="{{route('category-admin')}}"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Danh mục</a></li>
 			<li><a href="{{route('user-admin')}}"><svg class="glyph stroked male user"><use xlink:href="#stroked-male-user"></use></svg> Tài khoản</a></li>
 			<li><a href="{{route('order-admin')}}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"></use></svg> Đơn hàng</a></li>
-			<li><a href=""><svg class="glyph stroked two messages"><use xlink:href="#stroked-two-messages"/></svg> Bình luận</a></li>
+			<li><a href="{{route('comment-admin')}}"><svg class="glyph stroked two messages"><use xlink:href="#stroked-two-messages"/></svg> Bình luận</a></li>
 			<li role="presentation" class="divider"></li>
 		</ul>
 		

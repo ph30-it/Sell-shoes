@@ -17,8 +17,8 @@ class ProductSize extends Model
     	return $this->belongsTo('App\Product');
     }
 
-   /* public function size()
+    public function size()
     {
     	return $this->belongsTo('App\Size');
-    }*/
+    }
 }

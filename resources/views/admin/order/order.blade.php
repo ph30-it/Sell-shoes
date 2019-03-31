@@ -23,7 +23,16 @@
 										{{ session('status') }}
 									</div>
 							 	@endif
-							 	@if(!empty($data))
+							 	<div class="form-group" style="width: 20%">
+							 		<select name="status" id="" class="form-control" style="background:#FFEBCD">
+							 			<option value="">--Trạng thái đơn hàng</option>
+										<option value="0">Đơn mới</option>
+										<option value="1">Đã duyệt</option>
+										<option value="2">Đang giao</option>
+										<option value="3">Đã giao</option>
+										<option value="4">Đã hủy</option>
+							 		</select>
+							 	</div>
 								<table class="table table-bordered" style="margin-top:20px;text-align: center;">				
 									<thead>
 										<tr class="bg-primary">
@@ -77,10 +86,7 @@
 											@endforeach
 											
 									</tbody>
-								</table>
-								@else
-									<p>Chưa có đơn hàng nào!</p>
-								@endif						
+								</table>				
 							</div>
 						</div>
 						<div class="clearfix"></div>

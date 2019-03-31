@@ -23,13 +23,12 @@
 									</div>
 							 	@endif
 								@csrf()
-								@include('errors.error')
 								<div class="form-group">
-									<label>Tên danh mục:</label>
-	    							<input required type="text" name="name" class="form-control" placeholder="Tên danh mục...">
+									<label>Tên danh mục:<span style="color: red;">*</span></label>
+	    							<input type="text" name="name" class="form-control" placeholder="Tên danh mục...">
 	    							@if($errors->has('name'))
-	    							<p class="alert alert-danger">{{$errors->first('name')}}</p>
-	    							@endif
+		    							<span class="" style="color:red;font-size: 13px">{{$errors->first('name')}}</span>
+		    						@endif
 								</div>
 								<div class="form-group">
 									<label>Mô tả:</label><br>
@@ -48,7 +47,7 @@
 					<div class="panel-heading">Danh sách danh mục</div>
 					<div class="panel-body">
 						<div class="bootstrap-table">
-							<table class="table table-bordered">
+							<table class="table table-bordered" style="text-align: center;">
 				              	<thead>
 					                <tr class="bg-primary">
 					                  <th>Tên danh mục</th>
@@ -64,13 +63,11 @@
 										<td>{{$item->slug}}</td>
 										<td>{{$item->description}}</td>
 										<td>
-				                    		<a href="{{route('show-edit-category',$item->id)}}" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Sửa</a>
+				                    		<a href="{{route('show-edit-category',$item->id)}}"><span class="btn glyphicon glyphicon-pencil"></span></a>
 				                    		<form action="{{route('delete-category',$item->id)}}" method="POST">
 				                    			@csrf()
 				                    			@method('DELETE')
-				                    			<button onclick="return confirm('Bạn có chắc chắn muốn xóa? Warning: Tất cả những sản phẩm thuộc danh mục này cũng bị xóa!')" class="btn btn-danger">
-				                    				<span class="glyphicon glyphicon-trash"></span> Xóa
-				                    			</button>
+				                    			<button onclick="return confirm('Bạn có chắc chắn muốn xóa? Warning: Tất cả những sản phẩm thuộc danh mục này cũng bị xóa!')" class="glyphicon glyphicon-trash" style="border: none;background: #fff;color: red;"></button>
 				                    		</form>
 				                  		</td>
 				                  	</tr>	

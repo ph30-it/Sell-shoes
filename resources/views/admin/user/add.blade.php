@@ -29,19 +29,19 @@
                 @csrf()
                 @include('errors.error')  
                 <div class="form-group">
-                    <label>Fullname</label>
+                    <label>Fullname<span style="color: red">*</span></label>
                     <input type="text" name="name" class="form-control" placeholder="Fullname" value="" required />
                 </div>
                 <div class="form-group">
-                    <label>Email</label>
+                    <label>Email<span style="color: red">*</span></label>
                     <input type="text" name="email" class="form-control" placeholder="Email" value="" required />
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
+                    <label>Password<span style="color: red">*</span></label>
                     <input type="password" name="password" class="form-control" placeholder="Password" value="" required />
                 </div>
                 <div class="form-group">
-                    <label>User Level</label>
+                    <label>User Level<span style="color: red">*</span></label>
                     <select name="role_id" class="form-control">
                         <option value="2">SuperAdmin</option>
                         <option value="1">User</option>

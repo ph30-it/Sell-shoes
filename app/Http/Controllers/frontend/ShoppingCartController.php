@@ -8,6 +8,8 @@ use App\Product;
 use App\Image;
 use App\ProductSize;
 use Cart;
+use App\Http\Requests\AddCartRequest;
+
 class ShoppingCartController extends Controller
 {
     /**
@@ -42,6 +44,9 @@ class ShoppingCartController extends Controller
     {
         // $a = Cart::get($id);
         // dd($a->attributes->size);
+        if ($request->size == NULL) {
+            return back();
+        }
         
         $product = Product::find($id);
         $price_sale = $product->price - ($product->price*$product->sale)/100;

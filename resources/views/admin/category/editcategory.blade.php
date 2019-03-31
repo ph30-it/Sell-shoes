@@ -20,11 +20,11 @@
 								@method('PUT')
 								@csrf()
 								<div class="form-group">
-									<label>Tên danh mục:</label>
-	    							<input required type="text" name="name" class="form-control" placeholder="Tên danh mục..." value="{{$category->name}}">
+									<label>Tên danh mục:<span style="color: red;">*</span></label>
+	    							<input type="text" name="name" class="form-control" placeholder="Tên danh mục..." value="{{$category->name}}">
 	    							@if($errors->has('name'))
-	    							<p class="alert alert-danger">{{$errors->first('name')}}</p>
-	    							@endif
+		    							<span class="" style="color:red;font-size: 13px">{{$errors->first('name')}}</span>
+		    						@endif
 								</div>
 								<div class="form-group">
 									<div><label>Mô tả:</label></div>

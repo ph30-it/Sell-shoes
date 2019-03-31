@@ -60,7 +60,7 @@
 
 								<form action="{{route('status-detail-order',$order->id)}}" method="POST">
 									@csrf
-									<select name="status" id="" class="form-control" style="width: 30%;margin-bottom: 20px">
+									<select name="status" id="" class="form-control" style="width:30%;margin-bottom:20px;background:#FFEBCD">
 										<option value="">--Trạng thái đơn hàng</option>
 										<option value="0">Đơn mới</option>
 										<option value="1">Đã duyệt</option>

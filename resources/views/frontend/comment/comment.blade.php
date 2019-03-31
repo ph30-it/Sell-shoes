@@ -21,5 +21,5 @@
     								<span class="" style="color:red;font-size: 13px">{{$errors->first('content')}}</span>
     							@endif
 							</div>		
-							<button type="submit" class="btn btn-info" style="border-radius: 0;padding: 10px 50px;">Gửi</button>
+							<button type="submit" class="btn btn-info" style="border-radius: 0;padding: 10px 50px;">Bình Luận</button>
 						</form>
