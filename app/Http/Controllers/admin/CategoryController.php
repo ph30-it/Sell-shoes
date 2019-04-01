@@ -47,10 +47,10 @@ class CategoryController extends Controller
                 $cate= Category::create($data);
                 DB::commit();
                 // session()->flash('status', 'Thêm danh mục thành công!')
-                return redirect()->route('category-admin')->with('status','Thêm danh mục thành công!');  
+                return redirect()->route('category-admin')->with('status', trans('message.cate_create_susscess'));  
             }catch (\Exception $ex) {
             
-                return redirect()->back()->with('status','Thêm danh mục thất bại!');
+                return redirect()->back()->with('status', trans('message.cate_create_fail'));
             
             }
 
@@ -93,9 +93,9 @@ class CategoryController extends Controller
         $category->slug = str_slug($request->name);
         $category->description = $request->description;
         if ($category->save()) {
-           return redirect()->route('category-admin')->with('status','Sửa danh mục thành công!');
+           return redirect()->route('category-admin')->with('status', trans('message.cate_edit_susscess'));
         }else{
-            return redirect()->route('category-admin')->with('status','Sửa danh mục thành thất bại!');
+            return redirect()->route('category-admin')->with('status', trans('message.cate_edit_susscess'));
         }
         
     }
@@ -116,10 +116,10 @@ class CategoryController extends Controller
             $category->products()->delete();
             $category->delete();
             DB::commit();
-            return redirect()->back()->with('status','Xóa danh mục thành công!');  
+            return redirect()->back()->with('status', trans('message.cate_delete_susscess'));  
         } catch (\Exception $ex) {
             
-            return redirect()->back()->with('status','Xóa danh mục thất bại!');
+            return redirect()->back()->with('status', trans('message.cate_delete_susscess'));
             
         }
     }

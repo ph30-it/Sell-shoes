@@ -18,6 +18,7 @@
 <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+// <link rel="stylesheet" type="text/css"  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         $(document).ready(function() {
             $(".dropdown img.flag").addClass("flagvisibility");
 
@@ -196,9 +197,10 @@
 					
 					<ul class="nav navbar-nav navbar-right ulnav" style="margin-top: 20px;">
 						<li>
-							<form class="navbar-form navbar-left" role="search" action="{{asset('search/')}}" method="GET">
+							<form class="navbar-form navbar-left" role="search" action="{{route('search-user')}}" method="get">
+								@csrf
 								<div class="form-group">
-									<input name="result" type="text" class="form-control" placeholder="Tìm kiếm..." style="width: 100%; margin-right: 150px;">
+									<input name="search" type="text" class="form-control" placeholder="Tìm kiếm..." style="width: 100%; margin-right: 150px;">
 								</div>
 							</form>
 						</li>

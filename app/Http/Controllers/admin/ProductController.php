@@ -76,9 +76,9 @@ class ProductController extends Controller
                 
                 
             DB::commit();
-             return redirect()->route('product-admin')->with('status','Thêm sản phẩm thành công!');
+             return redirect()->route('product-admin')->with('status', trans('message.prod_create_susscess'));
         } catch (\Exception $e) {
-            return redirect()->route('product-admin')->with('status','Thêm sản phẩm thất bại!');
+            return redirect()->route('product-admin')->with('status',trans('message.prod_create_fail'));
         }   
         
 
@@ -137,9 +137,9 @@ class ProductController extends Controller
                 ]);        
             }
             DB::commit();
-             return redirect()->route('product-admin')->with('status','Sửa sản phẩm thành công!');
+             return redirect()->route('product-admin')->with('status', trans('message.prod_edit_susscess'));
         } catch (\Exception $e) {
-            return redirect()->route('product-admin')->with('status','Sửa sản phẩm thất bại!');
+            return redirect()->route('product-admin')->with('status',trans('message.prod_edit_fail'));
         }  
     }
     /**
@@ -156,9 +156,9 @@ class ProductController extends Controller
             $product->productSize()->delete();
             $product->delete();
             DB::commit();
-            return redirect()->back()->with('status','Xóa sản phẩm thành công!');  
+            return redirect()->back()->with('status', trans('message.prod_delete_susscess'));  
         } catch (\Exception $ex) {
-            return redirect()->back()->with('status','Xóa sản phẩm thất bại!');
+            return redirect()->back()->with('status',trans('message.prod_delete_susscess'));
         }
     }
     public function action(Request $request){

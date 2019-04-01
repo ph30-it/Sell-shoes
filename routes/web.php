@@ -64,6 +64,13 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::put('{id}/edit', 'ProductController@update')->name('edit-product');
 			Route::delete('{id}/delete', 'ProductController@destroy')->name('delete-product');
 		});
+		//Order management
+		Route::group(['prefix' => 'order'], function(){
+			Route::get('/', 'OrderController@index')->name('order-admin');
+			Route::get('{id}/show-detail','OrderController@show')->name('detail-order');
+			Route::post('{id}/show-detail','OrderController@update')->name('status-detail-order');
+			Route::delete('{id}/delete', 'OrderController@destroy')->name('delete-order');
+		});
 	});
 });
 
@@ -84,6 +91,8 @@ Route::group(['namespace'=>'frontend'], function(){
 	//contact(lien-he)
 	Route::get('lien-he','ContactController@index')->name('contact-user');
 	Route::post('lien-he','ContactController@store')->name('contact-user');
+	//Tìm kiếm(shearch)
+	Route::get('tim-kiem','SearchController@index')->name('search-user');
 	//chi tiet san pham
 	Route::get('detail/{id}/{slug}.html', 'DetailProductController@index')->name('show-detail-product');
 	//shopping cart

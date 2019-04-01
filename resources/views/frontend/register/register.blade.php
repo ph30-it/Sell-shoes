@@ -33,11 +33,11 @@
 	    						@endif
 							</p>
 							<p>
-								<label class="form-group">Confilmpassword</label>
+								<label class="form-group">Confirmpassword</label>
 								<span>*</span>
-								<input type="password" value="" name="confilmpassword" placeholder="Confilmpassword">
+								<input type="password" value="" name="confirmpassword" placeholder="Confirmpassword">
 								@if($errors->has('Confilmpassword'))
-	    							<span style="color: red;font-size: 13px">{{$errors->first('confilmpassword')}}</span>
+	    							<span style="color: red;font-size: 13px">{{$errors->first('confirmpassword')}}</span>
 	    						@endif
 							</p>
 							<button class="grey">Submit</button>

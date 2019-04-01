@@ -100,12 +100,21 @@
 			  	</ul>
 		   		<div class="clear"></div>
 	    	</div>
-	    	<div><h4>Tất cả sản phẩm</h4></div>
+	    	<div>
+	    		@if(isset($search))
+	    			<br><h4 style="color: 	#00CED1;">Kết quả tìm được với từ khóa: "{{$search}}"</h4>
+	    		@else
+	    			<br><h4>Tất cả sản phẩm</h4>
+	    		@endif
+	    	</div>
      	    <div class="clear"></div>
 	       </div>
 			  	<div class="row" style="margin-top: 20px">
 				    @include('frontend.product.product-card')
 			  </div>
+			  <div style="margin-left: 45%;">
+									{{ $products->links()}}
+								</div>
 			  <div class="clear"></div>
 			</div>
 		   </div>

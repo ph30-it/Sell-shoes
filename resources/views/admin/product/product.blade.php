@@ -33,7 +33,7 @@
 								</form>
 								<a href="{{route('show-add-product')}}" class="btn btn-primary">Thêm sản phẩm</a>
 								@if(session('status'))
-									<div class="alert alert-success">
+									<div class="alert alert-success" style="margin-top: 15px">
 										{{ session('status') }}
 									</div>
 							 	@endif

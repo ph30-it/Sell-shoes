@@ -1,3 +1,4 @@
+
 @extends('frontend.master')
 @section('title', 'Login')
 @section('content')
@@ -8,7 +9,7 @@
 					<h5 class="sub_title">Register Account</h5>
 					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan</p>
 					<div class="button1">
-					   <a href="{{route('register-user')}}"><input type="submit" name="Submit" value="Continue"></a>
+					   <a href="register.html"><input type="submit" name="Submit" value="Continue"></a>
 					 </div>
 					 <div class="clear"></div>
 				</div>
@@ -16,18 +17,25 @@
 				  <div class="login-title">
 	           		<h4 class="title">Registered Customers</h4>
 					 <div class="comments-area">
-						<form>
+						<form action="{{route('postLogin')}}" method="POST">
+							@csrf
 							<p>
 								<label>Name</label>
 								<span>*</span>
-								<input type="text" value="">
+								<input type="text" value="" name="email">
 							</p>
+							@if($errors->has('email'))
+    							<span class="" style="color:red;font-size: 13px">{{$errors->first('email')}}</span>
+    						@endif
 							<p>
 								<label>Password</label>
 								<span>*</span>
-								<input type="password" value="">
+								<input type="password" value="" name="password">
 							</p>
-							@if(session('status'))
+							@if($errors->has('password'))
+    							<span class="" style="color:red;font-size: 13px">{{$errors->first('password')}}</span>
+    						@endif
+    						@if(session('status'))
 								<div class="alert alert-info">
 									{{ session('status') }}
 								</div>
@@ -38,7 +46,7 @@
 									Ghi nhớ đăng nhập
 								</label>
 						 	 </div>
-							 <p id="login-form-remember">
+							 <br><p id="login-form-remember">
 								<label><a href="#">Forget Your Password ? </a></label>
 							 </p>
 							 <p>

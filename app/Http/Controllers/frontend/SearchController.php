@@ -4,42 +4,26 @@ namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
-use Validator;
-use App\Http\Requests\LoginRequest;
-
-class LoginController extends Controller
+use App\Product;
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('frontend.login.login');
+        $search = $request->search;
+
+        $search = str_replace('', '%', $search);
+        $products = Product::where('name', 'like', '%'.$search.'%')
+                            ->orWhere('price','<=',$search)
+                            ->orderBy('id','desc')
+                            ->paginate(9);
+        return view('frontend.product.shop', compact('products','search'));
     }
 
-    public function postLogin(LoginRequest $request)
-    {
-        $remember = $request->has('remember') ? true : false;
-
-        $user_data = array(
-      'email'  => $request->email,
-      'password' => $request->password,
-     );
-
-        if(Auth::attempt($user_data,$remember)){
-            return redirect()->route('home-user');
-        }else{
-            return redirect()->back()->with('status', trans('message.login_fail'));
-        }
-    }
-
-    public function logout(){
-        Auth::logout();
-        return redirect('login')->with('status', trans('message.logout'));
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -49,7 +33,6 @@ class LoginController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
