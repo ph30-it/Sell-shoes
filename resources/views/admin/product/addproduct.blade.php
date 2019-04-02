@@ -26,14 +26,14 @@
 								<div class="col-xs-8">
 									<div class="form-group" >
 										<label>Tên sản phẩm<span style="color: red;">*</span></label>
-										<input type="text" name="name" class="form-control">
+										<input type="text" name="name" class="form-control" value="{{old('name')}}">
 										@if($errors->has('name'))
 			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('name')}}</span>
 			    						@endif
 									</div>
 									<div class="form-group" >
 										<label>Giá sản phẩm<span style="color: red;">*</span></label>
-										<input type="text" name="price" class="form-control">
+										<input type="text" name="price" class="form-control" value="{{old('price')}}">
 										@if($errors->has('price'))
 			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('price')}}</span>
 			    						@endif
@@ -44,7 +44,10 @@
 											@foreach($sizes as $item)								
 												<section  class="sky-form">
 						                   		 	<label class="checkbox">
-						                   		 		<input type="checkbox" name="size[]" value="{{$i}}"><i style="padding: 6px"></i>{{$item->name}}
+						                   		 		<input type="checkbox" name="size[]" value="{{$i}}" 
+						                   		 		@if(old('size') == $i) checked @endif
+
+						                   		 		><i style="padding: 6px"></i>{{$item->name}}
 
 						                   		 	</label>
 						                   		 	<!-- <input type="text" name=""> -->
@@ -58,7 +61,7 @@
 									</div>
 									<div class="form-group" >
 										<label>Khuyến mãi(%)</label>
-										<input type="text" name="sale" class="form-control">
+										<input type="text" name="sale" class="form-control" value="{{old('sale')}}">
 									</div>
 									
 									<div class="form-group" >

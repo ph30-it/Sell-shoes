@@ -33,7 +33,7 @@
 			                       <div><span style="margin-right: 10px" class="price-del"><del>{{number_format($product->price)}} ₫</del></span><span class="price">{{number_format($product->price - ($product->price*$product->sale/100))}} ₫</span></div>
 								   </div>
 								    </div>
-								   <form action="{{route('add-cart-user',$product->id)}}" method="POST" id="formData">
+								   <form  id="formData" name="form">
 								   	@csrf
 								   <span class="rating" style="line-height: 10px">
 								   		<span style="margin-left: 7px">Chọn một kích thước</span><br>
@@ -41,15 +41,15 @@
 								   			<?php 
 								   				$quantity = App\ProductSize::where('product_id',$item->product_id)->sum('quantity');
 								   			 ?>		
-								   			@if($quantity > 0) 				   	
+								   			@if($quantity > 0) <!-- còn hàng -->				   	
 									   			@if($item->quantity == 0)
 									   				<span class="nav" style="float:left; " style="padding: 0">
 													  <li role="presentation" class="disabled" ><a  style="padding: 3.8px 4.5px;border: 1px solid #ccc;margin-top:10px;margin-right: 3px">{{$item->size->name}}</a></li>
 													</span>
 									   			@else
 									   				<span class="nav" style="float: left;">
-									   				<li><label for="{{'custom_radioa'.$item->id}}" style="margin-right: 4px">
-										   				<input type="radio" value="{{$item->size->name}}" name=size id="{{'custom_radioa'.$item->id}}" >
+									   				<li><label for="{{'custom_radio0'.$item->id}}" style="margin-right: 4px">
+										   				<input type="radio" value="{{$item->size->id}}" name=size id="{{'custom_radio0'.$item->id}}" >
 										   				<span>{{$item->size->name}}</span>
 									   				</label></li></span>
 									   			@endif
@@ -64,7 +64,7 @@
 									  <li>
 									  	@if($quantity > 0)
 									  		<ul class="icon1 sub-icon1 profile_img">
-											  <li><button type="submit" id="submit" class="active-icon c1" style="text-decoration: none; background: #000;color: #fff; border: none;">+ Thêm Vào Giỏ </button>
+											  <li><button class="active-icon c1 addCart" style="text-decoration: none; background: #000;color: #fff; border: none;" data-id="{{$product->id}}">+ Thêm Vào Giỏ </button>
 												<ul class="sub-icon1 list">
 													<li><h3>{{$product->name}}</h3><a href=""></a></li>
 													<li><p>

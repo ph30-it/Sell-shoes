@@ -25,7 +25,7 @@ class AddProductRequest extends FormRequest
     {
         return [
             'name'=> 'required|unique:products,name',
-            'price'=> 'required',
+            'price'=> 'required|numeric',
             'size'=> 'required',
             'category_id'=> 'required',
             'brand_id'=> 'required',
@@ -37,6 +37,7 @@ class AddProductRequest extends FormRequest
             'name.required' => 'Bạn chưa điền tên sản phẩm!',
             'name.unique' => 'Tên sản phẩm đã bị trùng!',
             'price.required' => 'Bạn chưa điền giá sản phẩm!',
+            'price.numeric' => 'Giá sản phẩm phải là số nguyên!',
             'size.required' => 'Bạn chưa chọn kích thước sản phẩm!',
             'category_id.required' => 'Bạn chưa chọn danh mục sản phẩm!',
             'brand_id.required' => 'Bạn chưa chọn hãng sản phẩm!',

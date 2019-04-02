@@ -150,7 +150,7 @@
 					<h3 class="m_9">Sale off: <span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">{{$product->sale}}%</span></h3>
 					<h4 class="m_9" style="margin-top: -15px">Thương hiệu {{$product->brand->name}}</h4>
 					<div class="btn_form" style="margin-top: -30px">
-						<form action="{{route('add-cart-user',$product->id)}}" method="POST">
+						<form >
 							@csrf
 						<div class="options" style="line-height: 15px">	
 							<h4 class="m_9">Chọn một kích thước(*)</h4>
@@ -167,7 +167,7 @@
 							   			@else
 							   				<span class="nav" style="float: left;">
 							   				<li><label for="{{'custom_radio'.$item->id}}" style="margin-right: 4px">
-								   				<input type="radio" value="{{$item->size->name}}" name=size id="{{'custom_radio'.$item->id}}" >
+								   				<input type="radio" value="{{$item->size->id}}" name=size id="{{'custom_radio'.$item->id}}" >
 								   				<span style="padding: 5px 9px">{{$item->size->name}}</span>
 							   				</label></li></span>
 							   			@endif
@@ -183,7 +183,7 @@
 						</div>
 								<div style="margin-top: 20px">
 									@if($quantity > 0)
-									<button class="btn btnaddcart btn-success" style="margin-right: 10px;padding: 10px; border-radius: 0"><span class="glyphicon glyphicon-shopping-cart" style="margin-right: 10px"></span>THÊM VÀO GIỎ</button>
+									<button class="btn btnaddcart btn-success addCart" style="margin-right: 10px;padding: 10px; border-radius: 0" data-id="{{$product->id}}"><span class="glyphicon glyphicon-shopping-cart" style="margin-right: 10px"></span>THÊM VÀO GIỎ</button>
 									<button type="submit"  class="btn btnaddcart btn-info" style="width: 150px;padding: 10px; border-radius: 0"><span class="glyphicon glyphicon-ok" style="margin-right: 10px"></span>MUA NGAY</button>
 									@else
 										<button class="btn btnaddcart btn-success" style="margin-right: 10px;padding: 10px; border-radius: 0" disabled="disabled"><span class="glyphicon glyphicon-shopping-cart" style="margin-right: 10px"></span>TẠM HẾT HÀNG</button>
@@ -216,21 +216,21 @@
 								</td>
 							</tr>
 							<tr>
-								<td><br><img src="../../images/giaohang1.png" alt=""></td>
+								<td><br><img src="{{asset('images/giaohang1.png')}}" alt=""></td>
 								<td>
 									<p><b>Giao hàng nhanh</b>
 									<br>Nhận hàng trong ngày ở nội thành</p>
 								</td>
 							</tr>
 							<tr>
-								<td><br><img src="../../images/thanhtoan.png" alt=""></td>
+								<td><br><img src="{{asset('images/thanhtoan.png')}}" alt=""></td>
 								<td>
 									<p><b>Thanh toán</b>
 									<br>Thanh toán khi nhận hàng trong khu vực nội thành</p>
 								</td>
 							</tr>
 							<tr>
-								<td><br><img src="../../images/hotro.png" alt=""></td>
+								<td><br><img src="{{asset('images/hotro.png')}}" alt=""></td>
 								<td>
 									<p><b>Hỗ trợ Online</b>
 									<br>0933880767 - 01222980259</p>
@@ -321,7 +321,7 @@
 								                </div>
 								                <div class="commentText">
 								                	<p>{{$comment->name}}</p>
-								                    <p class="" style="font-size: 13px">{{$comment->content}}</p> <span class="date sub-text">{{$comment->date}}</span>
+								                    <p class="" style="font-size: 13px">{{$comment->content}}</p> <span class="date sub-text">{{ date('d/m/Y H:i:s', strtotime($comment->date)) }}</span>
 													@if(Auth::check() && $comment->user_id == Auth::user()->id)
 														
 															
@@ -376,5 +376,51 @@
 		  dots[slideIndex-1].className += " active";
 		  captionText.innerHTML = dots[slideIndex-1].alt;
 		}
+
+		$(document).ready(function(){
+			//rating
+		  $('.rating').rating();
+		  $('.star-rating i').click(function(event) {
+		  	 var a =	$(this).attr('data-rating');
+		  	 alert(a);
+		  });
+		  //add cart
+		  $('.addCart').click(function(event) {
+				event.preventDefault();	
+				var size = document.getElementsByName("size");
+				var product_id =  $(this).attr('data-id');	
+				var length = size.length;
+				for (var i = 0; i < length; i++){
+                    if (size[i].checked === true){
+                        //alert(size[i].value);
+                        var size_id = size[i].value;
+                       	break;
+                    }
+                }
+                //alert(size_id);
+                if (typeof  size_id == "undefined") {
+					alert('Bạn chưa chọn kích thước!');
+				}else{
+					$.ajax({
+							url: "{{route('add-cart-user')}}",
+							type: 'GET',
+							data: {						
+								product_id:product_id,
+								size_id:size_id,
+											},
+							success: function(data) {
+								alert('Thêm giỏ hàng thành công!'); 
+								location.reload();
+							},
+							error: function($error) {
+								alert('Thêm vào giỏ hàng fail!');
+							}
+						})
+					}
+		});
+	});
+
+
+
      </script>
 @endsection    

@@ -41,12 +41,13 @@
 											<?php 
 												$product = App\Product::select('name')->where('id',$item->product_id)->first();
 												$image = App\Image::select('slug')->where('product_id',$item->product_id)->first();
+												$size = App\Size::select('name')->where('id',$item->size_id)->first();
 											 ?>
 											<tr>
 												<td>{{$item->id}}</td>
 												<td>{{$product->name}}</td>
 												<td><img src="{{asset($image->slug)}}" alt="" width="150px"></td>
-												<td>{{$item->size}}</td>
+												<td>{{$size->name}}</td>
 												<td>{{$item->quantity}}</td>
 												<td>{{number_format($item->price,0)}} ₫</td>
 												<td>{{$item->sale}}</td>
@@ -61,7 +62,7 @@
 								<form action="{{route('status-detail-order',$order->id)}}" method="POST">
 									@csrf
 									<select name="status" id="" class="form-control" style="width:30%;margin-bottom:20px;background:#FFEBCD">
-										<option value="">--Trạng thái đơn hàng</option>
+										<option>--Trạng thái đơn hàng</option>
 										<option value="0">Đơn mới</option>
 										<option value="1">Đã duyệt</option>
 										<option value="2">Đang giao</option>
