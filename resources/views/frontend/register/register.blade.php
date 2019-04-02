@@ -36,7 +36,7 @@
 								<label class="form-group">Confirmpassword</label>
 								<span>*</span>
 								<input type="password" value="" name="confirmpassword" placeholder="Confirmpassword">
-								@if($errors->has('Confilmpassword'))
+								@if($errors->has('Confirmpassword'))
 	    							<span style="color: red;font-size: 13px">{{$errors->first('confirmpassword')}}</span>
 	    						@endif
 							</p>
