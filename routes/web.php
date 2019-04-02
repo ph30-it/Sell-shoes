@@ -98,6 +98,14 @@ Route::group(['namespace'=>'frontend'], function(){
 	Route::get('san-pham','ProductController@index')->name('list-all-product');
 	Route::get('gioi-thieu','FrontendController@indexGioiThieu')->name('info-shop');
 	Route::get('lien-he','ContactController@index')->name('contact-user');
+	// dang ki nguoi dung
+	Route::get('dang-ki','RegisterController@index')->name('register-user');
+	Route::post('dang-ki','RegisterController@store')->name('register-user');
+	//contact(lien-he)
+	Route::get('lien-he','ContactController@index')->name('contact-user');
+	Route::post('lien-he','ContactController@store')->name('contact-user');
+	//Tìm kiếm(shearch)
+	Route::get('tim-kiem','SearchController@index')->name('search-user');
 	//chi tiet san pham
 	Route::get('detail/{id}/{slug}.html', 'DetailProductController@index')->name('show-detail-product');
 	//comment

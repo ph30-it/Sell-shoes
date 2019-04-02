@@ -20,8 +20,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link href="css/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
 <script type="text/javascript">
+// <link rel="stylesheet" type="text/css"  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         $(document).ready(function() {
             $(".dropdown img.flag").addClass("flagvisibility");
             $(".dropdown dt a").click(function() {
@@ -164,15 +166,16 @@
 	<div class="container-fluid navmenu">	
 			<div class="container ">
 					<ul class="nav navbar-nav" style="height: 40px;">
-						<li><a href="{{ route('home-user')}}" id="logohover"><img src="{{asset('images/logo2.png')}}" class="logo" style="width: 218px;"></a></li>
+						<li><a href="{{ route('home-user')}}" id="logohover" style="padding: 0"><img src="{{asset('images/logo2.png')}}" class="logo" style="width: 218px;"></a></li>
 						<!-- <li class="li1"><a href="#">Hỗ trợ: 0356796738 - DucManhIT</a></li> -->
 					</ul>
 					
 					<ul class="nav navbar-nav navbar-right ulnav" style="margin-top: 20px;">
 						<li>
-							<form class="navbar-form navbar-left" role="search" action="{{asset('search/')}}" method="GET">
+							<form class="navbar-form navbar-left" role="search" action="{{route('search-user')}}" method="get">
+								@csrf
 								<div class="form-group">
-									<input name="result" type="text" class="form-control" placeholder="Tìm kiếm..." style="width: 100%; margin-right: 150px;">
+									<input name="search" type="text" class="form-control" placeholder="Tìm kiếm..." style="width: 100%; margin-right: 150px;">
 								</div>
 							</form>
 						</li>
@@ -569,9 +572,11 @@
 		<div class="container divfooter">
 			<div class="col-sm-3">
 				<h4 class="textbot">LIÊN HỆ</h4>
-				<p class="textbot1">86 Lê Thiện Trị, Phường Hòa Hải, Quận Ngũ Hành Sơn, Tp. Đà Nẵng</p>
-				<p class="textbot1">Phone: 0356796738 - DucManhIT</p>
+				<p class="textbot1">76 Lê Thiện Trị, Phường Hòa Hải, Quận Ngũ Hành Sơn, Tp. Đà Nẵng</p>
+				<p class="textbot1">Phone: 035 679 6738 - DucManhIT</p>
 				<p class="textbot1">Email: leducmanh101198@gmail.com</p>
+				<p class="textbot1">Phone: 034 817 9975 - VietTranIT</p>
+				<p class="textbot1">Email: tranviet2006.tv@gmail.com</p>
 			</div>
 			<div class="col-sm-3">
 				<h4 class="textbot">CHÍNH SÁCH HỖ TRỢ</h4>
@@ -584,7 +589,7 @@
 			</div>
 			<div class="col-sm-3">
 				<h4 class="textbot">LIÊN KẾT</h4>
-				<p class="textbot1">Hãy kết nối với chúng tôi.</p>
+				<p class="textbot1">Hãy kết nối với chúng tôi, mọi thắc mắc của bạn sẽ được giải đáp trong thời gian sớm nhất có thể.</p>
 			</div>
 			<div class="col-sm-3">
 				<h4 class="textbot">ĐĂNG KÝ NHẬN THÔNG TIN</h4>

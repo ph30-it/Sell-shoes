@@ -4,7 +4,9 @@ namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\User;
+use App\Http\Requests\RegisterRequest;
+use Hash;
 class RegisterController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.register.register');
     }
 
     /**
@@ -33,9 +35,17 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        //
+        $data= $request->only('name','email','password');
+        $data['password'] = Hash::make($request->password);
+        $user = User::create($data);
+        if ($user) {
+            return  redirect()->route('login')->with('status', 'Đăng kí thành công. Hãy đăng nhập để tiếp tục');
+        }else{
+            return back()->with('thongbao','Đăng kí thất bại');
+        }
+        
     }
 
     /**
@@ -46,7 +56,7 @@ class RegisterController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**

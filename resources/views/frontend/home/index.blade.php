@@ -4,7 +4,6 @@
 			@include('frontend.home.banner')
              @include('frontend.home.follow')
 				   @include('frontend.home.giaohang')
-        </div>
 		  <div class="content-bottom">
 				  <div style="background: #000; color: #fff; padding: 10px 10px;margin-top: 10px;">
 				  		<div class="container">

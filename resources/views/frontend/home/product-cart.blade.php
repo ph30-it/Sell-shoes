@@ -13,7 +13,6 @@
 							  	  <div class="top_box">
 								  	<h3 class="m_1">
 								  		<a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}" style="color: #000;text-decoration: none;">{{$product->name}}</a>
-								  		
 								  	</h3>
 								  	<p class="m_2">{{$product->brand->name}}</p>
 							         <div class="grid_img">

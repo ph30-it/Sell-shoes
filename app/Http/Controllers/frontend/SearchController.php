@@ -4,17 +4,24 @@ namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
-class ContactController extends Controller
+use App\Product;
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('frontend.contact.contact');
+        $search = $request->search;
+
+        $search = str_replace('', '%', $search);
+        $products = Product::where('name', 'like', '%'.$search.'%')
+                            ->orWhere('price','<=',$search)
+                            ->orderBy('id','desc')
+                            ->paginate(9);
+        return view('frontend.product.shop', compact('products','search'));
     }
 
     /**
@@ -26,7 +33,6 @@ class ContactController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
