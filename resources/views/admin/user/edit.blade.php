@@ -28,19 +28,21 @@
                 @csrf()
                 @include('errors.error')  
             	<div class="form-group">
-                	<label>Fullname</label>
-                    <input type="text" name="name" class="form-control" placeholder="Fullname" value="{{$users->name}}" required />
+                	<label>Fullname<span style="color: red">*</span></label>
+                    <input type="text" name="name" class="form-control" placeholder="Fullname" value="{{$users->name}}" />
+                    @if($errors->has('name'))
+                        <span class="" style="color:red;font-size: 13px">{{$errors->first('name')}}</span>
+                    @endif
                 </div>
                 <div class="form-group">
-                	<label>Email</label>
-                    <input type="text" name="email" class="form-control" placeholder="Email" value="{{$users->email}}" required />
+                	<label>Email<span style="color: red">*</span></label>
+                    <input type="text" name="email" class="form-control" placeholder="Email" value="{{$users->email}}" />
+                    @if($errors->has('email'))
+                        <span class="" style="color:red;font-size: 13px">{{$errors->first('email')}}</span>
+                    @endif
                 </div>
                 <div class="form-group">
-                	<label>Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password" value="" required />
-                </div>
-                <div class="form-group">
-                	<label>User Level</label>
+                	<label>User Level<span style="color: red">*</span></label>
                     <select name="role_id" class="form-control">
                     	<option value="2" @if($users->role_id == 2) selected @endif >SuperAdmin</option>
                         <option value="1" @if($users->role_id == 1) selected @endif >User</option>

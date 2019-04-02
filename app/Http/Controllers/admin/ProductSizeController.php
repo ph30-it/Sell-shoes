@@ -28,11 +28,15 @@ class ProductSizeController extends Controller
     }
 
     public function updateQuantity(Request $request){
-        $id = $request->id;
-        $product_size = ProductSize::find($id);
-        $product_size->quantity = $request->qty;
-        $product_size->save();
+        $data = [
+            'quantity'=> $request->qty,
+            ];
+        $product_size = ProductSize::where('id',$request->id)->update($data);
+        if ($product_size) {
+             return response()->json([], 200);
+        }else{
          return response()->json([], 400);
+        }
     }
 
     /**
@@ -51,7 +55,7 @@ class ProductSizeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(AddSizeRequest $request, $id)
     {   
         $data = $request->all();
         $data['product_id'] = $id;

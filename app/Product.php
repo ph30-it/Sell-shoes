@@ -31,7 +31,7 @@ class Product extends Model
     {
     	return $this->belongstoMany('App\Size', 'product_sizes');
 	}
-    public function productSize()
+    public function productSizes()
     {
         return $this->hasMany('App\ProductSize');
     }
@@ -39,6 +39,11 @@ class Product extends Model
     public function orderDetails()
     {
         return $this->hasMany('App\OrderDetail');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
     }
 
 }

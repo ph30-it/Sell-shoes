@@ -24,14 +24,16 @@ class EditUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'=> 'unique:users,email,'.$this->segment(3).',id',
-            'password'=>'min:6'
+            'name' => 'required',
+            'email'=> 'required|email|unique:users,email,'.$this->segment(3).',id',
         ];
     }
     public function messages(){
         return [
+            'name.required'=>'Bạn chưa nhập tên!',
+            'email.required'=>'Bạn chưa nhập email!',
             'email.unique'=>'Emai đã có người sử dụng!',
-            'password.min'=>'Password phải ít nhất 6 ký tự',
+ 
         ];
     }
 }

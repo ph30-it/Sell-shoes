@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Customer;
 use App\Order;
 use App\OrderDetail;
+use App\ProductSize;
 use App\Http\Requests\StatusOrderRequest;
 use DB;
 
@@ -19,9 +20,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $data = Customer::with('order')->orderBy('id','desc')->get();
-       // dd($data);
-        return view('admin.order.order',compact('data'));
+        $order = Customer::with('order')->orderBy('id','desc')->get();
+       //dd($data);
+        return view('admin.order.order',compact('order'));
     }
 
     /**
@@ -78,11 +79,22 @@ class OrderController extends Controller
      */
     public function update(StatusOrderRequest $request, $id)
     {
-        $data = $request->only('status');
-        $order = Order::where('id',$id)->update($data);
-        if ($order) {
+        try {
+            DB::beginTransaction();
+            $data = $request->only('status');
+            if ($data['status'] == 1) {
+                //duyệt đơn hàng trừ số lướng
+                $quantityProduct = OrderDetail::select('product_id','size_id','quantity')->where('order_id',$id)->get();
+                foreach ($quantityProduct as $item) {
+                    $productSize = ProductSize::select('quantity')->where('product_id',$item->product_id)->where('size_id',$item->size_id)->first();
+                    $qty['quantity'] = $productSize->quantity - $item->quantity;
+                    ProductSize::where('product_id',$item->product_id)->where('size_id',$item->size_id)->update($qty);
+                }
+            }
+            $order = Order::where('id',$id)->update($data);
+            DB::commit();
             return redirect()->route('order-admin')->with('status', trans('message.status_order_susscess'));
-        }else{
+        } catch (Exception $e) {
             return back()->with('status', trans('message.status_order_fail'));
         }
     }
@@ -107,4 +119,46 @@ class OrderController extends Controller
             return redirect()->back()->with('status',trans('message.order_delete_fail'));
         }
     }
+
+     public function orderFilterStatus($id){
+        $order = Order::with('customer')->where('status',$id)->orderBy('id','desc')->get()->toArray();
+       /* echo "<pre>";
+        print_r($order);*/
+        foreach($order as $item){ ?>
+            <tr>
+                <td><?php echo $item['id']; ?></td>
+                <td><?php echo $item['customer']['name']; ?></td>
+                <td><?php echo $item['customer']['email']; ?></td>
+                <td><?php echo $item['date']; ?></td>
+                <td><?php echo $item['customer']['address']; ?></td>
+                <td><?php echo $item['customer']['phone']; ?></td>
+                <td><?php echo $item['customer']['note']; ?></td>
+                <td><?php if($item['status'] == 0) { ?>
+                        <span class="btn btn-default" style="padding: 1px 7px">Đơn mới</span>
+                    <?php } if($item['status'] == 1) { ?>
+                        <span class="btn btn-success" style="padding: 1px 7px">Đã duyệt</span>
+                    <?php } if($item['status'] == 2) { ?> 
+                        <span class="btn btn-info" style="padding: 1px 7px">Đang giao</span>
+                    <?php } if($item['status'] == 3) { ?>
+                        <span class="btn btn-primary" style="padding: 1px 7px">Đã giao</span>
+                    <?php } if($item['status'] == 4) { ?>
+                        <span class="btn btn-danger" style="padding: 1px 7px">Đã hủy</span>
+                    <?php } ?>
+                </td>
+                <td>
+                    <a href="<?php echo route('detail-order',$item['id']); ?>" class=""><span class="btn glyphicon glyphicon-search"></span></a><br>
+                    <form action="<?php echo route('delete-order',$item['id']); ?>" method="POST">
+                       <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                       <input type="hidden" name="_method" value="delete">
+                        <button onclick="return confirm('Bạn có chắc chắn muốn xóa?')"  type="submit" style="border: none; background: #fff"><span class="glyphicon glyphicon-trash" style="color: #d9534f;"></span></button>
+                    </form>
+                </td>
+            </tr>
+            <?php  
+        }
+        
+    
+    }
+
 }
+

@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::where('status',1)->orderBy('id','desc')->paginate(9);
+        $products = Product::with('brand')->where('status',1)->orderBy('id','desc')->paginate(9);
         return view('frontend.product.shop',compact('products'));
     }
 

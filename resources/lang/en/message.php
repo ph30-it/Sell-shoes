@@ -27,6 +27,8 @@ return [
 	'user_edit_fail' => 'Sửa tài khoản thất bại!',
 	'user_delete_susscess' => 'Xóa tài khoản thành công!',
 	'user_delete_fail' => 'Xóa tài khoản thất bại!',
+	'user_password_susscess' => 'Đổi mật khẩu thành công!',
+	'user_password_fail' => 'Đổi mật khẩu không thành công!',
 	//update status order
 	'status_order_susscess' => 'Cập nhật trạng thái đơn hàng thành công!',
 	'status_order_fail' => 'Cập nhật trạng thái đơn hàng thất bại!',

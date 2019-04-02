@@ -8,6 +8,7 @@
 <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{asset('css/admin.css')}}" rel="stylesheet">
 <link href="{{asset('css/form.css')}}" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- <link href="{{asset('css/custom.css')}}" rel="stylesheet"> -->
 <script
   src="http://code.jquery.com/jquery-3.3.1.min.js"
@@ -41,7 +42,7 @@
 			<li><a href="{{route('category-admin')}}"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Danh mục</a></li>
 			<li><a href="{{route('user-admin')}}"><svg class="glyph stroked male user"><use xlink:href="#stroked-male-user"></use></svg> Tài khoản</a></li>
 			<li><a href="{{route('order-admin')}}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"></use></svg> Đơn hàng</a></li>
-			<li><a href=""><svg class="glyph stroked two messages"><use xlink:href="#stroked-two-messages"/></svg> Bình luận</a></li>
+			<li><a href="{{route('comment-admin')}}"><svg class="glyph stroked two messages"><use xlink:href="#stroked-two-messages"/></svg> Bình luận</a></li>
 			<li role="presentation" class="divider"></li>
 		</ul>
 		

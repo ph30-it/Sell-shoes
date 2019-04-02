@@ -31,13 +31,29 @@
                     <td width="15%">Email</td>
                     <td width="10%">Password</td>
                     <td width="5%">User Level</td>
-                    <td width="5%">Edit</td>
-                    <td width="5%">Delete</td>
                 </tr>
                 @foreach($users as $user)
                 <tr>
                 	<td>{{$user->id}}</td>
-                    <td>{{$user->name}}</td>
+                    <td>
+                        <ul class="user-menu" style="margin-top: 0px;margin-right: 60px">
+                            <li class="dropdown pull-right">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: #000"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>{{$user->name}}<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{route('show-new-password',$user->id)}}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Đổi mật khẩu</a></li>
+                                    <li><a href="{{route('show-edit-user',$user->id)}}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Sửa thông tin</a></li>
+                                    <li>
+                                        <form action="{{route('delete-user',$user->id)}}" method="POST">
+                                            @method('DELETE')
+                                            @csrf()
+                                            <button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" style="background: #fff;border: none;"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Xóa tài khoản</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                    </td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->password}}</td>
                     <td>@if($user->role_id == 2)
@@ -45,13 +61,6 @@
                         @else
                             <span class="btn-info">User</span>
                         @endif
-                    </td>
-                    <td><a href="{{route('show-edit-user',$user->id)}}" class="btn btn-default">Edit</a></td>
-                    <td><form action="{{route('delete-user',$user->id)}}" method="POST">
-                        @method('DELETE')
-                        @csrf()
-                        <button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="btn btn-warning">Delete</button>
-                    </form>
                     </td>
                 </tr>
                 @endforeach

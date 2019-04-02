@@ -29,6 +29,8 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::post('add', 'UserController@store')->name('add-user');
 			Route::get('{id}/edit', 'UserController@edit')->name('show-edit-user');
 			Route::put('{id}/edit', 'UserController@update')->name('edit-user');
+			Route::get('{id}/show-new-password', 'UserController@showNewPassword')->name('show-new-password');
+			Route::put('{id}/new-password', 'UserController@newPassword')->name('new-password-admin');
 			Route::delete('{id}/delete', 'UserController@destroy')->name('delete-user');
 		});
 		//Category management
@@ -63,6 +65,8 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::get('{id}/edit', 'ProductController@edit')->name('show-edit-product');
 			Route::put('{id}/edit', 'ProductController@update')->name('edit-product');
 			Route::delete('{id}/delete', 'ProductController@destroy')->name('delete-product');
+			//search product
+			Route::get('search-product','ProductController@searchProduct')->name('search-product-admin');
 		});
 		//Order management
 		Route::group(['prefix' => 'order'], function(){
@@ -70,6 +74,15 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::get('{id}/show-detail','OrderController@show')->name('detail-order');
 			Route::post('{id}/show-detail','OrderController@update')->name('status-detail-order');
 			Route::delete('{id}/delete', 'OrderController@destroy')->name('delete-order');
+			//order filter by status
+			Route::get('{id}/order-filter-by-status','OrderController@orderFilterStatus')->name('order-filter-status');
+		});
+		//Comment management
+		Route::group(['prefix' => 'comment'], function(){
+			Route::get('/','CommentController@index')->name('comment-admin');
+			Route::get('{id}/edit','CommentController@edit')->name('show-edit-comment');
+			Route::put('{id}/edit','CommentController@update')->name('edit-comment');
+			Route::delete('{id}/delete', 'CommentController@destroy')->name('delete-comment');
 		});
 	});
 });
@@ -95,13 +108,21 @@ Route::group(['namespace'=>'frontend'], function(){
 	Route::get('tim-kiem','SearchController@index')->name('search-user');
 	//chi tiet san pham
 	Route::get('detail/{id}/{slug}.html', 'DetailProductController@index')->name('show-detail-product');
+	//comment
+	Route::post('detail/{id}/comment', 'CommentController@store')->name('comment-product');
+	Route::post('detail/{id}/comment-user', 'CommentController@storeUser')->name('user-comment-product');
+	Route::delete('detail/{id}/delete', 'CommentController@destroy')->name('delete-comment-user');
 	//shopping cart
 	Route::group(['prefix' => 'gio-hang'], function(){
 			Route::get('/', 'ShoppingCartController@index')->name('shoppingCart-user');
-			Route::post('{id}/add', 'ShoppingCartController@store')->name('add-cart-user');
+			//Route::post('{id}/add', 'ShoppingCartController@store2')->name('add-cart-user');
+			Route::get('add', 'ShoppingCartController@store')->name('add-cart-user');
 			Route::get('{id}/delete','ShoppingCartController@destroy')->name('delete-cart-user');
+			Route::get('{update-quantity','ShoppingCartController@update')->name('update-quantity-cart');
 		});
 	//checkout
 	Route::get('checkout','CheckoutController@index')->name('show-checkout-user');
 	Route::post('checkout','CheckoutController@store')->name('checkout-user');
+	
+
 });

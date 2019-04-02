@@ -17,11 +17,11 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('slug');
-            $table->text('description')->default(Null);
+            $table->text('description')->nulable();
             $table->integer('price');
-            $table->integer('sale');
+            $table->integer('sale')->nulable();
             $table->integer('featured')->default(0);
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->integer('category_id');
             $table->integer('brand_id');
             //$table->timestamps();

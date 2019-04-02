@@ -1,36 +1,6 @@
 @extends('frontend.master')
 @section('title', 'Giỏ hàng')
 @section('content')
-<script type="text/javascript">
-	function updateCart(qty, id){
-		/*console.log(qty);	
-		console.log(id);*/
-		$.get(
-			'{{asset('cart/update')}}',  /*url*/
-			{qty:qty, id:id},		/*đối tượng*/
-			function(){/*phương thức*/
-				/*alert('Giỏ hàng của bạn đã được cập nhật thành công^^');*/			
-				location.reload();
-			}		
-			);			
-	}
-</script>
-<script>
-    $(document).on('submit', '#formData', function (event) {
-    event.preventDefault();
-     var formData = $('#formData').serialize();
-    $.ajax({
-        url: url,
-       type: "POST",
-       data : formData,   
-                success: function (result) {
-                    console.log(result);                             
-                }
-           });
-        });
-
-    });
-</script>
 <div class="container" style="margin-top: 30px">
 	<div class="row">
 			<ol class="breadcrumb nen1">
@@ -105,4 +75,30 @@
 				<span class="glyphicon glyphicon-heart"></span> TIẾP TỤC XEM SẢN PHẨM</a>
 	</div>
 @endif
+<script>
+	$(document).ready(function(){
+		$('.quantityItem').change(function(event) {
+				var qty = $(this).val();	
+				var id =	$(this).attr('data-id');	
+				//alert(id);
+				$.ajax({
+					url: "{{route('update-quantity-cart')}}",
+					type: 'GET',
+					data: {
+						qty: qty,
+						id:id,
+									},
+					success: function(data) {
+						alert('Số lượng của bạn đã được cập nhật thành công!'); 
+						location.reload();
+					},
+					error: function($error) {
+						alert('Cật nhật số lượng fail!');
+					}
+				})
+				
+		});
+			
+	});
+</script>
 @stop

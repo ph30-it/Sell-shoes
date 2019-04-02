@@ -23,7 +23,18 @@
 										{{ session('status') }}
 									</div>
 							 	@endif
-							 	@if(!empty($data))
+							 	<div class="form-group" style="width: 20%">
+							 		<select name="status" id="orderStatus" class="form-control" style="background:#FFEBCD;">
+										<option>--Lọc trạng thái đơn hàng</option>
+										<option value="0">Đơn mới(Chưa xử lí)</option>
+										<option value="1">Đã duyệt (Đã xử lí)</option>
+										<option value="2">Đang giao</option>
+										<option value="3">Đã giao</option>
+										<option value="4">Đã hủy</option>
+							 		</select>
+							 		
+							 	</div>
+							 	<a href="{{route('order-admin')}}" class="btn btn-primary">Tải lại</a>
 								<table class="table table-bordered" style="margin-top:20px;text-align: center;">				
 									<thead>
 										<tr class="bg-primary">
@@ -40,9 +51,9 @@
 											<th style="text-align: center;">Tùy chọn</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody id="getOrder">
 										
-											@foreach($data as $item)
+											@foreach($order as $item)
 												<tr>
 													<td>{{$item->id}}</td>
 													<td>{{$item->name}}</td>
@@ -54,15 +65,15 @@
 													<td>{{$item->phone}}</td>
 													<td>{{$item->note}}</td>
 													<td>@if($item->order->status == 0)
-															<span class="btn-default">Đơn mới</span>
+															<span class="btn btn-default" style="padding: 1px 7px">Đơn mới</span>
 														@elseif($item->order->status == 1)
-															<span class="btn-success">Đã duyệt</span>
+															<span class="btn btn-success" style="padding: 1px 7px">Đã duyệt</span>
 														@elseif($item->order->status == 2)
-															<span class="btn-info">Đang giao</span>
+															<span class="btn btn-info" style="padding: 1px 7px">Đang giao</span>
 														@elseif($item->order->status == 3)
-															<span class="btn-primary">Đã giao</span>
+															<span class="btn btn-primary" style="padding: 1px 7px">Đã giao</span>
 														@elseif($item->order->status == 4)
-															<span class="btn-danger">Đã hủy</span>
+															<span class="btn btn-danger" style="padding: 1px 7px">Đã hủy</span>
 														@endif
 													</td>
 													<td>
@@ -77,10 +88,7 @@
 											@endforeach
 											
 									</tbody>
-								</table>
-								@else
-									<p>Chưa có đơn hàng nào!</p>
-								@endif						
+								</table>				
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -89,4 +97,28 @@
 			</div>
 		</div><!--/.row-->
 	</div>	<!--/.main-->
+<script>
+	$(document).ready(function($) {
+		$('#orderStatus').change(function(event) {
+			var status = $(this).val();
+			//alert(status);
+			$.ajax({
+				url: 'order/'+status+'/order-filter-by-status',
+				type: 'GET',
+				data: {						
+					status:status,
+								},
+				success: function(data) {
+					//alert(data); 
+					$("#getOrder").html(data);
+					
+					//location.reload();
+				},
+				error: function($error) {
+					alert('Thao tác thất bại!');
+				}
+			})
+		});
+	});
+</script>
 @stop

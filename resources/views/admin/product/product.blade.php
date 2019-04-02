@@ -1,16 +1,6 @@
 @extends('admin.master')
 @section('title', 'Sản Phẩm | MV Shoes')
 @section('content')
-<script>
-	$(document).ready(function(){
-	
-	$('#quantity').keyup(function(){
-		var query = $('#quantity').val();
-		$.post(route('search-product-admin'), {data: query},function(data){
-			$('tbody').html(data);
-		})
-	});
-</script>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<div class="col-lg-12">
@@ -26,11 +16,9 @@
 					<div class="panel-body">
 						<div class="bootstrap-table">
 							<div class="table-responsive">
-								<form action="">
-									<div style="margin-bottom: 15px">
-										<input type="search" class="form-control" placeholder="Tìm kiếm sản phẩm..." name="search" id="search">
-									</div>
-								</form>
+								<div style="margin-bottom: 15px">
+									<input type="search" class="form-control" placeholder="Tìm kiếm sản phẩm..." name="search" id="searchProduct">
+								</div>
 								<a href="{{route('show-add-product')}}" class="btn btn-primary">Thêm sản phẩm</a>
 								@if(session('status'))
 									<div class="alert alert-success" style="margin-top: 15px">
@@ -57,35 +45,40 @@
 											<th style="text-align: center;">Tùy chọn</th>
 										</tr>
 									</thead>	
-									<tbody>
+									<tbody id="getProduct">
 										@foreach($productlist as $product)
 											<tr>
 												<td>{{$product->id}}</td>
 												<td>{{$product->name}}</td>
 												<td>{{number_format($product->price,0)}}</td>
-												<td><span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">{{$product->sale}}%</span></td>
+												<td>
+													@if(empty($product->sale))
+														<span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">0%</span>
+													@else
+														<span style="border-radius: 15px;padding: 5px;background: #FFAF02;color: #fff">{{$product->sale}}%</span>
+													@endif
+												</td>
 												<td>
 													<?php 
-														 $sizes = App\Product::find($product->id)->sizes;
-														 $categorys = App\Product::find($product->id)->category;
-														 $images = App\Image::select('slug')->where('product_id',$product->id)->where('status',1)->orderBy('updated_at','desc')->first();
-														 $brand = App\Brand::select('name')->where('id',$product->brand_id)->first();
-														 if(empty($images)){
+														 //$images = App\Image::select('slug')->where('product_id',$product->id)->where('status',1)->orderBy('updated_at','desc')->first();
+
+														/* if(empty($product->images->slug)){
 														 	 $images['slug'] = 'images/image.png';
+														 }*/
+														 foreach ($product->images as $item) {
+														 	$images['slug'] = $item->slug;
 														 }
-														 $quantity = 0;
-														 $total_quantity = App\ProductSize::select('quantity')->where('product_id',$product->id)->get();
-														 //dd($total_quantity);
 													 ?>
-													@foreach($sizes as $item)
+													@foreach($product->sizes as $item)
 														<span style="background: url(//theme.hstatic.net/1000243581/1000361905/14/bg-variant-checked.png?v=131) no-repeat right bottom #fff; padding:2px; border: 1px solid #ccc;">{{$item->name}}</span>
 													@endforeach
 														
 													
 												</td>
 												<td>
-													@foreach($total_quantity as $qty)
-														<?php $quantity += $qty->quantity ?>
+													<?php $quantity = 0; ?>
+													@foreach ($product->productSizes as $item) 
+														 	<?php $quantity += $item->quantity; ?>			
 													@endforeach
 													{{$quantity}}
 												</td>
@@ -96,9 +89,15 @@
 														<img src="{{asset($images->slug)}}" alt="" width="150px">
 													@endif
 												</td>
-												<td>{{$product->description}}</td>
-												<td>{{$categorys->name}}</td>
-												<td>{{$brand->name}}</td>
+												<td>
+													@if(empty($product->description))
+														Chưa có mô tả cho sản phẩm này.
+													@else
+														{{$product->description}}
+													@endif
+												</td>
+												<td>{{$product->category->name}}</td>
+												<td>{{$product->brand->name}}</td>
 												<td>@if($product->featured == 1)
 														<span class="btn-info">Đặc biệt</span>
 													@else
@@ -113,16 +112,16 @@
 												</td>
 												<td>{{$product->created_at}}</td>
 												<td>{{$product->updated_at}}</td>
-												<td style="line-height: 50px">
-													<a href="{{route('show-edit-product',$product->id)}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a><br>
+												<td style="line-height: 50px" style="text-align: center;">
+													<a href="{{route('show-edit-product',$product->id)}}" class="btn glyphicon glyphicon-pencil"></a><br>
 													<form action="{{route('delete-product',$product->id)}}" method="POST">
 														@csrf
 														@method('DELETE')
-														<button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="btn btn-danger">Xóa</button>
+														<button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="glyphicon glyphicon-trash" style="border: none;background: #fff;color: red;"></button>
 													</form>
 													
-													<a href="{{route('view-product-size',$product->id)}}" class="btn btn-success">Size</a><br>
-													<a href="{{route('view-product-image',$product->id)}}" class="btn btn-info">Ảnh</a>
+													<a href="{{route('view-product-size',$product->id)}}" class="btn-success">Size</a><br>
+													<a href="{{route('view-product-image',$product->id)}}" class="btn-primary">ảnh</a>
 												</td>
 											</tr>
 										@endforeach
@@ -141,4 +140,27 @@
 			</div>
 		</div><!--/.row-->
 	</div>	<!--/.main-->
+	searchProduct
+<script>
+	$(document).ready(function($) {
+		$('#searchProduct').keyup(function(event) {
+			var search = $(this).val();
+			//alert(status);
+			$.ajax({
+				url: 'product/search-product',
+				type: 'GET',
+				data: {						
+					search:search,
+								},
+				success: function(data) {
+					//alert(data); 
+					$("#getProduct").html(data);
+				},
+				error: function($error) {
+					alert('Thao tác thất bại!');
+				}
+			})
+		});
+	});
+</script>
 @stop

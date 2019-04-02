@@ -17,7 +17,7 @@ class CreateOrderDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('order_id');
             $table->integer('product_id');
-            $table->integer('size');
+            $table->integer('size_id');
             $table->integer('quantity');
             $table->integer('price');
             $table->integer('sale');

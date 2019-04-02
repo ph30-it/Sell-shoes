@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Category;
 use App\Product;
 use App\User;
+use App\Comment;
 
 class AdminController extends Controller
 {
@@ -20,7 +21,8 @@ class AdminController extends Controller
         $product = Product::count('id');
         $category = Category::count('id');
         $user = User::count('id');
-        return view('admin.index',compact('product','category','user'));
+        $comment = Comment::count('id');
+        return view('admin.index',compact('product','category','user','comment'));
     }
 
     /**

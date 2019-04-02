@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Validator;
 use App\Http\Requests\LoginRequest;
+use Cart;
 
 class LoginController extends Controller
 {
@@ -37,6 +38,7 @@ class LoginController extends Controller
     }
 
     public function logout(){
+        Cart::clear();
         Auth::logout();
         return redirect('login')->with('status', trans('message.logout'));
     }
