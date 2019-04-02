@@ -1,16 +1,6 @@
 @extends('admin.master')
 @section('title', 'Sản Phẩm | MV Shoes')
 @section('content')
-<script>
-	$(document).ready(function(){
-	
-	$('#quantity').keyup(function(){
-		var query = $('#quantity').val();
-		$.post(route('search-product-admin'), {data: query},function(data){
-			$('tbody').html(data);
-		})
-	});
-</script>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<div class="col-lg-12">
@@ -26,11 +16,9 @@
 					<div class="panel-body">
 						<div class="bootstrap-table">
 							<div class="table-responsive">
-								<form action="">
-									<div style="margin-bottom: 15px">
-										<input type="search" class="form-control" placeholder="Tìm kiếm sản phẩm..." name="search" id="search">
-									</div>
-								</form>
+								<div style="margin-bottom: 15px">
+									<input type="search" class="form-control" placeholder="Tìm kiếm sản phẩm..." name="search" id="searchProduct">
+								</div>
 								<a href="{{route('show-add-product')}}" class="btn btn-primary">Thêm sản phẩm</a>
 								@if(session('status'))
 									<div class="alert alert-success" style="margin-top: 15px">
@@ -57,7 +45,7 @@
 											<th style="text-align: center;">Tùy chọn</th>
 										</tr>
 									</thead>	
-									<tbody>
+									<tbody id="getProduct">
 										@foreach($productlist as $product)
 											<tr>
 												<td>{{$product->id}}</td>
@@ -72,14 +60,14 @@
 												</td>
 												<td>
 													<?php 
-														 $images = App\Image::select('slug')->where('product_id',$product->id)->where('status',1)->orderBy('updated_at','desc')->first();
+														 //$images = App\Image::select('slug')->where('product_id',$product->id)->where('status',1)->orderBy('updated_at','desc')->first();
 
-														 if(empty($images)){
+														/* if(empty($product->images->slug)){
 														 	 $images['slug'] = 'images/image.png';
+														 }*/
+														 foreach ($product->images as $item) {
+														 	$images['slug'] = $item->slug;
 														 }
-														 $quantity = 0;
-														 $total_quantity = App\ProductSize::select('quantity')->where('product_id',$product->id)->get();
-														 //dd($total_quantity);
 													 ?>
 													@foreach($product->sizes as $item)
 														<span style="background: url(//theme.hstatic.net/1000243581/1000361905/14/bg-variant-checked.png?v=131) no-repeat right bottom #fff; padding:2px; border: 1px solid #ccc;">{{$item->name}}</span>
@@ -88,8 +76,9 @@
 													
 												</td>
 												<td>
-													@foreach($total_quantity as $qty)
-														<?php $quantity += $qty->quantity ?>
+													<?php $quantity = 0; ?>
+													@foreach ($product->productSizes as $item) 
+														 	<?php $quantity += $item->quantity; ?>			
 													@endforeach
 													{{$quantity}}
 												</td>
@@ -151,4 +140,27 @@
 			</div>
 		</div><!--/.row-->
 	</div>	<!--/.main-->
+	searchProduct
+<script>
+	$(document).ready(function($) {
+		$('#searchProduct').keyup(function(event) {
+			var search = $(this).val();
+			//alert(status);
+			$.ajax({
+				url: 'product/search-product',
+				type: 'GET',
+				data: {						
+					search:search,
+								},
+				success: function(data) {
+					//alert(data); 
+					$("#getProduct").html(data);
+				},
+				error: function($error) {
+					alert('Thao tác thất bại!');
+				}
+			})
+		});
+	});
+</script>
 @stop

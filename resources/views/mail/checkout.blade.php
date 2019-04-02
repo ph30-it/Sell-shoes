@@ -33,9 +33,10 @@
 			<th>Thành tiền</th>
 		</tr>
 		@foreach($items as $item)
+		<?php $size = App\Size::select('name')->where('id', $item->attributes->size_id)->first(); ?>
 		<tr>
 			<td>{{$item->name}}</td>
-			<th>{{$item->attributes->size}}</th>
+			<th>{{$size->name}}</th>
 			<td style="color: #ed4e4e">{{number_format($item->price)}} ₫</td>
 			<td>{{$item->quantity}}</td>
 			<td style="color: #ed4e4e">{{number_format($item->price*$item->quantity)}} ₫</td>

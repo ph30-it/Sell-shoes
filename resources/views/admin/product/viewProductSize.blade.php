@@ -1,38 +1,6 @@
 @extends('admin.master')
 @section('title', 'Quản lí size sản Phẩm | MV Shoes')
 @section('content')
-<script>
-	$(document).ready(function(){
-		$.$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('[name=csrf-token]').attr('content')
-			}
-		});
-		
-		$('#quantity').change(function(event) {
-				var qty = $('#quantity').value;
-				console.log(qty);
-				/*console.log(id);*/
-				$.ajax( function () {
-					url: "{{route('update-product-size')}}", /*url*/
-					method: 'GET',
-					data: {
-						qty:qty, 
-						id:id
-					}, 
-					success: function(data) {
-						alert('Số lượng của bạn đã được cập nhật thành công^^'); 
-						location.reload();
-					},
-					error: function($error) {
-						alert('Cật nhật fail!');
-					}
-				});		
-		});
-			
-	});
-</script>
-
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<div class="col-lg-12">
@@ -61,8 +29,8 @@
 											<label for="">Số lượng:</label>
 											<input type="number" name="quantity" style="width: 6%" min="0" max="10000">
 											<button type="submit" class="btn btn-success">Thêm</button>
-											@if($errors->has('name'))
-			    								<p class="alert alert-danger">{{$errors->first('name')}}</p>
+											@if($errors->has('quantity'))
+			    								<span style="color: red;font-size: 13px">{{$errors->first('quantity')}}</span>
 			    							@endif
 									</div>
 								</form>
@@ -85,6 +53,7 @@
 										</tr>
 									</thead>	
 									<tbody>
+										
 										@foreach($product_size as $item)
 											<tr>
 												<?php 
@@ -96,13 +65,9 @@
 												<td><img src="{{asset($image->slug)}}" alt="" width="150px"></td>
 												<td>{{$size->name}}</td>
 												<td>
-													<div class="form-group">
-														
-															<form action="">
-																@csrf
-																<input type="number" id="quantity" class="form-control" value="{{$item->quantity}}" min="0" max="10000">
-															</form>
-														
+													<div class="form-group">		
+														<input type="number" id="" class="form-control qty" value="{{$item->quantity}}" min="0" max="10000" data-id="{{$item->id}}">
+															
 													</div>
 												</td>
 												<td>{{$item->created_at}}</td>
@@ -118,6 +83,7 @@
 												</td>
 											</tr>
 										@endforeach
+
 									</tbody>
 								</table>	
 
@@ -133,4 +99,30 @@
 			</div>
 		</div><!--/.row-->
 	</div>	<!--/.main-->
+	<script>
+	$(document).ready(function(){
+		$('.qty').change(function(event) {
+				var qty = $(this).val();	
+				var id =	$(this).attr('data-id');	
+				//alert(id);
+				$.ajax({
+					url: "{{route('update-product-size')}}",
+					type: 'GET',
+					data: {
+						qty: qty,
+						id:id,
+									},
+					success: function(data) {
+						alert('Số lượng của bạn đã được cập nhật thành công!'); 
+						//location.reload();
+					},
+					error: function($error) {
+						alert('Cật nhật số lượng fail!');
+					}
+				})
+				
+		});
+			
+	});
+</script>
 @stop

@@ -65,6 +65,8 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::get('{id}/edit', 'ProductController@edit')->name('show-edit-product');
 			Route::put('{id}/edit', 'ProductController@update')->name('edit-product');
 			Route::delete('{id}/delete', 'ProductController@destroy')->name('delete-product');
+			//search product
+			Route::get('search-product','ProductController@searchProduct')->name('search-product-admin');
 		});
 		//Order management
 		Route::group(['prefix' => 'order'], function(){
@@ -72,6 +74,8 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::get('{id}/show-detail','OrderController@show')->name('detail-order');
 			Route::post('{id}/show-detail','OrderController@update')->name('status-detail-order');
 			Route::delete('{id}/delete', 'OrderController@destroy')->name('delete-order');
+			//order filter by status
+			Route::get('{id}/order-filter-by-status','OrderController@orderFilterStatus')->name('order-filter-status');
 		});
 		//Comment management
 		Route::group(['prefix' => 'comment'], function(){
@@ -103,8 +107,10 @@ Route::group(['namespace'=>'frontend'], function(){
 	//shopping cart
 	Route::group(['prefix' => 'gio-hang'], function(){
 			Route::get('/', 'ShoppingCartController@index')->name('shoppingCart-user');
-			Route::post('{id}/add', 'ShoppingCartController@store')->name('add-cart-user');
+			//Route::post('{id}/add', 'ShoppingCartController@store2')->name('add-cart-user');
+			Route::get('add', 'ShoppingCartController@store')->name('add-cart-user');
 			Route::get('{id}/delete','ShoppingCartController@destroy')->name('delete-cart-user');
+			Route::get('{update-quantity','ShoppingCartController@update')->name('update-quantity-cart');
 		});
 	//checkout
 	Route::get('checkout','CheckoutController@index')->name('show-checkout-user');

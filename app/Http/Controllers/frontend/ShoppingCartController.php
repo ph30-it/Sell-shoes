@@ -40,29 +40,50 @@ class ShoppingCartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-        // $a = Cart::get($id);
-        // dd($a->attributes->size);
-        if ($request->size == NULL) {
-            return back();
-        }
-        
-        $product = Product::find($id);
+        $product_id = $request->product_id;
+        $size_id = $request->size_id;
+        $product = Product::find($product_id);
         $price_sale = $product->price - ($product->price*$product->sale)/100;
-        $image = Image::select('slug')->where('product_id',$id)->where('status',1)->orderBy('updated_at','desc')->first();
-        Cart::add(array(
-                'id' => $id,
+        $image = Image::select('slug')->where('product_id',$product_id)->where('status',1)->orderBy('updated_at','desc')->first();
+        $cart = Cart::add(array(
+                'id' => $product_id.$size_id,
                 'name' => $product->name,
                 'price' => $price_sale,
                 'quantity' => 1,
-                'attributes' => array('image' => $image->slug,'price_goc'=> $product->price, 'slug'=> $product->slug,'sale'=> $product->sale,'size' => $request->size)
+                'attributes' => array('image' => $image->slug,'price_goc'=> $product->price, 'slug'=> $product->slug,'sale'=> $product->sale,'size_id' => $request->size_id, 'product_id' => $product_id)
             ));
-        
-        /*return redirect('cart/show');*/
-        return back();
+        if ($cart) {
+            return response()->json([], 200);
+        }else{
+            return response()->json([], 400);
+        }
+       
     }
-
+   /*public function store2(Request $request, $id)
+    {
+        // $a = Cart::get($id);
+        // dd($a->attributes->size);
+        if ($request->size_id == NULL) {
+            return back();
+        }
+       //dd(Cart::getContent());
+        $id  = $request->id;
+         $product = Product::find($id);
+        // dd($request);
+         //dd(Cart::get($id));
+        $price_sale = $product->price - ($product->price*$product->sale)/100;
+        $image = Image::select('slug')->where('product_id',$id)->where('status',1)->orderBy('updated_at','desc')->first();
+                $cart = Cart::add(array(
+                'id' => $id.$request->size_id,
+                'name' => $product->name,
+                'price' => $price_sale,
+                'quantity' => 1,
+                'attributes' => array('image' => $image->slug,'price_goc'=> $product->price, 'slug'=> $product->slug,'sale'=> $product->sale,'size_id' => $request->size_id)
+                ));
+        return back();
+    }*/
     /**
      * Display the specified resource.
      *
@@ -92,9 +113,19 @@ class ShoppingCartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request) //update quantity product cart
     {
-        //
+        $cart = Cart::update($request->id, array(
+          'quantity' => array(
+              'relative' => false,
+              'value' => $request->qty
+          ),
+        ));
+        if ($cart) {
+            return response()->json([], 200);
+        }else{
+            return response()->json([], 400);
+        }
     }
 
     /**

@@ -27,7 +27,7 @@ class CheckoutRequest extends FormRequest
             'name'=> 'required',
             'email'=>'required|email',
             'address'=>'required',
-            'phone' =>'required',
+            'phone' =>'required|numeric',
             'payment' => 'required',
         ];
     }
@@ -38,6 +38,7 @@ class CheckoutRequest extends FormRequest
             'email.email' => 'Email sai định dạng!',
             'address.required' => 'Bạn chưa nhập địa chỉ!',
             'phone.required' => 'Bạn chưa nhập số điện thoại!',
+            'phone.numeric' => 'Số điện thoại phải là số!',
             'payment.required' => 'Bạn chưa chọn phương thức thanh toán!',
         ];
     }

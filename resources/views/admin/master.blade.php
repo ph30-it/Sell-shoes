@@ -8,6 +8,7 @@
 <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{asset('css/admin.css')}}" rel="stylesheet">
 <link href="{{asset('css/form.css')}}" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- <link href="{{asset('css/custom.css')}}" rel="stylesheet"> -->
 <script
   src="http://code.jquery.com/jquery-3.3.1.min.js"

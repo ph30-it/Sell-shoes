@@ -4,15 +4,18 @@
 <title>MV Shoes | @yield('title')</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="{{asset('css/style3.css')}}" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/style2.css')}}">
 <link rel="stylesheet" href="{{asset('css/style10.css')}}">
 <link rel="stylesheet" href="{{asset('css/product.css')}}">
 <link href="{{asset('css/form.css')}}" rel="stylesheet">
+<link href="{{asset('css/simple-rating.css')}}" rel="stylesheet"> <!-- rating style css -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <link rel="stylesheet" href="{{asset('css/detail1.css')}}">
 <link rel="stylesheet" href="{{asset('css/etalage.css')}}">
+<link rel="stylesheet" type="text/css"  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{{asset('css/bootstrap-theme.min.css')}}">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -53,26 +56,7 @@
 <!----details-product-slider--->
 				<!-- Include the Etalage files -->
 					<link rel="stylesheet" href="{{asset('css/etalage.css')}}">
-					<script src="{{asset('js/jquery.etalage1.min.js')}}"></script>
 				<!-- Include the Etalage files -->
-				<script>
-						jQuery(document).ready(function($){
-			
-							$('#etalage').etalage({
-								thumb_image_width: 300,
-								thumb_image_height: 400,
-								
-								show_hint: true,
-								click_callback: function(image_anchor, instance_id){
-									alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-								}
-							});
-							// This is for the dropdown list example:
-							$('.dropdownlist').change(function(){
-								etalage_show( $(this).find('option:selected').attr('class') );
-							});
-					});
-				</script>
 				<!----//details-product-slider--->	
 <!-- top scrolling -->
 <script type="text/javascript" src="{{asset('js/move-top.js')}}"></script>
@@ -200,11 +184,13 @@
 						@endif
 						<li>
 							<ul class="icon2 sub-icon2 profile_img">
-								<li><a class="active-icon c2" href="#"  style="margin-top: 1%"> </a>
+								<li><a class="active-icon c2" href="{{route('shoppingCart-user')}}"  style="margin-top: 1%"> </a>
 									<ul class="sub-icon2 list">
 										<li>
 											<div class="row" style="margin-bottom: 20px">
 												@foreach(Cart::getContent() as $item)
+													<?php $size = App\Size::select('name')->where('id',$item->attributes->size_id)->first(); 
+													?>
 													<div class="row" style="padding: 10px">
 														<div class="col-lg-4">
 														<img src="{{asset($item->attributes->image)}}" alt="" style="width: 80px">
@@ -214,7 +200,7 @@
 															<div class="col-lg-5">
 																x{{$item->quantity}} <label for="custom_radio" style="margin-top: -10px">
 												   				<input type="radio" value="{{$item->attributes->size}}" name=size id="custom_radio" >
-												   				<span>{{$item->attributes->size}}</span></label>
+												   				<span>{{$size->name}}</span></label>
 															</div>
 															<div class="col-lg-7" style="line-height: 10px">
 																<br><span style="font-size: 12px;color: #ed4e4e">{{ number_format($item->price*$item->quantity,0)}} ₫</span>
@@ -244,8 +230,8 @@
 		</div>	
   	</div>
 	
-   <div class="header-bottom">
-   	<div class="wrap" id="menuTop">
+   <div class="header-bottom"  id="menuTop">
+   	<div class="wrap">
    		<!-- start header menu -->
 		<ul class="megamenu skyblue"  style="background-color: #000">
 		    <li><a class="color1" href="{{route('home-user')}}">Home</a></li>
@@ -622,5 +608,6 @@
 			});
 		});
 	</script>
+	<script src="{{asset('js/simple-rating.js')}}"></script>
 </body>
 </html>

@@ -109,4 +109,41 @@
 			   </div>
        	 	</div>
        	 </div>
+<script>
+	$(document).ready(function(){
+		$('.addCart').click(function(event) {
+				event.preventDefault();	
+				var size = document.getElementsByName("size");
+				var product_id =  $(this).attr('data-id');	
+				var length = size.length;
+				for (var i = 0; i < length; i++){
+                    if (size[i].checked === true){
+                        //alert(size[i].value);
+                        var size_id = size[i].value;
+                       	break;
+                    }
+                }
+                //alert(size_id);
+                if (typeof  size_id == "undefined") {
+					alert('Bạn chưa chọn kích thước!');
+				}else{
+					$.ajax({
+							url: "{{route('add-cart-user')}}",
+							type: 'GET',
+							data: {						
+								product_id:product_id,
+								size_id:size_id,
+											},
+							success: function(data) {
+								alert('Thêm giỏ hàng thành công!'); 
+								location.reload();
+							},
+							error: function($error) {
+								alert('Thêm vào giỏ hàng fail!');
+							}
+						})
+					}
+		});		
+	});
+</script>
 @endsection

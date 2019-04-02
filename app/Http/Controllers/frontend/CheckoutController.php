@@ -12,7 +12,8 @@ use App\OrderDetail;
 use DB;
 use Auth;
 use Mail;
-use App\Mail\CheckoutMail; 
+use App\Mail\CheckoutMail;
+use App\Size;
 
 class CheckoutController extends Controller
 {
@@ -64,8 +65,8 @@ class CheckoutController extends Controller
                 foreach (Cart::getContent() as $item) {
                     $data_orderDetail = [
                     'order_id' => $order->id,
-                    'product_id' => $item->id,
-                    'size' => $item->attributes->size,
+                    'product_id' => $item->attributes->product_id,
+                    'size_id' => $item->attributes->size_id,
                     'quantity' => $item->quantity,
                     'price' => $item->attributes->price_goc,
                     'sale' => $item->attributes->sale,

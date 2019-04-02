@@ -4,6 +4,7 @@
 							<div class="form-group">
 								<p><span style="font-weight: bold;">Email:</span><a> {{Auth::user()->email}}</a></p>
 							</div>
+							<div class="rating"></div>
 							<div class="form-group">
 								<label for="textara">Nội dung:</label><br>
 								<textarea name="content" cols="86" rows="2" placeholder="Nhập bình luận của bạn..." style="padding: 10px"></textarea>
