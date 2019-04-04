@@ -23,9 +23,13 @@
 										{{ session('status') }}
 									</div>
 							 	@endif
-							 	<div class="form-group" style="width: 20%">
+							 	
+							 		<div style="float: left;width: 50%; margin-right: 20px">
+							 			<input type="search" id="searchOrder" name="searchOrder" class="form-control" placeholder="Tìm kiếm đơn hàng theo tên, email, sđt...">
+							 		</div>
+							 		<div class="form-group" style="width: 20%;float: left;">
 							 		<select name="status" id="orderStatus" class="form-control" style="background:#FFEBCD;">
-										<option>--Lọc trạng thái đơn hàng</option>
+										<option value="all">--Lọc đơn hàng theo trạng thái</option>
 										<option value="0">Đơn mới(Chưa xử lí)</option>
 										<option value="1">Đã duyệt (Đã xử lí)</option>
 										<option value="2">Đang giao</option>
@@ -34,17 +38,13 @@
 							 		</select>
 							 		
 							 	</div>
-							 	<a href="{{route('order-admin')}}" class="btn btn-primary">Tải lại</a>
 								<table class="table table-bordered" style="margin-top:20px;text-align: center;">				
 									<thead>
 										<tr class="bg-primary">
 											<th style="text-align: center;">ID</th>
 											<th width="10%" style="text-align: center;">Người Nhận</th>
 											<th style="text-align: center;">Email</th>
-											<th style="text-align: center;">Ngày Đặt</th>
-<!-- 											<th style="text-align: center;">Tổng Tiền(VNĐ)</th> -->
-											<!-- <th width="5%" style="text-align: center;">Thanh Toán</th> -->
-											<th width="15%" style="text-align: center;" width="20%">Địa Chỉ</th>
+											<th style="text-align: center;">Ngày Đặt</th>									<th width="15%" style="text-align: center;" width="20%">Địa Chỉ</th>
 											<th style="text-align: center;">Số ĐT</th>
 											<th style="text-align: center;" width="20%">Ghi Chú</th>
 											<th width="8%" style="text-align: center;">Trạng thái</th>
@@ -56,28 +56,30 @@
 											@foreach($order as $item)
 												<tr>
 													<td>{{$item->id}}</td>
-													<td>{{$item->name}}</td>
-													<td>{{$item->email}}</td>
-													<td>{{$item->order->date}}</td>
-													<!-- <td>{{number_format($item->order->total)}}</td> -->
-												<!-- 	<td>{{$item->order->payment}}</td> -->
-													<td>{{$item->address}}</td>
-													<td>{{$item->phone}}</td>
-													<td>{{$item->note}}</td>
-													<td>@if($item->order->status == 0)
+													<td>{{$item->customer->name}}</td>
+													<td>{{$item->customer->email}}</td>
+													<td>{{$item->date}}</td>
+													<td>{{$item->customer->address}}</td>
+													<td>{{$item->customer->phone}}</td>
+													@if(empty($item->customer->note))
+														<td>Không có!</td>
+													@else
+														<td>{{$item->customer->note}}</td>
+													@endif
+													<td>@if($item->status == 0)
 															<span class="btn btn-default" style="padding: 1px 7px">Đơn mới</span>
-														@elseif($item->order->status == 1)
+														@elseif($item->status == 1)
 															<span class="btn btn-success" style="padding: 1px 7px">Đã duyệt</span>
-														@elseif($item->order->status == 2)
+														@elseif($item->status == 2)
 															<span class="btn btn-info" style="padding: 1px 7px">Đang giao</span>
-														@elseif($item->order->status == 3)
+														@elseif($item->status == 3)
 															<span class="btn btn-primary" style="padding: 1px 7px">Đã giao</span>
-														@elseif($item->order->status == 4)
+														@elseif($item->status == 4)
 															<span class="btn btn-danger" style="padding: 1px 7px">Đã hủy</span>
 														@endif
 													</td>
 													<td>
-														<a href="{{route('detail-order',$item->order->id)}}" class=""><span class="btn glyphicon glyphicon-search"></span></a><br>
+														<a href="{{route('detail-order',$item->id)}}" class=""><span class="btn glyphicon glyphicon-search"></span></a><br>
 														<form action="{{route('delete-order',$item->id)}}" method="POST">
 															@csrf
 															@method('DELETE')
@@ -99,6 +101,7 @@
 	</div>	<!--/.main-->
 <script>
 	$(document).ready(function($) {
+		//Order filter by status
 		$('#orderStatus').change(function(event) {
 			var status = $(this).val();
 			//alert(status);
@@ -119,6 +122,26 @@
 				}
 			})
 		});
-	});
+		//search order
+		$('#searchOrder').keyup(function(event) {
+				var search = $(this).val();
+				//alert(search);
+				$.ajax({
+					url: 'order/search-order',
+					type: 'GET',
+					data: {						
+						search:search,
+									},
+					success: function(data) {
+						//alert(data); 
+						$("#getOrder").html(data);
+					},
+					error: function($error) {
+						alert('Thao tác thất bại!');
+					}
+				})
+			});
+});
+	
 </script>
 @stop

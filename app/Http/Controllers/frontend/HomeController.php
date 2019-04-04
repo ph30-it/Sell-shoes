@@ -16,9 +16,28 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data['products'] = Product::where('status',1)->orderBy('id','desc')->paginate(8);
-        $data['products_hot'] = Product::where('status',1)->where('featured',1)->orderBy('id','desc')->take(4)->get();
-        return view('frontend.home.index',$data);
+        $products = Product::with([
+           'sizes' => function($query){
+                return $query->orderBy('id','asc');},
+            'productSizes'=> function($query){
+                return $query->orderBy('id','asc');},
+            'category','brand',
+            'images' => function($query){
+                return $query->where('status',1)->orderBy('updated_at','desc');
+            }])->orderBy('id','desc')->paginate(8);
+
+        $products_hot = Product::with([
+           'sizes' => function($query){
+                return $query->orderBy('id','asc');},
+            'productSizes'=> function($query){
+                return $query->orderBy('id','asc');},
+            'category','brand',
+            'images' => function($query){
+                return $query->where('status',1)->orderBy('updated_at','desc');
+            }])->orderBy('id','desc')->paginate(4);
+    
+       // dd($products_hot);
+        return view('frontend.home.index',compact('products','products_hot'));
     }
 
     /**

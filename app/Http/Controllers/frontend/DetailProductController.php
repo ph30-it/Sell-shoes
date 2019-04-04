@@ -18,14 +18,23 @@ class DetailProductController extends Controller
      */
     public function index($id)
     {
-        $product = Product::with('brand')->where('id',$id)->first();
-        $sizes = ProductSize::where('product_id',$product->id)->orderBy('size_id','asc')->get();
-        $comments = Comment::where('product_id',$id)->orderBy('date','desc')->get();
-        $image = Image::select('slug')->where('product_id',$id)->where('status',1)->first();
-        $products_lienquan = Product::where('brand_id',$product->brand_id)->where('status',1)->inRandomOrder()->limit(5)->get();
-        //dd($product);
-
-        return view('frontend.productDetail.single',compact('product','image','products_lienquan','comments','sizes'));
+        $product = Product::with([
+           'sizes' => function($query){
+                return $query->orderBy('id','asc');},
+            'productSizes'=> function($query){
+                return $query->orderBy('id','asc');},
+            'category','brand',
+            'images' => function($query){
+                return $query->where('status',1)->orderBy('updated_at','desc');
+            },
+            'comments' => function($query){
+                return $query->orderBy('date','desc');
+            }
+                ])->orderBy('id','desc')->first();
+            $imageDetails =  Image::select('slug')->where('product_id',$id)->where('status',0)->get()->toArray();
+            //dd($imageDetails);
+            $products_lienquan = Product::where('brand_id',$product->brand_id)->where('status',1)->inRandomOrder()->limit(5)->get();
+        return view('frontend.productDetail.single',compact('product','imageDetails','products_lienquan'));
     }
 
     /**

@@ -1,29 +1,19 @@
 						@foreach($products_hot as $product)
-				     	<?php 
-				     		$image = App\Image::select('slug')->where('product_id',$product->id)->where('status',1)->orderBy('updated_at','desc')->first();
-				     		$sizes = App\ProductSize::with('size')->where('product_id',$product->id)->orderBy('size_id','asc')->get();
-				     		
-				     		if(empty($image)){
-							 	 $image['slug'] = 'images/image.png';
-							 }
-				     	 ?>
 				     	<div class="col-sm-3">
 				    	<div style="border: 1px solid #ccc; padding: 2%; padding-left: 0; padding-bottom: 0;margin-bottom: 30px;height: 100%">
 				    		<div class="view view-fifth">
 							  	  <div class="top_box">
 								  	<h3 class="m_1">
 								  		<a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}" style="color: #000;text-decoration: none;">{{$product->name}}</a>
-								  		
 								  	</h3>
 								  	<p class="m_2">{{$product->brand->name}}</p>
 							         <div class="grid_img">
 									   <div class="css3">
-									   	<a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}">
-									   		@if($image['slug'])
-									   			<img src="{{asset($image['slug'])}}" alt=""/>
-									   		@else
-												<img src="{{asset($image->slug)}}" alt=""/>
-									   		@endif
+									   	<a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}">	
+									   		@foreach ($product->images as $item)
+												<?php $image['slug'] = $item->slug;	 ?>	 	
+											@endforeach		
+											<img src="{{asset($image['slug'])}}" alt=""/>
 									   	</a>
 									   </div>
 								          <div class="mask">
@@ -37,27 +27,47 @@
 								   	@csrf
 								   <span class="rating" style="line-height: 10px">
 								   		<span style="margin-left: 7px">Chọn một kích thước</span><br>
-								   		@foreach($sizes as $item)
-								   			<?php 
-								   				$quantity = App\ProductSize::where('product_id',$item->product_id)->sum('quantity');
-								   			 ?>		
-								   			@if($quantity > 0) <!-- còn hàng -->				   	
-									   			@if($item->quantity == 0)
-									   				<span class="nav" style="float:left; " style="padding: 0">
-													  <li role="presentation" class="disabled" ><a  style="padding: 3.8px 4.5px;border: 1px solid #ccc;margin-top:10px;margin-right: 3px">{{$item->size->name}}</a></li>
+								   		<?php $quantity = 0; ?>
+										@foreach ($product->productSizes as $productSize) 
+											 	<?php $quantity += $productSize->quantity; ?>	
+										@endforeach
+
+								   		@foreach($product->productSizes as $productSize)
+								   				@if($quantity > 0) <!-- còn hàng -->				   	
+										   			@if($productSize->quantity == 0)
+										   				<span class="nav" style="float:left; " style="padding: 0">
+														  <li role="presentation" class="disabled" ><a  style="padding: 3.8px 4.5px;border: 1px solid #ccc;margin-top:10px;margin-right: 3px">
+														  		@foreach($product->sizes as $size)
+																	@if($productSize->size_id == $size->id) 
+																		{{$size->name}}	
+																	@endif
+																@endforeach
+														  </a></li>
+														</span>
+										   			@else
+										   				<span class="nav" style="float: left;">
+										   				<li><label for="{{'custom_radio0'.$productSize->id}}" style="margin-right: 4px">
+											   				<input type="radio" value="{{$productSize->size_id}}" name=size id="{{'custom_radio0'.$productSize->id}}" >
+											   				<span>
+																@foreach($product->sizes as $size)
+																	@if($productSize->size_id == $size->id) 
+																		{{$size->name}}	
+																	@endif
+																@endforeach
+											   				</span>
+										   				</label></li></span>
+										   			@endif
+										   		@else
+										   			<span class="nav" style="float:left; " style="padding: 0">
+													  <li role="presentation" class="disabled" ><a  style="padding: 3.8px 4.5px;border: 1px solid #ccc;margin-top:10px;margin-right: 3px">
+													  	@foreach($product->sizes as $size)
+															@if($productSize->size_id == $size->id) 
+																{{$size->name}}	
+															@endif
+														@endforeach
+													  </a></li>
 													</span>
-									   			@else
-									   				<span class="nav" style="float: left;">
-									   				<li><label for="{{'custom_radio0'.$item->id}}" style="margin-right: 4px">
-										   				<input type="radio" value="{{$item->size->id}}" name=size id="{{'custom_radio0'.$item->id}}" >
-										   				<span>{{$item->size->name}}</span>
-									   				</label></li></span>
-									   			@endif
-									   		@else
-									   			<span class="nav" style="float:left; " style="padding: 0">
-												  <li role="presentation" class="disabled" ><a  style="padding: 3.8px 4.5px;border: 1px solid #ccc;margin-top:10px;margin-right: 3px">{{$item->size->name}}</a></li>
-												</span>
-									   		@endif	
+										   		@endif	
 								   		@endforeach
 					    	      </span>
 									 <ul class="list">
@@ -102,9 +112,6 @@
 									  	@endif
 									   </li>
 								     </ul>
-								    <!--  @if($errors->has('size'))
-								    			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('size')}}</span>
-								    			    						@endif -->
 								     </form>
 						    	    <div class="clear"></div>
 						    	</a>

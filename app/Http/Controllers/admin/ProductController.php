@@ -10,6 +10,7 @@ use App\Size;
 use App\Brand;
 use App\Image;
 use App\ProductSize;
+use App\OrderDetail;
 use App\Http\Requests\AddProductRequest;
 use App\Http\Requests\EditProductRequest;
 use DB;
@@ -24,7 +25,10 @@ class ProductController extends Controller
     public function index()
     {
         $productlist = Product::with([
-           'sizes','productSizes',
+           'sizes' => function($query){
+                return $query->orderBy('id','asc');
+                    },
+            'productSizes',
             'category','brand',
             'images' => function($query){
                 return $query->where('status',1)->orderBy('updated_at','desc');
@@ -59,6 +63,9 @@ class ProductController extends Controller
             DB::beginTransaction();
             $data = $request->except('_token','img','size');
             $data['slug'] = str_slug($data['name']);
+            if (empty($data['sale'])) {
+                $data['sale'] = 0;
+            }
             $product = Product::create($data);
 
             foreach ($request->size as $item) {
@@ -67,7 +74,23 @@ class ProductController extends Controller
             'size_id' => $item,
              ]);
             }
-
+             //image product detail
+            if ($request->hasFile('img_description')) {
+                    $imageData = [];
+                    foreach (request()->file('img_description') as $item) {
+                        $filename = $item->getClientOriginalName();
+                        $newName = '/images/product/'.md5(microtime(true)).$filename;
+                        $item->move(public_path('/images/product'), $newName);
+                        array_push($imageData, [
+                                                   'name' => $filename,
+                                                   'product_id' => $product->id,
+                                                   'slug' => $newName,
+                                                   'status' => 0,  
+                                                ]);    
+                }  
+                Image::insert($imageData);
+            }
+            //image product
             if ($request->hasFile('img')) {
                     $filename = $request->img->getClientOriginalName();
                     $newName = '/images/product/'.md5(microtime(true)).$filename;
@@ -79,13 +102,14 @@ class ProductController extends Controller
                    'status' => 1,
                 ]);        
             }
-                
-                
+           
             DB::commit();
              return redirect()->route('product-admin')->with('status', trans('message.prod_create_susscess'));
         } catch (\Exception $e) {
             return back()->with('status',trans('message.prod_create_fail'));
         }   
+
+           
         
 
     }
@@ -137,7 +161,7 @@ class ProductController extends Controller
                 $newName = '/images/product/'.md5(microtime(true)).$filename;
                 $request->img->move(public_path('/images/product'), $newName);
                 Image::where('product_id',$id)->update([
-                   'name' => $filename,
+                   'name' => $filename, 
                    'slug' => $newName,
                 ]);        
             }
@@ -157,13 +181,16 @@ class ProductController extends Controller
     {
         try{
         DB::beginTransaction();
-            $product = Product::find($id);
-            $product->productSize()->delete();
+            $product = Product::find($id);;
+            $product->productSizes()->delete();
+            $product->images()->delete();
+            $product->orders()->delete();
+            $product->orderDetails()->delete();
             $product->delete();
             DB::commit();
             return redirect()->back()->with('status', trans('message.prod_delete_susscess'));  
         } catch (\Exception $ex) {
-            return redirect()->back()->with('status',trans('message.prod_delete_susscess'));
+            return redirect()->back()->with('status',trans('message.prod_delete_fail'));
         }
     }
 
@@ -250,8 +277,8 @@ class ProductController extends Controller
                     <td style="line-height: 50px" style="text-align: center;">
                         <a href="<?php echo route('show-edit-product',$product->id); ?>" class="btn glyphicon glyphicon-pencil"></a><br>
                         <form action="<?php echo route('delete-product',$product->id); ?>" method="POST">
-                            <!-- @csrf
-                            @method('DELETE') -->
+                            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                            <input type="hidden" name="_method" value="delete">
                             <button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="glyphicon glyphicon-trash" style="border: none;background: #fff;color: red;"></button>
                         </form>
                         

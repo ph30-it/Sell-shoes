@@ -30,15 +30,24 @@
                 @include('errors.error')  
                 <div class="form-group">
                     <label>Fullname<span style="color: red">*</span></label>
-                    <input type="text" name="name" class="form-control" placeholder="Fullname" value="" required />
+                    <input type="text" name="name" class="form-control" placeholder="Fullname" value="{{old('name')}}" />
+                    @if($errors->has('name'))
+                        <span class="" style="color:red;font-size: 13px">{{$errors->first('name')}}</span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label>Email<span style="color: red">*</span></label>
-                    <input type="text" name="email" class="form-control" placeholder="Email" value="" required />
+                    <input type="text" name="email" class="form-control" placeholder="Email" value="{{old('email')}}"  />
+                     @if($errors->has('email'))
+                        <span class="" style="color:red;font-size: 13px">{{$errors->first('email')}}</span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label>Password<span style="color: red">*</span></label>
-                    <input type="password" name="password" class="form-control" placeholder="Password" value="" required />
+                    <input type="password" name="password" class="form-control" placeholder="Password" value=""  />
+                     @if($errors->has('password'))
+                        <span class="" style="color:red;font-size: 13px">{{$errors->first('password')}}</span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label>User Level<span style="color: red">*</span></label>

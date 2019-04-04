@@ -32,6 +32,8 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::get('{id}/show-new-password', 'UserController@showNewPassword')->name('show-new-password');
 			Route::put('{id}/new-password', 'UserController@newPassword')->name('new-password-admin');
 			Route::delete('{id}/delete', 'UserController@destroy')->name('delete-user');
+			//search user
+			Route::get('search-user','UserController@searchUser')->name('search-user-admin');
 		});
 		//Category management
 		Route::group(['prefix' => 'category'], function(){
@@ -76,6 +78,8 @@ Route::group(['namespace'=>'admin','middleware' => 'CheckAdmin'], function(){
 			Route::delete('{id}/delete', 'OrderController@destroy')->name('delete-order');
 			//order filter by status
 			Route::get('{id}/order-filter-by-status','OrderController@orderFilterStatus')->name('order-filter-status');
+			//search order
+			Route::get('search-order','OrderController@orderSearch')->name('order-search-admin');
 		});
 		//Comment management
 		Route::group(['prefix' => 'comment'], function(){

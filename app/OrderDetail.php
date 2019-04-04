@@ -21,4 +21,9 @@ class OrderDetail extends Model
     {
     	return $this->belongsTo('App\Product');
     }
+
+    public function size()
+    {
+        return $this->belongsTo('App\Size');
+    }
 }

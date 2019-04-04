@@ -25,7 +25,7 @@ class CheckoutLoginedRequest extends FormRequest
     {
         return [
             'address'=>'required',
-            'phone' =>'required',
+            'phone' =>'required|numeric',
             'payment' => 'required',
         ];
     }
@@ -33,6 +33,7 @@ class CheckoutLoginedRequest extends FormRequest
         return [
             'address.required' => 'Bạn chưa nhập địa chỉ!',
             'phone.required' => 'Bạn chưa nhập số điện thoại!',
+            'phone.numeric' => 'Số điện thoại phải là số!',
             'payment.required' => 'Bạn chưa chọn phương thức thanh toán!',
         ];
     }

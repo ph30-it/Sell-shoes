@@ -40,10 +40,15 @@ class Product extends Model
     {
         return $this->hasMany('App\OrderDetail');
     }
+    public function orders()
+    {
+        return $this->belongstoMany('App\Order', 'orderdetails');
+    }
 
     public function comments()
     {
         return $this->hasMany('App\Comment');
     }
+
 
 }

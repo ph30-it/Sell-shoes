@@ -22,9 +22,9 @@
 									<div class="form-group">
 											<label for="">Thêm kích thước:</label>
 											<select name="size_id" id="" style="padding: 3px">
-												@foreach($sizes as $size)
-												<option value="{{$size->id}}">{{$size->name}}</option>
-												@endforeach
+													@foreach($sizes as $size)
+															<option value="{{$size->id}}">{{$size->name}}</option>
+													@endforeach
 											</select>
 											<label for="">Số lượng:</label>
 											<input type="number" name="quantity" style="width: 6%" min="0" max="10000">
@@ -54,7 +54,7 @@
 									</thead>	
 									<tbody>
 										
-										@foreach($product_size as $item)
+										@foreach($product_sizes as $item)
 											<tr>
 												<?php 
 													$name_product = App\Product::select('name')->where('id',$item->product_id)->first();

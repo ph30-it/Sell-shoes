@@ -35,6 +35,7 @@ class AddUserRequest extends FormRequest
             'email.required'=>'Bạn chưa nhập email!',
             'email.email'=>'Bạn chưa nhập đúng định dạng email!',
             'email.unique'=>'Email đã có người sử dụng!',
+            'password.required'=>'Bạn chưa nhập password!',
             'password.min'=>'Password phải ít nhất 6 ký tự',
             'password.max'=> 'Password không quá 16 ký tự'
         ];

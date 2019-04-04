@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data['users'] = User::paginate(10);
+        $data['users'] = User::orderBy('id','desc')->paginate(10);
         return view('admin.user.admin',$data);
     }
 
@@ -117,6 +117,60 @@ class UserController extends Controller
             return redirect()->back()->with('status',trans('message.user_delete_susscess'));
         }else{
             return redirect()->back()->with('status',trans('message.user_delete_fail'));
+        }
+    }
+
+    public function searchUser(Request $request)
+    {
+        if($request->ajax())
+        {
+            $result = $request->search;
+            $result = str_replace(' ', '%', $result);
+            $users = User::where('name','like','%'.$result.'%')
+                        ->orWhere('email','like','%'.$result.'%')
+                        ->orderBy('id','desc')->get();
+            if (empty($users->toArray())) {
+                ?>
+                    <tr>
+                        <td colspan="4">Không tìm thấy tài khoản nào!</td>
+                    </tr>
+                <?php
+            }else{ 
+                foreach($users as $user){
+                    ?>
+                    <tr>
+                        <td><?php echo $user->id; ?></td>
+                        <td>
+                            <ul class="user-menu" style="margin-top: 0px;margin-right: 40%">
+                                <li class="dropdown pull-right">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: #000"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg><?php echo $user->name; ?><span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="<?php echo route('show-new-password',$user->id); ?>"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Đổi mật khẩu</a></li>
+                                        <li><a href="<?php echo route('show-edit-user',$user->id); ?>"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Sửa thông tin</a></li>
+                                        <li>
+                                            <form action="<?php echo route('delete-user',$user->id); ?>" method="POST">
+                                                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                                                <input type="hidden" name="_method" value="delete">
+                                                <button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" style="background: #fff;border: none;"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Xóa tài khoản</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </td>
+                        <td><?php echo $user->email; ?></td>
+                        <td><?php if($user->role_id == 2){ ?>
+                                <span class="btn-danger">SuperAdmin</span>
+                            <?php }else{ ?>
+                                <span class="btn-info">User</span>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                
+            }
+
         }
     }
 }

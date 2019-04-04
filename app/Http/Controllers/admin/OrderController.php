@@ -20,7 +20,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $order = Customer::with('order')->orderBy('id','desc')->get();
+        $order = Order::with('customer')->orderBy('id','desc')->get();
        //dd($data);
         return view('admin.order.order',compact('order'));
     }
@@ -54,7 +54,8 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::with('orderDetails')->where('id',$id)->orderBy('id','desc')->first();
+        //$order = Order::with('orderDetails')->where('id',$id)->orderBy('id','desc')->first();
+        $order = OrderDetail::with('order','product','size')->where('order_id',$id)->orderBy('id','desc')->get();
         //dd($order);
         return view('admin.order.showdetail',compact('order'));
     }
@@ -121,10 +122,19 @@ class OrderController extends Controller
     }
 
      public function orderFilterStatus($id){
-        $order = Order::with('customer')->where('status',$id)->orderBy('id','desc')->get()->toArray();
-       /* echo "<pre>";
-        print_r($order);*/
-        foreach($order as $item){ ?>
+        if ($id === 'all') {
+            $order = Order::with('customer')->orderBy('id','desc')->get()->toArray();
+        }else{
+            $order = Order::with('customer')->where('status',$id)->orderBy('id','desc')->get()->toArray();
+        }
+        if (empty($order)) {
+            ?> 
+               <tr>
+                   <td colspan="9">Không có đơn hàng nào!</td>
+               </tr>
+            <?php
+        }else{
+            foreach($order as $item){ ?>
             <tr>
                 <td><?php echo $item['id']; ?></td>
                 <td><?php echo $item['customer']['name']; ?></td>
@@ -132,7 +142,11 @@ class OrderController extends Controller
                 <td><?php echo $item['date']; ?></td>
                 <td><?php echo $item['customer']['address']; ?></td>
                 <td><?php echo $item['customer']['phone']; ?></td>
-                <td><?php echo $item['customer']['note']; ?></td>
+                <td><?php if (empty($item['customer']['note'])) {
+                    echo 'Không có!';
+                }else{
+                    echo $item['customer']['note'];
+                } ?></td>
                 <td><?php if($item['status'] == 0) { ?>
                         <span class="btn btn-default" style="padding: 1px 7px">Đơn mới</span>
                     <?php } if($item['status'] == 1) { ?>
@@ -155,10 +169,67 @@ class OrderController extends Controller
                 </td>
             </tr>
             <?php  
+            }
+
         }
-        
-    
     }
+
+    public function orderSearch(Request $request){
+            $result = $request->search;
+            $result = str_replace(' ', '%', $result);
+            $order = Customer::with('order')
+                            ->where('name','like','%'.$result.'%')
+                            ->orWhere('email','like','%'.$result.'%')
+                            ->orWhere('phone','like','%'.$result.'%')
+                            ->orderBy('id','desc')->get()->toArray();
+ 
+        if (empty($order)) {
+            ?> 
+               <tr>
+                   <td colspan="9">Không có đơn hàng nào!</td>
+               </tr>
+            <?php
+        }else{
+            foreach($order as $item){ ?>
+            <tr>
+                <td><?php echo $item['id']; ?></td>
+                <td><?php echo $item['name']; ?></td>
+                <td><?php echo $item['email']; ?></td>
+                <td><?php echo $item['order']['date']; ?></td>
+                <td><?php echo $item['address']; ?></td>
+                <td><?php echo $item['phone']; ?></td>
+                <td><?php if (empty($item['note'])) {
+                    echo 'Không có!';
+                }else{
+                    echo $item['note'];
+                } ?></td>
+                <td><?php if($item['order']['status'] == 0) { ?>
+                        <span class="btn btn-default" style="padding: 1px 7px">Đơn mới</span>
+                    <?php } if($item['order']['status'] == 1) { ?>
+                        <span class="btn btn-success" style="padding: 1px 7px">Đã duyệt</span>
+                    <?php } if($item['order']['status'] == 2) { ?> 
+                        <span class="btn btn-info" style="padding: 1px 7px">Đang giao</span>
+                    <?php } if($item['order']['status'] == 3) { ?>
+                        <span class="btn btn-primary" style="padding: 1px 7px">Đã giao</span>
+                    <?php } if($item['order']['status'] == 4) { ?>
+                        <span class="btn btn-danger" style="padding: 1px 7px">Đã hủy</span>
+                    <?php } ?>
+                </td>
+                <td>
+                    <a href="<?php echo route('detail-order',$item['id']); ?>" class=""><span class="btn glyphicon glyphicon-search"></span></a><br>
+                    <form action="<?php echo route('delete-order',$item['id']); ?>" method="POST">
+                       <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                       <input type="hidden" name="_method" value="delete">
+                        <button onclick="return confirm('Bạn có chắc chắn muốn xóa?')"  type="submit" style="border: none; background: #fff"><span class="glyphicon glyphicon-trash" style="color: #d9534f;"></span></button>
+                    </form>
+                </td>
+            </tr>
+            <?php  
+            }
+
+        }
+    }
+
 
 }
 

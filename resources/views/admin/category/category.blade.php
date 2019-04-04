@@ -25,14 +25,16 @@
 								@csrf()
 								<div class="form-group">
 									<label>Tên danh mục:<span style="color: red;">*</span></label>
-	    							<input type="text" name="name" class="form-control" placeholder="Tên danh mục...">
+	    							<input type="text" name="name" class="form-control" placeholder="Tên danh mục..." value="{{old('name')}}">
 	    							@if($errors->has('name'))
 		    							<span class="" style="color:red;font-size: 13px">{{$errors->first('name')}}</span>
 		    						@endif
 								</div>
 								<div class="form-group">
 									<label>Mô tả:</label><br>
-	    							<textarea name="description" id="" cols="54" rows="10" class="" style="padding: 10px"></textarea>
+	    							<textarea name="description" id="" cols="54" rows="10" class="" style="padding: 10px">
+	    								{{old('description')}}
+	    							</textarea>
 								</div>
 
 								<div class="form-group">
