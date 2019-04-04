@@ -45,7 +45,7 @@
 												<section  class="sky-form">
 						                   		 	<label class="checkbox">
 						                   		 		<input type="checkbox" name="size[]" value="{{$i}}" 
-						                   		 		@if(old('size') == $i) checked @endif
+						                   		 		 {{ old('size') == $i ? 'checked' : '' }}
 
 						                   		 		><i style="padding: 6px"></i>{{$item->name}}
 
@@ -104,11 +104,18 @@
 									</div>		
 								</div>
 								<div class="form-group" >
-										<label>Ảnh sản phẩm<span style="color: red;">*</span></label>
+										<label>Ảnh chính sản phẩm<span style="color: red;">*</span></label>
 										<input id="img" type="file" name="img" class="form-control hidden" onchange="changeImg(this)">
 					                    <img id="avatar" class="thumbnail" width="300px" src="{{asset('images/new_seo-10-512.png')}}">
 					                    @if($errors->has('img'))
 			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('img')}}</span>
+			    						@endif
+								</div>
+								<div class="form-group" >
+										<label>Ảnh mô tả sản phẩm<span style="color: red;">*</span></label>
+										<input id="img_description" type="file" name="img_description[]" multiple>
+					                    @if($errors->has('img_description'))
+			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('img_description')}}</span>
 			    						@endif
 								</div>
 							</div>

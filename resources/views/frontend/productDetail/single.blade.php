@@ -96,28 +96,23 @@
 			  <div class="col-lg-5" style="padding: 10px">
 				<!-- start product_slider -->
 				 	<!-- Full-width images with number text -->
-				  <div class="mySlides">
-				    <div class="numbertext">1 / 6</div>
-				      <img src="{{asset($image->slug)}}" style="width:100%">
-				  </div>
-
-				  <div class="mySlides">
-				    <div class="numbertext">2 / 6</div>
-				      <img src="{{asset($image->slug)}}" style="width:100%">
-				  </div>
-
-				  <div class="mySlides">
-				    <div class="numbertext">3 / 6</div>
-				      <img src="{{asset($image->slug)}}" style="width:100%">
-				  </div>
-
-				  <div class="mySlides">
-				    <div class="numbertext">4 / 6</div>
-				      <img src="{{asset($image->slug)}}" style="width:100%">
-				  </div>
+				 	<?php $i = 2; ?>
+				  @foreach($product->images as $image)
+				    <div class="mySlides">
+				    	<div class="numbertext">1 / 6</div>
+				      	<img src="{{asset($image->slug)}}" style="width:100%">
+				  	</div>
+				  @endforeach
+				  @if(!empty($imageDetails))
+				  		@foreach($imageDetails as $image)
+						    <div class="mySlides">
+						    	<div class="numbertext">{{$i}} / 6</div>
+						      	<img src="{{asset($image['slug'])}}" style="width:100%">
+						  	</div>
+						  	<?php $i++; ?>
+					  	@endforeach	
+				  @endif		 
 				  <!-- Next and previous buttons -->
-				  
-
 				  <!-- Image text -->
 				  <div class="caption-container">
 				    <p id="caption"></p>
@@ -126,17 +121,17 @@
 				  <!-- Thumbnail images -->
 				  <div class="row">
 				    <div class="column">
-				      <img class="demo cursor" src="{{asset($image->slug)}}" style="width:120%" onclick="currentSlide(1)" alt="The Woods">
+				      @foreach($product->images as $image)
+				      	  <img class="demo cursor" src="{{asset($image->slug)}}" style="width:120%" onclick="currentSlide(1)" alt="The Woods">
+				      @endforeach
 				    </div>
-				    <div class="column"> 
-				      <img class="demo cursor" src="{{asset($image->slug)}}" style="width:120%" onclick="currentSlide(2)" alt="Cinque Terre">
-				    </div>
-				    <div class="column">
-				      <img class="demo cursor" src="{{asset($image->slug)}}" style="width:120%" onclick="currentSlide(3)" alt="Mountains and fjords">
-				    </div>
-				    <div class="column">
-				      <img class="demo cursor" src="{{asset($image->slug)}}" style="width:120%" onclick="currentSlide(4)" alt="Northern Lights">
-				    </div>
+				    @if(!empty($imageDetails))
+					    @foreach($imageDetails as $image)
+					    <div class="column"> 
+					      <img class="demo cursor" src="{{asset($image['slug'])}}" style="width:120%" onclick="currentSlide(2)" alt="Cinque Terre">
+					    </div>
+					   	@endforeach
+					@endif
 				  </div>
 				  <a class="prev" onclick="plusSlides(-1)" style="background: #000">&#10094;</a>
 				  	<a class="next" onclick="plusSlides(1)" style="background: #000;">&#10095;</a>
@@ -155,25 +150,45 @@
 						<div class="options" style="line-height: 15px">	
 							<h4 class="m_9">Chọn một kích thước(*)</h4>
 							<div style="padding: 0px 15px 15px 0px;">
-								@foreach($sizes as $item)
-										<?php 
-											$quantity = App\ProductSize::where('product_id',$item->product_id)->sum('quantity');
-										 ?>
+								<?php $quantity = 0; ?>
+								@foreach ($product->productSizes as $productSize) 
+									 	<?php $quantity += $productSize->quantity; ?>	
+								@endforeach
+
+								@foreach($product->productSizes as $productSize)
 						   			@if($quantity > 0) 				   	
-							   			@if($item->quantity == 0)
+							   			@if($productSize->quantity == 0)
 							   				<span class="nav" style="float:left; " style="padding: 0">
-											  <li role="presentation" class="disabled" ><a  style="padding: 5px 9px;border: 1px solid #ccc;margin-top:14px;margin-right: 4px">{{$item->size->name}}</a></li>
+											  <li role="presentation" class="disabled" ><a  style="padding: 5px 9px;border: 1px solid #ccc;margin-top:14px;margin-right: 4px">
+											  			@foreach($product->sizes as $size)
+															@if($productSize->size_id == $size->id) 
+																{{$size->name}}	
+															@endif
+														@endforeach
+											  </a></li>
 											</span>
 							   			@else
 							   				<span class="nav" style="float: left;">
-							   				<li><label for="{{'custom_radio'.$item->id}}" style="margin-right: 4px">
-								   				<input type="radio" value="{{$item->size->id}}" name=size id="{{'custom_radio'.$item->id}}" >
-								   				<span style="padding: 5px 9px">{{$item->size->name}}</span>
+							   				<li><label for="{{'custom_radio'.$productSize->id}}" style="margin-right: 4px">
+								   				<input type="radio" value="{{$productSize->size_id}}" name=size id="{{'custom_radio'.$productSize->id}}" >
+								   				<span style="padding: 5px 9px">
+								   					@foreach($product->sizes as $size)
+														@if($productSize->size_id == $size->id) 
+															{{$size->name}}	
+														@endif
+													@endforeach
+								   				</span>
 							   				</label></li></span>
 							   			@endif
 							   		@else
 							   			<span class="nav" style="float:left; " style="padding: 0">
-										  <li role="presentation" class="disabled" ><a  style="padding: 5px 9px;border: 1px solid #ccc;margin-top:10px;margin-right: 4px">{{$item->size->name}}</a></li>
+										  <li role="presentation" class="disabled" ><a  style="padding: 5px 9px;border: 1px solid #ccc;margin-top:10px;margin-right: 4px">
+										  			@foreach($product->sizes as $size)
+														@if($productSize->size_id == $size->id) 
+															{{$size->name}}	
+														@endif
+													@endforeach
+										  </a></li>
 										</span>
 							   		@endif	
 									
@@ -311,7 +326,7 @@
      	<div style="margin-bottom: 30px;" class="col-sm-7">
      					<div class="actionBox" style="margin-top: 20px">
 					        <ul class="commentList">
-								 @foreach($comments as $comment)
+								 @foreach($product->comments as $comment)
 						           		<li>
 						           			<form action="{{route('delete-comment-user',$comment->id)}}" method="POST">
 						           				@csrf
@@ -409,8 +424,9 @@
 								size_id:size_id,
 											},
 							success: function(data) {
-								alert('Thêm giỏ hàng thành công!'); 
-								location.reload();
+								alert('Thêm giỏ hàng thành công!');
+								$("#getCart").html(data);
+								//location.reload();
 							},
 							error: function($error) {
 								alert('Thêm vào giỏ hàng fail!');

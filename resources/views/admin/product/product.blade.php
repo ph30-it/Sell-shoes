@@ -60,11 +60,6 @@
 												</td>
 												<td>
 													<?php 
-														 //$images = App\Image::select('slug')->where('product_id',$product->id)->where('status',1)->orderBy('updated_at','desc')->first();
-
-														/* if(empty($product->images->slug)){
-														 	 $images['slug'] = 'images/image.png';
-														 }*/
 														 foreach ($product->images as $item) {
 														 	$images['slug'] = $item->slug;
 														 }
@@ -121,7 +116,6 @@
 													</form>
 													
 													<a href="{{route('view-product-size',$product->id)}}" class="btn-success">Size</a><br>
-													<a href="{{route('view-product-image',$product->id)}}" class="btn-primary">ảnh</a>
 												</td>
 											</tr>
 										@endforeach

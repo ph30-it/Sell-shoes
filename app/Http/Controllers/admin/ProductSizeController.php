@@ -18,11 +18,12 @@ class ProductSizeController extends Controller
      */
     public function index($id)
     {
-        $data['product_size'] = ProductSize::where('product_id',$id)->orderBy('size_id','asc')->get();
+        $data['product_sizes'] = ProductSize::where('product_id',$id)->orderBy('size_id','asc')->get();
         $data['image'] = Image::select('slug')->where('product_id',$id)->where('status',1)->first();
+        //$data['product_sizes_name'] = ProductSize::select('size_id')->where('product_id',$id)->orderBy('size_id','asc')->get()->toArray();
         $data['sizes'] = Size::all();
         $data['id'] = $id;
-        //dd($data['id']);
+        //dd($data['sizes']);
         
         return view('admin.product.viewProductSize',$data);
     }

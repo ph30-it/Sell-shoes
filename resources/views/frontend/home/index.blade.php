@@ -13,24 +13,24 @@
 				  </div>
 				   <div class="container" style="margin-top: 20px">
 				      @include('frontend.home.product-cart')
-				  <div class="clear"></div>
-			  </div>
+				  		<div class="clear"></div>
+			  		</div>
 			  <div style="background: #000; color: #fff; padding: 10px 10px;">
 				  		<div class="container">
-				  			<h4>SẢN PHẨM HOT</h3>
+				  			<h4>SẢN PHẨM HOT</h4>
 				  			<p style="font-size: 12px;">Hàng luôn được cật nhật thường xuyên</p>
 				  		</div>
 				  </div>
 				   <div class="container" style="margin-top: 20px">
 				     @include('frontend.home.product-hot-cart')
-				    
+				    </div>
 				  <div class="clear"></div>
-			  </div>
+			  
 			  </div>
 		
 					<div  style="background: #000; color: #fff; padding: 10px 10px;">
 						<div class="container">
-							<h4>THƯƠNG HIỆU NỔI TIẾNG</h3>
+							<h4>THƯƠNG HIỆU NỔI TIẾNG</h4>
 				  			<p style="font-size: 12px;">Những thương hiệu hàng đầu thế giới</p>
 						</div>
 					</div>
@@ -54,6 +54,7 @@
 						<a href="@"><img src="{{asset('images/thuonghieu/newbalanece.png')}}" width="130px"></a>
 					</div>
 				</div>
+	
         <div class="footer">
        	  <div class="footer-top">
        		<div class="wrap">
@@ -108,6 +109,7 @@
 			   </div>
        	 	</div>
        	 </div>
+       	</div> 
 <script>
 	$(document).ready(function(){
 		$('.addCart').click(function(event) {
@@ -134,8 +136,10 @@
 								size_id:size_id,
 											},
 							success: function(data) {
-								alert('Thêm giỏ hàng thành công!'); 
-								location.reload();
+								alert("Thêm giỏ hàng thành công!"); 
+								$("#getCart").html(data);
+								//location.reload();
+
 							},
 							error: function($error) {
 								alert('Thêm vào giỏ hàng fail!');

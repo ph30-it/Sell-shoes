@@ -23,7 +23,7 @@
 										{{ session('status') }}
 									</div>
 							 	@endif
-								<table class="table table-bordered" style="margin-top:20px;text-align: center;">				
+								<table class="table table-bordered" style="margin-top:20px;text-align: center;font-size: 13px">				
 									<thead>
 										<tr class="bg-primary">
 											<th style="text-align: center;">ID</th>
@@ -37,17 +37,15 @@
 										</tr>
 									</thead>
 									<tbody>
-										@foreach($order->orderDetails as $item)
+										@foreach($order as $item)
 											<?php 
-												$product = App\Product::select('name')->where('id',$item->product_id)->first();
 												$image = App\Image::select('slug')->where('product_id',$item->product_id)->first();
-												$size = App\Size::select('name')->where('id',$item->size_id)->first();
 											 ?>
 											<tr>
 												<td>{{$item->id}}</td>
-												<td>{{$product->name}}</td>
+												<td>{{$item->product->name}}</td>
 												<td><img src="{{asset($image->slug)}}" alt="" width="150px"></td>
-												<td>{{$size->name}}</td>
+												<td>{{$item->size->name}}</td>
 												<td>{{$item->quantity}}</td>
 												<td>{{number_format($item->price,0)}} ₫</td>
 												<td>{{$item->sale}}</td>
@@ -56,18 +54,18 @@
 										@endforeach
 									</tbody>
 								</table>
-								<p style="font-size: 18px"><span style="color: #000; font-weight: bold;margin-right: 10px">Tổng tiền:</span><span>{{number_format($order->total)}} ₫</span></p>
-								<p style="font-size: 18px"><span style="color: #000; font-weight: bold;margin-right: 10px">Hình thức thanh toán: </span><span>{{$order->payment}}</span></p>
+								<p style="font-size: 18px"><span style="color: #000; font-weight: bold;margin-right: 10px">Tổng tiền:</span><span>{{number_format($item->order->total)}} ₫</span></p>
+								<p style="font-size: 18px"><span style="color: #000; font-weight: bold;margin-right: 10px">Hình thức thanh toán: </span><span>{{$item->order->payment}}</span></p>
 
-								<form action="{{route('status-detail-order',$order->id)}}" method="POST">
+								<form action="{{route('status-detail-order',$item->order->id)}}" method="POST">
 									@csrf
+									<label>--Trạng thái đơn hàng</label>
 									<select name="status" id="" class="form-control" style="width:30%;margin-bottom:20px;background:#FFEBCD">
-										<option>--Trạng thái đơn hàng</option>
-										<option value="0">Đơn mới</option>
-										<option value="1">Đã duyệt</option>
-										<option value="2">Đang giao</option>
-										<option value="3">Đã giao</option>
-										<option value="4">Đã hủy</option>
+										<option value="0" @if($item->order->status == 0) selected @endif >Đơn mới</option>
+										<option value="1"@if($item->order->status == 1) selected @endif>Đã duyệt</option>
+										<option value="2"@if($item->order->status == 2) selected @endif>Đang giao</option>
+										<option value="3"@if($item->order->status == 3) selected @endif>Đã giao</option>
+										<option value="4" @if($item->order->status == 4) selected @endif>Đã hủy</option>
 									</select>
 										@if($errors->has('status'))
 			    							<span class="" style="color:red;font-size: 13px;">{{$errors->first('status')}}</span><br>

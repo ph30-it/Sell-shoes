@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use App\Product;
+use App\Order;
 use App\Http\Requests\AddCategoryRequest;
 use App\Http\Requests\EditCategoryRequest;
 use DB;
@@ -112,14 +114,20 @@ class CategoryController extends Controller
         try{
         DB::beginTransaction();
             $category= Category::find($id);
-            //dd($category->products());
+            foreach ($category->products()->get() as $item) {
+                $product = Product::find($item->id);
+                $product->productSizes()->delete();
+                $product->images()->delete();
+                $product->orders()->delete();
+                $product->orderDetails()->delete();
+            }
             $category->products()->delete();
             $category->delete();
             DB::commit();
             return redirect()->back()->with('status', trans('message.cate_delete_susscess'));  
         } catch (\Exception $ex) {
             
-            return redirect()->back()->with('status', trans('message.cate_delete_susscess'));
+            return redirect()->back()->with('status', trans('message.cate_delete_fail'));
             
         }
     }

@@ -29,7 +29,9 @@ class AddProductRequest extends FormRequest
             'size'=> 'required',
             'category_id'=> 'required',
             'brand_id'=> 'required',
-            'img'=>'required|image'
+            'img'=>'required|image|mimes:jpeg,png|max:2048',
+            'img_description.*'=>'image|mimes:jpeg,png|max:2048',
+            
         ];
     }
     public function messages(){
@@ -42,7 +44,14 @@ class AddProductRequest extends FormRequest
             'category_id.required' => 'Bạn chưa chọn danh mục sản phẩm!',
             'brand_id.required' => 'Bạn chưa chọn hãng sản phẩm!',
             'img.required'=>'Bạn chưa chọn ảnh sản phẩm!',
-            'img.image'=>'Hãy chọn đúng định dạng ảnh'
+            'img.image'=>'File phải là hình ảnh!',
+            'img.mimes'=>'Ảnh phải có đuôi là jpg hoặc png',
+            'img.max'=>'Ảnh chỉ có kích thước tối đa là 2MB !',
+            //'img_description.required'=>'Bạn chưa chọn ảnh sản phẩm!',
+            'img_description.image'=>'File phải là hình ảnh!',
+            'img_description.mimes'=>'Ảnh phải có đuôi là jpg hoặc png',
+            'img_description.max'=>'Ảnh chỉ có kích thước tối đa là 2MB !',
+
         ];
     }
 }
