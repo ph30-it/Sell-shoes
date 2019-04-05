@@ -112,7 +112,7 @@
 			    						@endif
 								</div>
 								<div class="form-group" >
-										<label>Ảnh mô tả sản phẩm<span style="color: red;">*</span></label>
+										<label>Ảnh mô tả sản phẩm</label>
 										<input id="img_description" type="file" name="img_description[]" multiple>
 					                    @if($errors->has('img_description'))
 			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('img_description')}}</span>

@@ -132,12 +132,19 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $data['product'] = Product::with('sizes')->where('id',$id)->first();
-        $data['sizes'] = Size::all();
-        $data['categories'] = Category::all();
-        $data['brands'] = Brand::all();
-        $data['images'] = Product::find($id)->images->where('status',1)->first();   
-        return view('admin.product.editproduct',$data);
+        $product = Product::with([
+           'sizes' => function($query){
+                return $query->orderBy('id','asc');
+                    },
+            'productSizes',
+            'category','brand',
+            'images' => function($query){
+                return $query->where('status',1)->orderBy('updated_at','desc');
+            }])->where('id',$id)->first();
+        $categories = Category::all();
+        $brands = Brand::all();
+       //dd($product);  
+        return view('admin.product.editproduct',compact('product','categories','brands'));
     }
 
     /**
@@ -151,11 +158,13 @@ class ProductController extends Controller
     {         
           try {
             DB::beginTransaction();
-            $data = $request->except('_token','img','size','_method');
+            $data = $request->except('_token','img','size','_method','img_description');
             $data['slug'] = str_slug($data['name']);
             //dd($data);
             Product::where('id',$id)->update($data);
 
+
+            //update image product
             if ($request->hasFile('img')) {
                 $filename = $request->img->getClientOriginalName();
                 $newName = '/images/product/'.md5(microtime(true)).$filename;
@@ -164,6 +173,25 @@ class ProductController extends Controller
                    'name' => $filename, 
                    'slug' => $newName,
                 ]);        
+            }
+
+             //update image product detail
+            if ($request->hasFile('img_description')) {
+                Image::where('product_id',$id)->where('status',0)->delete();
+
+                    $imageData = [];
+                    foreach (request()->file('img_description') as $item) {
+                        $filename = $item->getClientOriginalName();
+                        $newName = '/images/product/'.md5(microtime(true)).$filename;
+                        $item->move(public_path('/images/product'), $newName);
+                        array_push($imageData, [
+                                                   'name' => $filename,
+                                                   'product_id' => $id,
+                                                   'slug' => $newName,
+                                                   'status' => 0,  
+                                                ]);    
+                }  
+                Image::insert($imageData);
             }
             DB::commit();
              return redirect()->route('product-admin')->with('status', trans('message.prod_edit_susscess'));
