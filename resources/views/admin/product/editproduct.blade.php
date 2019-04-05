@@ -104,13 +104,19 @@
 								<div class="form-group col-xs-4">
 										<label>Ảnh sản phẩm<span style="color: red;">*</span></label>
 										<input id="img" type="file" name="img" class="form-control hidden" onchange="changeImg(this)">
-											@if(empty($images))
-												<img id="avatar" class="thumbnail" width="300px" src="{{asset('images/image.png')}}">
-											@else
-												<img id="avatar" class="thumbnail" width="300px" src="{{asset($images->slug)}}">
-											@endif
+											@foreach($product->images as $image)
+												<?php $image['slug'] = $image->slug; ?>
+											@endforeach
+											<img id="avatar" class="thumbnail" width="300px" src="{{asset($image['slug'])}}">
 					                    	@if($errors->has('img'))
 			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('img')}}</span>
+			    							@endif
+								</div>
+								<div class="form-group" >
+										<label>Ảnh mô tả sản phẩm</label>
+										<input id="img_description" type="file" name="img_description[]" multiple>
+					                    @if($errors->has('img_description'))
+			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('img_description')}} abc</span>
 			    						@endif
 								</div>
 							</div>
