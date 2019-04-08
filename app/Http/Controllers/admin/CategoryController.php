@@ -120,6 +120,7 @@ class CategoryController extends Controller
                 $product->images()->delete();
                 $product->orders()->delete();
                 $product->orderDetails()->delete();
+                $product->comments()->delete();
             }
             $category->products()->delete();
             $category->delete();

@@ -63,7 +63,11 @@
 									<tr>
 										<td>{{$item->name}}</td>
 										<td>{{$item->slug}}</td>
-										<td>{{$item->description}}</td>
+										<td>@if(empty($item->description))
+												Không có mô tả!
+											@else
+												{{$item->description}}
+											@endif</td>
 										<td>
 				                    		<a href="{{route('show-edit-category',$item->id)}}"><span class="btn glyphicon glyphicon-pencil"></span></a>
 				                    		<form action="{{route('delete-category',$item->id)}}" method="POST">

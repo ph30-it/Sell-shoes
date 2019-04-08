@@ -30,7 +30,7 @@ class DetailProductController extends Controller
             'comments' => function($query){
                 return $query->orderBy('date','desc');
             }
-                ])->orderBy('id','desc')->first();
+                ])->where('id',$id)->orderBy('id','desc')->first();
             $imageDetails =  Image::select('slug')->where('product_id',$id)->where('status',0)->get()->toArray();
             //dd($imageDetails);
             $products_lienquan = Product::where('brand_id',$product->brand_id)->where('status',1)->inRandomOrder()->limit(5)->get();

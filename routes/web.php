@@ -100,6 +100,11 @@ Route::group(['namespace'=>'frontend'], function(){
 	Route::get('logout','LoginController@logout')->name('logout');
 
 	Route::get('san-pham','ProductController@index')->name('list-all-product');
+	//list product by category
+	Route::get('san-pham/{id}/{category}','ProductController@productByCategory')->name('list-product-by-category');
+	//filter product
+	Route::get('san-pham/loc-san-pham','ProductController@filterProduct')->name('filter-product-user');
+
 	Route::get('gioi-thieu','FrontendController@indexGioiThieu')->name('info-shop');
 	Route::get('lien-he','ContactController@index')->name('contact-user');
 	// dang ki nguoi dung
@@ -122,6 +127,8 @@ Route::group(['namespace'=>'frontend'], function(){
 			//Route::post('{id}/add', 'ShoppingCartController@store2')->name('add-cart-user');
 			Route::get('add', 'ShoppingCartController@store')->name('add-cart-user');
 			Route::get('{id}/delete','ShoppingCartController@destroy')->name('delete-cart-user');
+			//delete by ajax
+			Route::get('delete','ShoppingCartController@destroyAjax')->name('deleteAjax-cart-user');
 			Route::get('{update-quantity','ShoppingCartController@update')->name('update-quantity-cart');
 		});
 	//checkout

@@ -24,16 +24,15 @@ class AddSizeRequest extends FormRequest
     public function rules()
     {
         return [
-            'quantity' => 'required',
-            //'size_id'=> 'unique:product_size,size_id',
-            //'img'=>'image'
+            'quantity' => 'required|numeric|min:0|max:1000',
         ];
     }
     public function messages(){
         return [
-
-            //'size_id.unique' => 'Kích thước sản phẩm đã bị trùng',
-            'quantity.required'=>'Bạn chưa nhập số lượng!'
+            'quantity.required'=>'Bạn chưa nhập số lượng!',
+            'quantity.numeric'=>'Số lượng phải là số!',
+            'quantity.min'=>'Số lượng không được âm!',
+            'quantity.max'=>'Số lượng phải nhỏ hơn hoặc bằng 1000!'
         ];
     }
 }

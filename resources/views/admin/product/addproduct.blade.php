@@ -62,6 +62,9 @@
 									<div class="form-group" >
 										<label>Khuyến mãi(%)</label>
 										<input type="text" name="sale" class="form-control" value="{{old('sale')}}">
+										@if($errors->has('sale'))
+			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('sale')}}</span>
+			    						@endif
 									</div>
 									
 									<div class="form-group" >
@@ -87,11 +90,6 @@
 			    						@endif
 									</div>
 									<div class="form-group" >
-										<label>SP Đặc biệt</label><br>
-										Có: <input type="radio" name="featured" value="1">
-										Không: <input type="radio" checked name="featured" value="0">
-									</div>
-									<div class="form-group" >
 										<label>Trạng thái</label>
 										<select name="status" class="form-control">
 											<option value="1">Hiển thị</option>
@@ -114,8 +112,8 @@
 								<div class="form-group" >
 										<label>Ảnh mô tả sản phẩm</label>
 										<input id="img_description" type="file" name="img_description[]" multiple>
-					                    @if($errors->has('img_description'))
-			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('img_description')}}</span>
+					                    @if($errors->has('img_description.*'))
+			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('img_description.*')}}</span>
 			    						@endif
 								</div>
 							</div>

@@ -5,116 +5,78 @@
        	<img src="{{asset('images/collection_image.jpg')}}" alt="">
          <div class="container">
      	    <div class="rsidebar span_1_of_left">
-				   <section  class="sky-form">              	  
+				 <section  class="sky-form">              	  
                    	  <h4>Category</h4>
 						<div class="row row1 scroll-pane">
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Flats (70)</label>
-							</div>
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Athletic Shoes (48)</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Athletic Shoes (48)</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Heels (38)</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Other (1)</label>
+							<div class="col col-4" style="margin: -20px 0;">
+								@foreach($categories as $category)
+								<label class="checkbox"><input type="checkbox" name="categories[]" value="{{$category->id}}" class="filterProduct categoryID" ><i></i>{{$category->name}} ({{count($category->products)}})</label>
+								@endforeach
 						    </div>
 						</div>
 				</section>
 		        <section  class="sky-form">
 					<h4>Brand</h4>
-						<div class="row row1 scroll-pane">
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Adidas by Stella McCartney</label>
-							</div>
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Asics</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Bloch</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Bloch Kids</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Capezio</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox" ><i></i>Capezio Kids</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Nike</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Zumba</label>
-							</div>
+						<div class="row row1 scroll-pane" >
+							@foreach($brands as $brand)
+								<label class="checkbox"><input type="checkbox" name="brands[]" value="{{$brand->id}}" class="filterProduct brandID"><i></i>{{$brand->name}} ({{count($brand->products)}})</label>
+							@endforeach
 						</div>
 		       </section>
 		       <section  class="sky-form">
 					<h4>Price</h4>
 						<div class="row row1 scroll-pane">
 							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>$50.00 and Under (30)</label>
-							</div>
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>$100.00 and Under (30)</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>$200.00 and Under (30)</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>$300.00 and Under (30)</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>$400.00 and Under (30)</label>
+								<!-- <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Dưới 1,000,000</label>
+								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>1,000,000₫ ~ 2,000,000₫</label>
+								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>2,000,000₫ ~ 3,000,000₫</label>
+								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>3,000,000₫ ~ 4,000,000₫</label>
+								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Trên 5,000,000₫</label> -->
+								<select name="price" id="priceProduct" style="background: #F7F7F7;" >
+									<option value="0-100000000">Tất cả</option>
+									<option value="0-1000000">Dưới 1,000,000</option>
+									<option value="1000000-2000000">1,000,000₫ ~ 2,000,000₫</option>
+									<option value="2000000-3000000">2,000,000₫ ~ 3,000,000₫</option>
+									<option value="3000000-4000000">3,000,000₫ ~ 4,000,000₫</option>
+									<option value="5000000-100000000">Trên 5,000,000₫</option>
+								</select>
 							</div>
 						</div>
 		       </section>
-		       <section  class="sky-form">
+		       <!-- <section  class="sky-form" style="margin-top: -80px;padding-bottom: 20px;">
 					<h4>Size</h4>
 						<div class="row row1 scroll-pane">
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Red</label>
-							</div>
-							<div class="col col-4">
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Green</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Black</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Yellow</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Orange</label>
-							</div>
+							@foreach($sizes as $size)
+								<label class="checkbox"><input type="checkbox" name="sizes[]" value="{{$size->id}}" class="filterProduct sizeID"><i></i>{{$size->name}}</label>
+							@endforeach
 						</div>
-		       </section>
+		       </section> -->
 		</div>
 		<div class="cont" style="width: 77.1%">
 		  <div class="mens-toolbar">
               <div class="sort">
                	<div class="sort-by">
 		            <label>Sort By</label>
-		            <select>
-		                            <option value="">
-		                    Popularity               </option>
-		                            <option value="">
-		                    Price : High to Low               </option>
-		                            <option value="">
-		                    Price : Low to High               </option>
+		            <select name="sortBy" id="sortBy">
+		            		 <option value="">Sort By</option>
+		            		 <option value="asc">Price : Low to High</option>
+		                     <option value="desc">Price : High to Low</option> 
 		            </select>
 		            <a href=""><img src="images/arrow2.gif" alt="" class="v-middle"></a>
                </div>     		        
     		</div>
-	          <div class="pager">   
-	           <div class="limiter visible-desktop">
-	            <label>Show</label>
-	            <select>
-	                            <option value="" selected="selected">
-	                    9                </option>
-	                            <option value="">
-	                    15                </option>
-	                            <option value="">
-	                    30                </option>
-	                        </select> per page        
-	             </div>
-	       		<ul class="dc_pagination dc_paginationA dc_paginationA06">
-				    <li><a href="#" class="previous">Pages</a></li>
-				    <li><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-			  	</ul>
-		   		<div class="clear"></div>
-	    	</div>
 	    	<div>
 	    		@if(isset($search))
-	    			<br><h4 style="color: 	#00CED1;">Kết quả tìm được với từ khóa: "{{$search}}"</h4>
+	    			<br><h4 style="color:#00CED1;margin-top: -5px">Kết quả tìm được với từ khóa: "{{$search}}"</h4>
 	    		@else
-	    			<br><h4>Tất cả sản phẩm</h4>
+	    			<br><h4 style="margin-top: -5px">Tất cả sản phẩm</h4>
 	    		@endif
 	    	</div>
      	    <div class="clear"></div>
 	       </div>
-			  	<div class="row" style="margin-top: 20px">
-				    @include('frontend.product.product-card')
-			  </div>
-			  <div style="margin-left: 45%;">
-									{{ $products->links()}}
-								</div>
+	       		<div id="getProduct">
+					    @include('frontend.product.product-card')
+				 </div>
 			  <div class="clear"></div>
 			</div>
 		   </div>
@@ -174,6 +136,77 @@
        	 </div>
 <script>
 	$(document).ready(function(){
+		//filter product by category & brand
+		$('.filterProduct').click(function(event) {
+			var category_id = [];
+			$('.categoryID').each(function() {
+				if($(this).is(":checked")){
+					category_id.push($(this).val());
+				}
+			});
+			var brand_id = [];
+			$('.brandID').each(function() {
+				if($(this).is(":checked")){
+					brand_id.push($(this).val());
+				}
+			});
+			$.ajax({
+							url: "{{route('filter-product-user')}}",
+							type: 'GET',
+							data: {						
+								category_id:category_id,
+								brand_id:brand_id,
+								//size_id:size_id,
+								// price:price,
+								// sort_by:sort_by,
+
+											},
+							success: function(data) {
+								$("#getProduct").html(data);
+							},
+							error: function($error) {
+								alert('Thao tác fail!');
+							}
+						})
+		});
+		//filter product by price
+		$('#priceProduct').change(function(event) {
+			var price = $(this).val();
+			//alert(price);
+			$.ajax({
+							url: "{{route('filter-product-user')}}",
+							type: 'GET',
+							data: {						
+								 price:price,
+								// sort_by:sort_by,
+											},
+							success: function(data) {
+								$("#getProduct").html(data);
+							},
+							error: function($error) {
+								alert('Thao tác fail!');
+							}
+						})
+		});
+		//sort by price
+		$('#sortBy').change(function(event) {
+			var sort_by = $(this).val();
+			$.ajax({
+							url: "{{route('filter-product-user')}}",
+							type: 'GET',
+							data: {						
+								 sort_by:sort_by,
+											},
+							success: function(data) {
+								$("#getProduct").html(data);
+							},
+							error: function($error) {
+								alert('Thao tác fail!');
+							}
+						})
+		});
+
+		//add cart
 		$('.addCart').click(function(event) {
 				event.preventDefault();	
 				var size = document.getElementsByName("size");

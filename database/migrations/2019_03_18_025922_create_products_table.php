@@ -20,7 +20,6 @@ class CreateProductsTable extends Migration
             $table->text('description')->nulable();
             $table->integer('price');
             $table->integer('sale');
-            $table->integer('featured')->default(0);
             $table->integer('status')->default(1);
             $table->integer('category_id');
             $table->integer('brand_id');
