@@ -170,9 +170,10 @@
 					
 					<ul class="nav navbar-nav navbar-right ulnav" style="margin-top: 20px;">
 						<li>
-							<form class="navbar-form navbar-left" role="search" action="{{asset('search/')}}" method="GET">
+							<form class="navbar-form navbar-left" role="search" action="{{route('search-user')}}" method="GET">
+								@csrf
 								<div class="form-group">
-									<input name="result" type="text" class="form-control" placeholder="Tìm kiếm..." style="width: 100%; margin-right: 150px;">
+									<input name="search" type="text" class="form-control" placeholder="Tìm kiếm..." style="width: 100%; margin-right: 150px;">
 								</div>
 							</form>
 						</li>
@@ -183,11 +184,13 @@
 							<li><a href="{{route('login')}}"><span class="glyphicon glyphicon-user" style="font-size: 20px; color: #000;"></span></a></li>
 						@endif
 						<li>
-							<ul class="icon2 sub-icon2 profile_img">
-								<li><a class="active-icon c2" href="{{route('shoppingCart-user')}}"  style="margin-top: 1%"> </a>
+							<ul class="icon2 sub-icon2 profile_img"  id="getCart">
+								<li><a class="active-icon" href="{{route('shoppingCart-user')}}"  style="margin-top: 1%;color: #000;font-size: 25px;position: relative;">
+									<i class="fas fa-shopping-cart" style="margin-top: 9px"></i><span style="border-radius: 50px;padding: 1px 5px;background:#ff6517;color:#fff;font-size: 15px;position: absolute; top: 0px; right:-7px;font-size: 13px">{{Cart::getTotalQuantity()}}</span>
+								 </a>
 									<ul class="sub-icon2 list">
 										<li>
-											<div class="row" style="margin-bottom: 20px" id="getCart">
+											<div class="row" style="margin-bottom: 20px">
 												@foreach(Cart::getContent() as $item)
 													<?php $size = App\Size::select('name')->where('id',$item->attributes->size_id)->first(); 
 													?>
@@ -201,8 +204,10 @@
 																<br><span>x{{$item->quantity}} </span><span style="background: url(//theme.hstatic.net/1000243581/1000361905/14/bg-variant-checked.png?v=131) no-repeat right bottom #fff; padding:3px 5px; border: 1px solid #ccc;">{{$size->name}}</span> 
 															</div>
 															<div class="col-lg-7" style="line-height: 10px">
-																<br><span style="font-size: 12px;color:#ed4e4e;margin-right: 2px;">{{ number_format($item->price*$item->quantity,0)}} ₫</span>
+																<br><span style="font-size: 12px;color:#ed4e4e;">{{ number_format($item->price*$item->quantity,0)}} ₫</span>
 																<a href="{{route('delete-cart-user',$item->id)}}" class="glyphicon glyphicon-remove" style="color:red;text-decoration:none;"></a>
+
+																<!-- <button class="glyphicon glyphicon-remove deleteCart" data-idcart="{{$item->id}}"  style="color:red;text-decoration:none;border: none;background: #fff;"></button> -->
 															</div>
 														</div>
 													</div>
@@ -235,54 +240,44 @@
    		<!-- start header menu -->
 		<ul class="megamenu skyblue"  style="background-color: #000">
 		    <li><a class="color1" href="{{route('home-user')}}">Home</a></li>
-			<li class="grid"><a class="color2" href="#">Men</a>
-				<div class="megapanel">
-					<div class="row">
-						<div class="col1">
-							<div class="h_nav">
-								<h4>popular</h4>
-								<ul>
-									<li><a href="shop.html">new arrivals</a></li>
-									<li><a href="shop.html">men</a></li>
-									<li><a href="shop.html">women</a></li>
-									<li><a href="shop.html">accessories</a></li>
-									<li><a href="shop.html">kids</a></li>
-									<li><a href="shop.html">login</a></li>
-								</ul>	
+		    @foreach($categories as $category)
+				<li class="grid"><a class="color2" href="{{asset('san-pham/'.$category->id.'/'.$category->name)}}">{{$category->name}}</a>
+					<div class="megapanel">
+						<div class="row">
+							<div class="col1">
+								<div class="h_nav">
+									<h4>popular</h4>
+									<ul>
+										<li><a href="shop.html">new arrivals</a></li>
+										<li><a href="shop.html">men</a></li>
+										<li><a href="shop.html">women</a></li>
+										<li><a href="shop.html">accessories</a></li>
+										<li><a href="shop.html">kids</a></li>
+										<li><a href="shop.html">login</a></li>
+									</ul>	
+								</div>
+								<div class="h_nav">
+									<h4 class="top">men</h4>
+									<ul>
+										<li><a href="shop.html">new arrivals</a></li>
+										<li><a href="shop.html">men</a></li>
+										<li><a href="shop.html">women</a></li>
+										<li><a href="shop.html">accessories</a></li>
+										<li><a href="shop.html">kids</a></li>
+										<li><a href="shop.html">style videos</a></li>
+									</ul>	
+								</div>
 							</div>
-							<div class="h_nav">
-								<h4 class="top">men</h4>
-								<ul>
-									<li><a href="shop.html">new arrivals</a></li>
-									<li><a href="shop.html">men</a></li>
-									<li><a href="shop.html">women</a></li>
-									<li><a href="shop.html">accessories</a></li>
-									<li><a href="shop.html">kids</a></li>
-									<li><a href="shop.html">style videos</a></li>
-								</ul>	
-							</div>
+							<div class="col1"></div>
+							<div class="col1"></div>
+							<div class="col1"></div>
+							<div class="col1"></div>
+							<img src="images/nav_img.jpg" alt=""/>
 						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>style zone</h4>
-								<ul>
-									<li><a href="shop.html">men</a></li>
-									<li><a href="shop.html">women</a></li>
-									<li><a href="shop.html">accessories</a></li>
-									<li><a href="shop.html">kids</a></li>
-									<li><a href="shop.html">brands</a></li>
-								</ul>	
-							</div>							
-						</div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-						<img src="images/nav_img.jpg" alt=""/>
 					</div>
-				</div>
-				</li>
-  			   <li class="active grid"><a class="color4" href="#">Women</a>
+					</li>
+				@endforeach
+  			  <!--  <li class="active grid"><a class="color4" href="#">Women</a>
 				<div class="megapanel">
 					<div class="row">
 						<div class="col1">
@@ -411,109 +406,7 @@
 						<img src="images/nav_img2.jpg" alt=""/>
 					</div>
 				</div>
-				</li>
-				<li><a class="color6" href="#">Sale</a>
-				<div class="megapanel">
-					<div class="row">
-						<div class="col1">
-							<div class="h_nav">
-								<h4>shop</h4>
-								<ul>
-									<li><a href="shop.html">new arrivals</a></li>
-									<li><a href="shop.html">men</a></li>
-									<li><a href="shop.html">women</a></li>
-									<li><a href="shop.html">accessories</a></li>
-									<li><a href="shop.html">kids</a></li>
-									<li><a href="shop.html">brands</a></li>
-								</ul>	
-							</div>	
-							<div class="h_nav">
-								<h4 class="top">my company</h4>
-								<ul>
-									<li><a href="shop.html">trends</a></li>
-									<li><a href="shop.html">sale</a></li>
-									<li><a href="shop.html">style videos</a></li>
-									<li><a href="shop.html">accessories</a></li>
-									<li><a href="shop.html">kids</a></li>
-									<li><a href="shop.html">style videos</a></li>
-								</ul>	
-							</div>												
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>man</h4>
-								<ul>
-									<li><a href="shop.html">new arrivals</a></li>
-									<li><a href="shop.html">men</a></li>
-									<li><a href="shop.html">women</a></li>
-									<li><a href="shop.html">accessories</a></li>
-									<li><a href="shop.html">kids</a></li>
-									<li><a href="shop.html">style videos</a></li>
-								</ul>	
-							</div>						
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>help</h4>
-								<ul>
-									<li><a href="shop.html">trends</a></li>
-									<li><a href="shop.html">sale</a></li>
-									<li><a href="shop.html">style videos</a></li>
-									<li><a href="shop.html">accessories</a></li>
-									<li><a href="shop.html">kids</a></li>
-									<li><a href="shop.html">style videos</a></li>
-								</ul>	
-							</div>							
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>account</h4>
-								<ul>
-									<li><a href="shop.html">login</a></li>
-									<li><a href="shop.html">create an account</a></li>
-									<li><a href="shop.html">create wishlist</a></li>
-									<li><a href="shop.html">my shopping bag</a></li>
-									<li><a href="shop.html">brands</a></li>
-									<li><a href="shop.html">create wishlist</a></li>
-								</ul>	
-							</div>						
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>my company</h4>
-								<ul>
-									<li><a href="shop.html">trends</a></li>
-									<li><a href="shop.html">sale</a></li>
-									<li><a href="shop.html">style videos</a></li>
-									<li><a href="shop.html">accessories</a></li>
-									<li><a href="shop.html">kids</a></li>
-									<li><a href="shop.html">style videos</a></li>
-								</ul>	
-							</div>
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>popular</h4>
-								<ul>
-									<li><a href="shop.html">new arrivals</a></li>
-									<li><a href="shop.html">men</a></li>
-									<li><a href="shop.html">women</a></li>
-									<li><a href="shop.html">accessories</a></li>
-									<li><a href="shop.html">kids</a></li>
-									<li><a href="shop.html">style videos</a></li>
-								</ul>	
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col2"></div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-					</div>
-				</div>
-				</li>
+				</li> -->
 				<li><a class="color8" href="{{route('list-all-product')}}">Shop</a>
 				<div class="megapanel">
 					<div class="row">
@@ -609,6 +502,30 @@
 			});
 		});
 	</script>
+	<script>
+	$(document).ready(function(){
+		$('.deleteCart').click(function(event) {
+				//event.preventDefault();	
+				var cart_id =  $(this).attr('data-idcart');	
+                //alert(cart_id);
+               
+				$.ajax({
+						url: '{{route('deleteAjax-cart-user')}}',
+						type: 'GET',
+						data: {						
+							cart_id:cart_id,
+										},
+						success: function(data) { 
+							$("#getCart").html(data);
+							//location.reload();
+						},
+						error: function($error) {
+							alert('Thao tác fail!');
+						}
+					})
+		});		
+	});
+</script>
 	<script src="{{asset('js/simple-rating.js')}}"></script>
 </body>
 </html>

@@ -56,8 +56,9 @@ class OrderController extends Controller
     {
         //$order = Order::with('orderDetails')->where('id',$id)->orderBy('id','desc')->first();
         $order = OrderDetail::with('order','product','size')->where('order_id',$id)->orderBy('id','desc')->get();
-        //dd($order);
-        return view('admin.order.showdetail',compact('order'));
+        $customer = Customer::with('order')->find($id);
+        
+        return view('admin.order.showdetail',compact('order','customer'));
     }
 
     /**

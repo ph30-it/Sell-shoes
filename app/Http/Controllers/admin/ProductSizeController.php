@@ -18,14 +18,15 @@ class ProductSizeController extends Controller
      */
     public function index($id)
     {
-        $data['product_sizes'] = ProductSize::where('product_id',$id)->orderBy('size_id','asc')->get();
-        $data['image'] = Image::select('slug')->where('product_id',$id)->where('status',1)->first();
-        //$data['product_sizes_name'] = ProductSize::select('size_id')->where('product_id',$id)->orderBy('size_id','asc')->get()->toArray();
-        $data['sizes'] = Size::all();
-        $data['id'] = $id;
+        $product_sizes = ProductSize::where('product_id',$id)->orderBy('size_id','asc')->get();
+        $image = Image::select('slug')->where('product_id',$id)->where('status',1)->first();
+    
+        $sizes = Size::all();
         //dd($data['sizes']);
+        $listSize= $product_sizes->pluck('size_id')->toArray();
+                                                    //dd($listSize);
         
-        return view('admin.product.viewProductSize',$data);
+        return view('admin.product.viewProductSize',compact('product_sizes','image','sizes','listSize','id'));
     }
 
     public function updateQuantity(Request $request){

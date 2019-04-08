@@ -5,6 +5,9 @@ namespace App\Http\Controllers\frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Category;
+use App\Size;
+use App\Brand;
 class SearchController extends Controller
 {
     /**
@@ -17,11 +20,28 @@ class SearchController extends Controller
         $search = $request->search;
 
         $search = str_replace('', '%', $search);
-        $products = Product::where('name', 'like', '%'.$search.'%')
-                            ->orWhere('price','<=',$search)
-                            ->orderBy('id','desc')
-                            ->paginate(9);
-        return view('frontend.product.shop', compact('products','search'));
+       
+        $products = Product::with([
+           'sizes' => function($query){
+                return $query->orderBy('id','asc');},
+            'productSizes'=> function($query){
+                return $query->orderBy('id','asc');},
+            'category','brand',
+            'images' => function($query){
+                return $query->where('status',1)->orderBy('updated_at','desc');
+            }])
+        ->where('name', 'like', '%'.$search.'%')
+        ->orWhere('price','<=',$search)
+        ->orderBy('id','desc')
+        ->paginate(9);
+
+        $categories = Category::with('products')->get();
+       $sizes = Size::all();
+       $brands = Brand::with('products')->get();
+
+       //dd($products->isEmpty());
+
+        return view('frontend.product.shop', compact('products','search','categories','sizes','brands'));
     }
 
     /**

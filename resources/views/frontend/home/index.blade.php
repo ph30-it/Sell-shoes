@@ -11,6 +11,7 @@
 				  			<p style="font-size: 12px;">Hàng luôn được cật nhật thường xuyên</p>
 				  		</div>
 				  </div>
+			<form  id="formData" name="form">
 				   <div class="container" style="margin-top: 20px">
 				      @include('frontend.home.product-cart')
 				  		<div class="clear"></div>
@@ -18,12 +19,13 @@
 			  <div style="background: #000; color: #fff; padding: 10px 10px;">
 				  		<div class="container">
 				  			<h4>SẢN PHẨM HOT</h4>
-				  			<p style="font-size: 12px;">Hàng luôn được cật nhật thường xuyên</p>
+				  			<p style="font-size: 12px;">Cập nhật liên tục những sản phẩm được đặt hàng nhiều nhất</p>
 				  		</div>
 				  </div>
 				   <div class="container" style="margin-top: 20px">
 				     @include('frontend.home.product-hot-cart')
 				    </div>
+			</form>
 				  <div class="clear"></div>
 			  
 			  </div>
@@ -112,7 +114,12 @@
        	</div> 
 <script>
 	$(document).ready(function(){
+		$('.productSize').click(function(event) {
+			
+		});
+
 		$('.addCart').click(function(event) {
+				
 				event.preventDefault();	
 				var size = document.getElementsByName("size");
 				var product_id =  $(this).attr('data-id');	

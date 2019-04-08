@@ -38,10 +38,9 @@
 											<th style="text-align: center;" width="15%">Mô tả</th>
 											<th style="text-align: center;">Danh mục</th>
 											<th style="text-align: center;">Hãng</th>
-											<th style="text-align: center;">SP Đặc biệt</th>
 											<th style="text-align: center;">Trạng thái</th>
-											<th style="text-align: center;">Ngày tạo</th>
-											<th style="text-align: center;">Cập nhật</th>
+										<!-- 	<th style="text-align: center;">Ngày tạo</th>
+											<th style="text-align: center;">Cập nhật</th> -->
 											<th style="text-align: center;">Tùy chọn</th>
 										</tr>
 									</thead>	
@@ -93,20 +92,14 @@
 												</td>
 												<td>{{$product->category->name}}</td>
 												<td>{{$product->brand->name}}</td>
-												<td>@if($product->featured == 1)
-														<span class="btn-info">Đặc biệt</span>
-													@else
-														<span class="btn-default">Bình thường</span>
-													@endif
-												</td>
 												<td>@if($product->status == 1)
-														<span class="btn-default">Đã hiển thị</span>
+														<span class="btn-default" style="padding: 2px">Đã hiển thị</span>
 													@else
-														<span class="btn-success">Đang ẩn</span>
+														<span class="btn-success" style="padding: 2px">Đang ẩn</span>
 													@endif
 												</td>
-												<td>{{$product->created_at}}</td>
-												<td>{{$product->updated_at}}</td>
+												<!-- <td>{{$product->created_at}}</td>
+												<td>{{$product->updated_at}}</td> -->
 												<td style="line-height: 50px" style="text-align: center;">
 													<a href="{{route('show-edit-product',$product->id)}}" class="btn glyphicon glyphicon-pencil"></a><br>
 													<form action="{{route('delete-product',$product->id)}}" method="POST">

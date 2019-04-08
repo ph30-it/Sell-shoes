@@ -23,11 +23,14 @@
 											<label for="">Thêm kích thước:</label>
 											<select name="size_id" id="" style="padding: 3px">
 													@foreach($sizes as $size)
+														@if(in_array($size->id, $listSize))
+														@else
 															<option value="{{$size->id}}">{{$size->name}}</option>
+														@endif
 													@endforeach
 											</select>
 											<label for="">Số lượng:</label>
-											<input type="number" name="quantity" style="width: 6%" min="0" max="10000">
+											<input type="text" name="quantity" style="width: 6%">
 											<button type="submit" class="btn btn-success">Thêm</button>
 											@if($errors->has('quantity'))
 			    								<span style="color: red;font-size: 13px">{{$errors->first('quantity')}}</span>

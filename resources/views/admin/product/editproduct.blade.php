@@ -41,23 +41,29 @@
 									</div>									
 									<div class="form-group">
 										<label>Size Giày<span style="color: red;">*</span></label>
-										    
-					                    	@foreach($product->sizes as $item)
-					                    		<!-- <label class="container">{{$item->name}}
-												  <input type="checkbox" name="size" value="{{$item->name}}" checked>
-												  <span class="checkmark"></span>
-												</label> -->
+										@php
+											$listSize= $product->sizes->pluck('id')->toArray();
+										@endphp
+										    @foreach($sizes  as $item)
+								                @php
+													$checked= in_array($item->id, $listSize) ? 'checked' : '';
+												@endphp    	
+						                    		
 												<section  class="sky-form">
-						                   		 	<label class="checkbox"><input type="checkbox" name="size[]" value="{{$item->name}}" checked><i style="padding: 6px"></i>{{$item->name}}</label>
-						                   		 </section>
+						                   		 	<label class="checkbox"><input type="checkbox" name="size[]" value="{{$item->id}}" {{$checked}} ><i style="padding: 6px" ></i>{{$item->name}}</label>
+						                   		 </section>	
 					                   		 @endforeach
 											@if($errors->has('size'))
 			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('size')}}</span>
 			    							@endif
+
 									</div>
 									<div class="form-group">
 										<label>Khuyến mãi(%)</label>
 										<input type="text" name="sale" class="form-control" value="{{$product->sale}}">
+										@if($errors->has('sale'))
+			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('sale')}}</span>
+			    						@endif
 									</div>
 									
 									<div class="form-group" >
@@ -81,11 +87,6 @@
 					                    @if($errors->has('brand_id'))
 			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('brand_id')}}</span>
 			    						@endif
-									</div>
-									<div class="form-group" >
-										<label>Sản phẩm đặc biệt</label><br>
-										Có: <input type="radio" name="featured" value="1" @if($product->featured == 1) checked @endif >
-										Không: <input type="radio" name="featured" value="0" @if($product->featured == 0) checked @endif >
 									</div>
 									<div class="form-group" >
 										<label>Trạng thái</label>
@@ -115,8 +116,8 @@
 								<div class="form-group" >
 										<label>Ảnh mô tả sản phẩm</label>
 										<input id="img_description" type="file" name="img_description[]" multiple>
-					                    @if($errors->has('img_description'))
-			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('img_description')}} abc</span>
+					                    @if($errors->has('img_description.*'))
+			    							<span class="" style="color:red;font-size: 13px">{{$errors->first('img_description.*')}}</span>
 			    						@endif
 								</div>
 							</div>

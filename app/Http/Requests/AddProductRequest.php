@@ -25,8 +25,9 @@ class AddProductRequest extends FormRequest
     {
         return [
             'name'=> 'required|unique:products,name',
-            'price'=> 'required|numeric',
+            'price'=> 'required|numeric|max:50000000|min:1',
             'size'=> 'required',
+            'sale' => 'numeric|max:100|min:0',
             'category_id'=> 'required',
             'brand_id'=> 'required',
             'img'=>'required|image|mimes:jpeg,png|max:2048',
@@ -40,7 +41,12 @@ class AddProductRequest extends FormRequest
             'name.unique' => 'Tên sản phẩm đã bị trùng!',
             'price.required' => 'Bạn chưa điền giá sản phẩm!',
             'price.numeric' => 'Giá sản phẩm phải là số nguyên!',
+            'price.max' => 'Giá sản phẩm không được lớn hơn 50,000,000đ',
+            'price.min' => 'Giá sản phẩm phải lớn hơn 0',
             'size.required' => 'Bạn chưa chọn kích thước sản phẩm!',
+            'sale.numeric' => 'Khuyến mãi phải là số!',
+            'sale.max' => 'Khuyến mãi phải nhỏ hơn 100%',
+            'sale.min' => 'Khuyến mãi không thể âm!',
             'category_id.required' => 'Bạn chưa chọn danh mục sản phẩm!',
             'brand_id.required' => 'Bạn chưa chọn hãng sản phẩm!',
             'img.required'=>'Bạn chưa chọn ảnh sản phẩm!',

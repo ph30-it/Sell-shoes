@@ -5,6 +5,8 @@ namespace App\Http\Controllers\frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\OrderDetail;
+use DB;
 
 
 class HomeController extends Controller
@@ -23,20 +25,31 @@ class HomeController extends Controller
                 return $query->orderBy('id','asc');},
             'category','brand',
             'images' => function($query){
-                return $query->where('status',1)->orderBy('updated_at','desc');
-            }])->orderBy('id','desc')->paginate(8);
+                return $query->where('status',1)->orderBy('updated_at','desc');}])
+            ->where('status',1)
+            ->orderBy('id','desc')->paginate(8);
 
-        $products_hot = Product::with([
+        $productHot_ids = DB::table('orderdetails')
+                ->select('product_id',DB::raw('SUM(quantity) as total_quantity'))
+                ->groupBy('product_id')
+                ->orderBy('total_quantity','desc')
+                ->limit(4)->get();
+
+        $products_hot = [];
+       foreach ($productHot_ids as $item) {
+           $product = Product::with([
            'sizes' => function($query){
                 return $query->orderBy('id','asc');},
             'productSizes'=> function($query){
                 return $query->orderBy('id','asc');},
             'category','brand',
             'images' => function($query){
-                return $query->where('status',1)->orderBy('updated_at','desc');
-            }])->orderBy('id','desc')->paginate(4);
-    
-       // dd($products_hot);
+                return $query->where('status',1)->orderBy('updated_at','desc');}])
+             ->find($item->product_id);
+             array_push($products_hot, $product);
+       }
+
+       //dd($productHot_ids);
         return view('frontend.home.index',compact('products','products_hot'));
     }
 

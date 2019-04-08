@@ -143,8 +143,9 @@ class ProductController extends Controller
             }])->where('id',$id)->first();
         $categories = Category::all();
         $brands = Brand::all();
-       //dd($product);  
-        return view('admin.product.editproduct',compact('product','categories','brands'));
+       // dd($product->sizes);  
+        $sizes= Size::all();
+        return view('admin.product.editproduct',compact('product','categories','brands', 'sizes'));
     }
 
     /**
@@ -214,6 +215,7 @@ class ProductController extends Controller
             $product->images()->delete();
             $product->orders()->delete();
             $product->orderDetails()->delete();
+            $product->comments()->delete();
             $product->delete();
             DB::commit();
             return redirect()->back()->with('status', trans('message.prod_delete_susscess'));  
@@ -288,20 +290,12 @@ class ProductController extends Controller
                     </td>
                     <td><?php echo $product->category->name; ?></td>
                     <td><?php echo $product->brand->name; ?></td>
-                    <td><?php  if($product->featured == 1) { ?>
-                            <span class="btn-info">Đặc biệt</span>
-                        <?php } else { ?>
-                            <span class="btn-default">Bình thường</span>
-                        <?php } ?>
-                    </td>
                     <td><?php if($product->status == 1)  { ?>
-                            <span class="btn-default">Đã hiển thị</span>
+                            <span class="btn-default" style="padding: 2px">Đã hiển thị</span>
                         <?php }else{ ?>
-                            <span class="btn-success">Đang ẩn</span>
+                            <span class="btn-success" style="padding: 2px">Đang ẩn</span>
                         <?php } ?>
                     </td>
-                    <td><?php echo $product->created_at; ?></td>
-                    <td><?php echo $product->updated_at; ?></td>
                     <td style="line-height: 50px" style="text-align: center;">
                         <a href="<?php echo route('show-edit-product',$product->id); ?>" class="btn glyphicon glyphicon-pencil"></a><br>
                         <form action="<?php echo route('delete-product',$product->id); ?>" method="POST">
@@ -311,7 +305,7 @@ class ProductController extends Controller
                         </form>
                         
                         <a href="<?php echo route('view-product-size',$product->id); ?>" class="btn-success">Size</a><br>
-                        <a href="<?php echo route('view-product-image',$product->id); ?>" class="btn-primary">ảnh</a>
+                        
                     </td>
                 </tr>
             <?php

@@ -122,19 +122,20 @@
 				  <div class="row">
 				    <div class="column">
 				      @foreach($product->images as $image)
-				      	  <img class="demo cursor" src="{{asset($image->slug)}}" style="width:120%" onclick="currentSlide(1)" alt="The Woods">
+				      	  <img class="demo cursor" src="{{asset($image->slug)}}" style="width:120%" onclick="currentSlide(1)" alt="Hình mô tả 1">
 				      @endforeach
 				    </div>
+				    <?php $i = 2; ?>
 				    @if(!empty($imageDetails))
 					    @foreach($imageDetails as $image)
 					    <div class="column"> 
-					      <img class="demo cursor" src="{{asset($image['slug'])}}" style="width:120%" onclick="currentSlide(2)" alt="Cinque Terre">
+					      <img class="demo cursor" src="{{asset($image['slug'])}}" style="width:120%" onclick="currentSlide(2)" alt="Hình mô tả {{$i++}}">
 					    </div>
 					   	@endforeach
 					@endif
 				  </div>
-				  <a class="prev" onclick="plusSlides(-1)" style="background: #000">&#10094;</a>
-				  	<a class="next" onclick="plusSlides(1)" style="background: #000;">&#10095;</a>
+				  <a class="prev" onclick="plusSlides(-1)" style="background:#000;text-decoration: none;">&#10094;</a>
+				  	<a class="next" onclick="plusSlides(1)" style="background:#000;text-decoration: none;">&#10095;</a>
 			</div>
 			<div class="col-lg-5">
 					<h3 class="m_3" style="font-size: 25px">{{$product->name}}</h3>
@@ -208,9 +209,9 @@
 					 	</form>
 					</div>
 
-					<ul class="add-to-links">
+					<!-- <ul class="add-to-links">
 	    			   <li><img src="{{asset('images/wish.png')}}" alt=""/><a href="#">Add to wishlist</a></li>
-	    			</ul>
+	    			</ul> -->
 	    			<p class="m_desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
 	    			
 	                <div class="social_single">	
@@ -326,7 +327,7 @@
      	<div style="margin-bottom: 30px;" class="col-sm-7">
      					<div class="actionBox" style="margin-top: 20px">
 					        <ul class="commentList">
-								 @foreach($product->comments as $comment)
+								@foreach($product->comments as $comment)
 						           		<li>
 						           			<form action="{{route('delete-comment-user',$comment->id)}}" method="POST">
 						           				@csrf
@@ -396,8 +397,8 @@
 			//rating
 		  $('.rating').rating();
 		  $('.star-rating i').click(function(event) {
+
 		  	 var a =	$(this).attr('data-rating');
-		  	 alert(a);
 		  });
 		  //add cart
 		  $('.addCart').click(function(event) {
