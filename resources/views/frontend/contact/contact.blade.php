@@ -1,5 +1,5 @@
 @extends('frontend.master')
-@section('title', 'Register')
+@section('title', 'Contact')
 @section('content')
               <h5 class="title contact-title">
                 Contact Us

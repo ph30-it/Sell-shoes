@@ -36,8 +36,13 @@ return [
 	'order_delete_susscess' => 'Xóa đơn hàng thành công!',
 	'order_delete_fail' => 'Xóa đơn hàng thất bại!',
 
-
-
-
+	//confirm password change email
+	'confirm_password_fail' => 'Sai toàn khoản hoặc mật khẩu, hãy thử lại.',
+	//update email
+	'update_email_fail' => 'Cật nhật địa chỉ email không thành công.',
+	'update_email_success' => 'Cật nhật địa chỉ email thành công.',
+	//update phone
+	'update_phone_fail' => 'Cật nhật số điện thoại không thành công.',
+	'update_phone_success' => 'Cật nhật số điện thoại thành công.',
 ];
 ?>

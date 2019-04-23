@@ -4,8 +4,8 @@
 							<div class="form-group">
 								<p><span style="font-weight: bold;">Email:</span><a> {{Auth::user()->email}}</a></p>
 							</div>
-							<div class="rating"></div>
-							<i class="fa fa-star test" data-rating="1" style="color:#f5ba00" ></i>
+							<!-- <div class="rating"></div>
+							<i class="fa fa-star test" data-rating="1" style="color:#f5ba00" ></i> -->
 							<div class="form-group">
 								<label for="textara">Nội dung:</label><br>
 								<textarea name="content" cols="86" rows="2" placeholder="Nhập bình luận của bạn..." style="padding: 10px"></textarea>

@@ -98,6 +98,28 @@ Route::group(['namespace'=>'frontend'], function(){
 	Route::get('login','LoginController@index')->name('login')->middleware('CheckLogedIn');
 	Route::post('login','LoginController@postLogin')->name('postLogin');
 	Route::get('logout','LoginController@logout')->name('logout');
+	//proflie user
+	Route::group(['prefix' => 'tai-khoan-cua-toi','middleware' => 'CheckProfile'], function(){
+			Route::get('/','ProfileUserController@index')->name('profile-user');
+			//change email
+				Route::get('{id}/xac-thuc-mat-khau/email','ProfileUserController@emailConfirmPassword')->name('email-confirm-password-user');
+				//confirm password
+				Route::post('{id}/xac-thuc-mat-khau/email','ProfileUserController@postEmailConfirmPassword')->name('post-email-confirm-password-user');
+				//view update email
+				Route::get('{id}/update-email','ProfileUserController@viewUpdateEmail')->name('view-update-email-user');
+				//update email
+				Route::put('{id}/update-email','ProfileUserController@updateEmail')->name('update-email-user');
+			//change phone
+				Route::get('{id}/xac-thuc-mat-khau/so-dien-thoai','ProfileUserController@phoneConfirmPassword')->name('phone-confirm-password-user');
+				//confirm password
+				Route::post('{id}/xac-thuc-mat-khau/phone','ProfileUserController@postPhoneConfirmPassword')->name('post-phone-confirm-password-user');
+				//view update phone
+				Route::get('{id}/update-phone','ProfileUserController@viewUpdatePhone')->name('view-update-phone-user');
+				//update phone
+				Route::put('{id}/update-phone','ProfileUserController@updatePhone')->name('update-phone-user');
+			//update profile
+			Route::put('{id}/cat-nhat-ho-so','ProfileUserController@update')->name('update-profile-user');
+		});
 
 	Route::get('san-pham','ProductController@index')->name('list-all-product');
 	//list product by category
