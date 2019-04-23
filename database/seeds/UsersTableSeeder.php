@@ -22,11 +22,13 @@ class UsersTableSeeder extends Seeder
             'name' => 'Lê Đức Mạnh',
             'email' => 'leducmanh101198@gmail.com',
             'password' => bcrypt('123456'),
+            'avatar' => '/images/avatar/user-default.jpg',
             'role_id' => '2',
         ],[
             'name' => 'Trần Văn Viết',
             'email' => 'viet123@gmail.com',
             'password' => bcrypt('123456'),
+            'avatar' => '/images/avatar/user-default.jpg',
             'role_id' => '2',
         ]
     ]);

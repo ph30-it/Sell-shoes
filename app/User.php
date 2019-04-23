@@ -13,7 +13,7 @@ class User extends \Eloquent implements Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'name', 'email', 'password','role_id',
+        'name', 'email', 'password','sex','birthday','phone','address','avatar' ,'role_id',
     ];
 
     public function role()

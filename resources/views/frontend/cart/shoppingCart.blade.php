@@ -53,7 +53,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td style="padding-top: 30px"><a href="{{route('show-checkout-user')}}"  style="background:#3CB371;color:#fff;padding:10px 35px;font-weight:bold;text-decoration: none;">TIẾN HÀNH THÀNH TOÁN</a></td>
+						<td style="padding-top: 30px"><a href="{{route('show-checkout-user')}}"  style="background:#3CB371;color:#fff;padding:10px 30px;font-weight:bold;text-decoration: none;">TIẾN HÀNH THÀNH TOÁN</a></td>
 					</tr>
 				</thead>	
 			</table>

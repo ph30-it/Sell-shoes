@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use App\Category;
+use App\Brand;
 use View;
 
 
@@ -27,7 +28,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $brands = Brand::all();
         $categories = Category::all();
         View::share('categories',$categories);
+        View::share('brands',$brands);
     }
 }
