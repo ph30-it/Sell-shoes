@@ -14,6 +14,7 @@
 			<form  id="formData" name="form">
 				   <div class="container" style="margin-top: 20px">
 				      @include('frontend.home.product-cart')
+				      <div class="clear" style="margin: auto;margin-left: 45%;">{{$products->links()}}</div>
 				  		<div class="clear"></div>
 			  		</div>
 			  <div style="background: #000; color: #fff; padding: 10px 10px;">

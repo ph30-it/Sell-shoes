@@ -28,7 +28,6 @@ class HomeController extends Controller
                 return $query->where('status',1)->orderBy('updated_at','desc');}])
             ->where('status',1)
             ->orderBy('id','desc')->paginate(8);
-
         $productHot_ids = DB::table('orderdetails')
                 ->select('product_id',DB::raw('SUM(quantity) as total_quantity'))
                 ->groupBy('product_id')

@@ -88,6 +88,92 @@
 .demo:hover {
   opacity: 1;
 }
+/*
+style comment*/
+.bold{
+	font-weight:700;
+}
+.padding-bottom-7{
+	padding-bottom:7px;
+}
+
+.review-block{
+	background-color:#FAFAFA;
+	border:1px solid #EFEFEF;
+	padding:15px;
+	border-radius:3px;
+	margin-bottom:15px;
+}
+.review-block-name{
+	font-size:12px;
+	margin:10px 0;
+}
+.review-block-date{
+	font-size:12px;
+}
+.review-block-rate{
+	font-size:13px;
+	margin-bottom:15px;
+}
+.review-block-title{
+	font-size:15px;
+	font-weight:700;
+	margin-bottom:10px;
+}
+.review-block-description{
+	font-size:13px;
+}
+
+/*style ratting*/
+/*box comment + ratting*/
+    .animated {
+    -webkit-transition: height 0.2s;
+    -moz-transition: height 0.2s;
+    transition: height 0.2s;
+	}
+
+	.stars
+	{
+	    margin: 20px 0;
+	    font-size: 30px;
+	    color: dodgerblue;
+	}
+	 .half {
+    position:relative;
+
+    >after {
+    content:'';
+    position:absolute;
+    z-index:1;
+    background:white;
+    width: 50%;
+    height: 100%;
+    left: 47%;
+    }
+
+.haflstar {
+  font-size: 40px;
+  color: #e67e22;
+  &.half {
+    position: relative;
+    &:before {
+      position: relative;
+      z-index: 9;
+      width: 47%;
+      display: block;
+      overflow: hidden;
+    }
+    &:after {
+      content: '\e006';
+      position: absolute;
+      z-index: 8;
+      color: #bdc3c7;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
 </style>
        <div class="single">
          <div class="wrap">
@@ -114,8 +200,8 @@
 				  @endif		 
 				  <!-- Next and previous buttons -->
 				  <!-- Image text -->
-				  <div class="caption-container">
-				    <p id="caption"></p>
+				  <div class="caption-container" style="background: rgba(51, 51, 51, 0.4);">
+				    <p id="caption" style="color:#fff;"></p>
 				  </div>
 
 				  <!-- Thumbnail images -->
@@ -134,8 +220,8 @@
 					   	@endforeach
 					@endif
 				  </div>
-				  <a class="prev" onclick="plusSlides(-1)" style="background:#000;text-decoration: none;">&#10094;</a>
-				  	<a class="next" onclick="plusSlides(1)" style="background:#000;text-decoration: none;">&#10095;</a>
+				  <a class="prev" onclick="plusSlides(-1)" style="background-color: rgba(51, 51, 51, 0.4);text-decoration: none;">&#10094;</a>
+				  	<a class="next" onclick="plusSlides(1)" style="background-color: rgba(51, 51, 51, 0.4);text-decoration: none;">&#10095;</a>
 			</div>
 			<div class="col-lg-5">
 					<h3 class="m_3" style="font-size: 25px">{{$product->name}}</h3>
@@ -200,7 +286,7 @@
 								<div style="margin-top: 20px">
 									@if($quantity > 0)
 									<button class="btn btnaddcart btn-success addCart" style="margin-right: 10px;padding: 10px; border-radius: 0" data-id="{{$product->id}}"><span class="glyphicon glyphicon-shopping-cart" style="margin-right: 10px"></span>THÊM VÀO GIỎ</button>
-									<button type="submit"  class="btn btnaddcart btn-info" style="width: 150px;padding: 10px; border-radius: 0"><span class="glyphicon glyphicon-ok" style="margin-right: 10px"></span>MUA NGAY</button>
+									<button type="submit"  class="btn btnaddcart btn-info buyNow" style="width: 150px;padding: 10px; border-radius: 0" data-id="{{$product->id}}"><span class="glyphicon glyphicon-ok" style="margin-right: 10px"></span>MUA NGAY</button>
 									@else
 										<button class="btn btnaddcart btn-success" style="margin-right: 10px;padding: 10px; border-radius: 0" disabled="disabled"><span class="glyphicon glyphicon-shopping-cart" style="margin-right: 10px"></span>TẠM HẾT HÀNG</button>
 									@endif
@@ -257,60 +343,34 @@
 					</div>	
 			<div class="clear"></div>
      
-     	<h3 class="m_3">Sản phẩm liên quan</h3>
-         <ul id="flexiselDemo3">
-			@foreach($products_lienquan as $item)
-				<?php $img = App\Image::where('product_id',$item->id)->where('status',1)->first();  
-				?>
-				<li><img src="{{asset($img->slug)}}" /><div class="grid-flex"><a href="{{asset('detail/'.$item->id.'/'.$item->slug.'.html')}}">{{$product->brand->name}}</a><p>{{number_format($item->price - $item->price*$item->sale/100)}}₫</p></div></li>
-			@endforeach
-		 </ul>
-	    <script type="text/javascript">
-		 $(window).load(function() {
-			$("#flexiselDemo1").flexisel();
-			$("#flexiselDemo2").flexisel({
-				enableResponsiveBreakpoints: true,
-		    	responsiveBreakpoints: { 
-		    		portrait: { 
-		    			changePoint:480,
-		    			visibleItems: 1
-		    		}, 
-		    		landscape: { 
-		    			changePoint:640,
-		    			visibleItems: 2
-		    		},
-		    		tablet: { 
-		    			changePoint:768,
-		    			visibleItems: 3
-		    		}
-		    	}
-		    });
-		
-			$("#flexiselDemo3").flexisel({
-				visibleItems: 5,
-				animationSpeed: 1000,
-				autoPlay: true,
-				autoPlaySpeed: 3000,    		
-				pauseOnHover: true,
-				enableResponsiveBreakpoints: true,
-		    	responsiveBreakpoints: { 
-		    		portrait: { 
-		    			changePoint:480,
-		    			visibleItems: 1
-		    		}, 
-		    		landscape: { 
-		    			changePoint:640,
-		    			visibleItems: 2
-		    		},
-		    		tablet: { 
-		    			changePoint:768,
-		    			visibleItems: 3
-		    		}
-		    	}
-		    });
-		    
-		});
-	</script>
+     	<h3 class="m_3" style="font-size: 23px;margin: 25px 0;">Sản phẩm liên quan</h3>
+ 		<div class="row">
+		    <div class="col-xs-12 col-sm-12 col-md-12">
+		      <div class="carousel carousel-showmanymoveone slide" id="itemslider">
+		        <div class="carousel-inner">
+		 			@foreach($products_lienquan as $item)
+					<?php $img = App\Image::where('product_id',$item->id)->where('status',1)->first();  
+					?>
+			          <div class="item active">
+			            <div class="col-xs-12 col-sm-6 col-md-2">
+			              <a href="{{asset('detail/'.$item->id.'/'.$item->slug.'.html')}}"><img src="{{asset($img->slug)}}" class="img-responsive center-block"></a>
+			              	@if($item->sale > 0)
+								<span style="border-radius: 50px;padding: 7px 4px;background:#ff6517;color:#fff;font-size: 12px;position: absolute; top: 0px;right: 0;">{{$item->sale}}%</span>
+							@endif
+			              <h4 class="text-center"><a href="{{asset('detail/'.$item->id.'/'.$item->slug.'.html')}}" style="color: #000">{{$item->name}}</a></h4>
+			              <h5 class="text-center">{{number_format($product->price - ($product->price*$product->sale/100))}} ₫</h5>
+			            </div>
+			          </div>
+		 			@endforeach
+		        </div>
+		<!-- left,right control -->
+		        <div id="slider-control">
+		        <a class="left carousel-control" href="#itemslider" data-slide="prev"><img src="{{asset('images/arrow_left.png')}}" alt="Left" class="img-responsive"></a>
+		        <a class="right carousel-control" href="#itemslider" data-slide="next"><img src="{{asset('images/arrow_right.png')}}" alt="Right" class="img-responsive"></a>
+		      </div>
+		      </div>
+		    </div>
+		  </div>
 	<script type="text/javascript" src="{{asset('js/jquery.flexisel.js')}}"></script>
 	 <div class="toogle">
      	<h3 class="m_3">Mô tả sản phẩm</h3>
@@ -323,44 +383,34 @@
 		<p class="m_text">Instagram: lleducmanh</p>
      </div>					
 	 <div class="toogle">
-     	<h3 class="m_3">Bình luận sản phẩm</h3>
-     	<div style="margin-bottom: 30px;" class="col-sm-7">
-     					<div class="actionBox" style="margin-top: 20px">
-					        <ul class="commentList">
-								@foreach($product->comments as $comment)
-						           		<li>
-						           			<form action="{{route('delete-comment-user',$comment->id)}}" method="POST">
-						           				@csrf
-												@method('DELETE')
-								                <div class="commenterImage">
-								                  <img src="http://placekitten.com/50/50" />
-								                </div>
-								                <div class="commentText">
-								                	<p>{{$comment->name}}</p>
-								                    <p class="" style="font-size: 13px">{{$comment->content}}</p> <span class="date sub-text">{{ date('d/m/Y H:i:s', strtotime($comment->date)) }}</span>
-													@if(Auth::check() && $comment->user_id == Auth::user()->id)
-														
-															
-															<button type="submit" style="margin-left:10px;font-size: 13px;background: #fff;border: none;color: blue" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</button>
-														
-								                    @endif
-								                </div>
-										    </form>            
-						            	</li>
-					           @endforeach
-					        </ul>
-					    </div>
-						@if(Auth::check())
-							@include('frontend.comment.user-comment')
-						@else
-							@include('frontend.comment.comment')
-						@endif
-		</div>
-    </div>
-    </div>
+	 	@include('frontend.comment.comment-rating')
+      </div>
     <div class="clear"></div>
 	 </div>
      </div>
+     <script type="text/javascript">
+		  $(document).ready(function(){
+		 
+		$('#itemslider').carousel({ interval: 3000 });
+		 
+		$('.carousel-showmanymoveone .item').each(function(){
+		var itemToClone = $(this);
+		 
+		for (var i=1;i<6;i++) {
+		itemToClone = itemToClone.next();
+		 
+		if (!itemToClone.length) {
+		itemToClone = $(this).siblings(':first');
+		}
+		 
+		itemToClone.children(':first-child').clone()
+		.addClass("cloneditem-"+(i))
+		.appendTo($(this));
+		}
+		});
+		});
+ 
+  </script>
      <script>
      	var slideIndex = 1;
 		showSlides(slideIndex);
@@ -394,12 +444,6 @@
 		}
 
 		$(document).ready(function(){
-			//rating
-		  $('.rating').rating();
-		  $('.star-rating i').click(function(event) {
-
-		  	 var a =	$(this).attr('data-rating');
-		  });
 		  //add cart
 		  $('.addCart').click(function(event) {
 				event.preventDefault();	
@@ -435,9 +479,41 @@
 						})
 					}
 		});
+		  //buy now
+		  $('.buyNow').click(function(event) {
+				event.preventDefault();	
+				var size = document.getElementsByName("size");
+				var product_id =  $(this).attr('data-id');	
+				var length = size.length;
+				for (var i = 0; i < length; i++){
+                    if (size[i].checked === true){
+                        //alert(size[i].value);
+                        var size_id = size[i].value;
+                       	break;
+                    }
+                }
+                //alert(size_id);
+                if (typeof  size_id == "undefined") {
+					alert('Bạn chưa chọn kích thước!');
+				}else{
+					$.ajax({
+							url: "{{route('buy-now-user')}}",
+							type: 'GET',
+							data: {						
+								product_id:product_id,
+								size_id:size_id,
+											},
+							success: function(data) {
+								location.assign("{{route('show-checkout-user')}}");
+							},
+							error: function($error) {
+								alert('Lỗi hệ thống!');
+							}
+						})
+					}
+		});
 	});
 
-
-
-     </script>
+</script>	
+<script src="{{asset('js/comment-rating.js')}}" ></script>
 @endsection    

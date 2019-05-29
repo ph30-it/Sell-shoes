@@ -117,13 +117,20 @@ Route::group(['namespace'=>'frontend'], function(){
 				Route::get('{id}/update-phone','ProfileUserController@viewUpdatePhone')->name('view-update-phone-user');
 				//update phone
 				Route::put('{id}/update-phone','ProfileUserController@updatePhone')->name('update-phone-user');
+			//change password
+				//view update password
+				Route::get('{id}/update-password','ProfileUserController@viewUpdatePassword')->name('view-update-password-user');
+				//update password
+				Route::put('{id}/update-password','ProfileUserController@updatePassword')->name('update-password-user');
 			//update profile
-			Route::put('{id}/cat-nhat-ho-so','ProfileUserController@update')->name('update-profile-user');
+				Route::put('{id}/cat-nhat-ho-so','ProfileUserController@update')->name('update-profile-user');
 		});
 
 	Route::get('san-pham','ProductController@index')->name('list-all-product');
 	//list product by category
 	Route::get('san-pham/{id}/{category}','ProductController@productByCategory')->name('list-product-by-category');
+	//list product by brand
+	Route::get('san-pham/{id}/hang/{brand}','ProductController@productByBrand')->name('list-product-by-brand');
 	//filter product
 	Route::get('san-pham/loc-san-pham','ProductController@filterProduct')->name('filter-product-user');
 
@@ -134,13 +141,15 @@ Route::group(['namespace'=>'frontend'], function(){
 	Route::post('dang-ki','RegisterController@store')->name('register-user');
 	//contact(lien-he)
 	Route::get('lien-he','ContactController@index')->name('contact-user');
-	Route::post('lien-he','ContactController@store')->name('contact-user');
-	//Tìm kiếm(shearch)
+	Route::post('lien-he','ContactController@store')->name('mail-contact-user');
+	Route::get('lien-he-done','ContactController@contactDone')->name('contact-done-user');
+	//Tìm kiếm(search)
 	Route::get('tim-kiem','SearchController@index')->name('search-user');
+	//live search ajax
+	Route::get('liveSearch','SearchController@liveSearch')->name('live-search-user');
 	//chi tiet san pham
 	Route::get('detail/{id}/{slug}.html', 'DetailProductController@index')->name('show-detail-product');
 	//comment
-	Route::post('detail/{id}/comment', 'CommentController@store')->name('comment-product');
 	Route::post('detail/{id}/comment-user', 'CommentController@storeUser')->name('user-comment-product');
 	Route::delete('detail/{id}/delete', 'CommentController@destroy')->name('delete-comment-user');
 	//shopping cart
@@ -153,6 +162,8 @@ Route::group(['namespace'=>'frontend'], function(){
 			Route::get('delete','ShoppingCartController@destroyAjax')->name('deleteAjax-cart-user');
 			Route::get('{update-quantity','ShoppingCartController@update')->name('update-quantity-cart');
 		});
+	//buy now
+	Route::get('buy-now','DetailProductController@buyNow')->name('buy-now-user');
 	//checkout
 	Route::get('checkout','CheckoutController@index')->name('show-checkout-user');
 	Route::post('checkout','CheckoutController@store')->name('checkout-user');

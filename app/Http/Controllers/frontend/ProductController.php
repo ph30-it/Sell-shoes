@@ -51,14 +51,39 @@ class ProductController extends Controller
             'images' => function($query){
                 return $query->where('status',1)->orderBy('updated_at','desc');}])
             ->where('category_id',$id)
+            ->where('status',1)
             ->orderBy('id','desc')
             ->paginate(9);
        $categories = Category::with('products')->get();
        $sizes = Size::all();
        $brands = Brand::with('products')->get();
+       $categoryName = Category::select('name')->where('id',$id)->first();
 
-        return view('frontend.product.shop',compact('products','categories','sizes','brands'));
+        return view('frontend.product.shop',compact('products','categories','sizes','brands','categoryName'));
     }
+
+    public function productByBrand($id)
+    {
+        $products = Product::with([
+           'sizes' => function($query){
+                return $query->orderBy('id','asc');},
+            'productSizes'=> function($query){
+                return $query->orderBy('id','asc');},
+            'category','brand',
+            'images' => function($query){
+                return $query->where('status',1)->orderBy('updated_at','desc');}])
+            ->where('brand_id',$id)
+            ->where('status',1)
+            ->orderBy('id','desc')
+            ->paginate(9);
+       $categories = Category::with('products')->get();
+       $sizes = Size::all();
+       $brands = Brand::with('products')->get();
+       $brandName = Brand::select('name')->where('id',$id)->first();
+
+        return view('frontend.product.shop',compact('products','categories','sizes','brands','brandName'));
+    }
+
     public function filterProduct(Request $request)
     {
         if ($request->ajax()) {
@@ -79,6 +104,7 @@ class ProductController extends Controller
                     ->where('price','<=',$price_max)
                     ->orderBy('id','desc')
                     ->paginate(9);
+                    $products->appends(['sort' => 'price']);
             }elseif($request->sort_by){
                 $products = Product::with([
                    'sizes' => function($query){
@@ -90,6 +116,7 @@ class ProductController extends Controller
                         return $query->where('status',1)->orderBy('updated_at','desc');}])
                     ->orderBy('price', $request->sort_by)
                     ->paginate(9);
+                    $products->appends(['sort' => 'id_'.$request->sort_by]);
             }else{
                 $category_id = $request->category_id;
                 $brand_id = $request->brand_id;
@@ -148,19 +175,20 @@ class ProductController extends Controller
                     ->paginate(9);
                 }
             }
-            
         }
             //response()->json($products);
-        
             if($products->isEmpty()) { ?>
                         <p style="margin-left: 20px">Không có sản phẩm nào!</p>
                     <?php }else{ ?>
                     <div class="row" style="margin-top: 20px"> <?php
                         foreach($products as $product){ ?>
-                        <div class="col-sm-4">
+                        <div class="col-sm-4" style="margin-bottom: 30px;">
                         <div style="border: 1px solid #ccc; padding: 2%; padding-left: 0; padding-bottom: 0;margin-bottom: 30px;height: 100%">
-                            <div class="view view-fifth">
+                            <div class="view view-fifth" style="position: relative;">
                                   <div class="top_box">
+                                    <?php if($product->sale > 0){ ?>
+                                    <span style="border-radius: 50px;padding: 7px 4px;background:#ff6517;color:#fff;font-size: 12px;position: absolute; top: 0px;right: 0;"><?php echo $product->sale; ?> %</span>
+                                    <?php } ?>
                                     <h3 class="m_1">
                                         <a href=" <?php echo asset('detail/'.$product->id.'/'.$product->slug.'.html'); ?>" style="color: #000;text-decoration: none;"><?php echo $product->name; ?></a>
                                     </h3>

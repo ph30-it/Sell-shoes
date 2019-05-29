@@ -44,6 +44,49 @@ class SearchController extends Controller
         return view('frontend.product.shop', compact('products','search','categories','sizes','brands'));
     }
 
+    public function liveSearch(Request $request)
+    {
+        if ($request->ajax()) {
+            $search = $request->search;
+            $search = str_replace('', '%', $search);
+
+            $products = Product::with([
+            'images' => function($query){
+                return $query->where('status',1)->orderBy('updated_at','desc');
+            }])
+        ->where('name', 'like', '%'.$search.'%')
+        ->orWhere('price','<=',$search)
+        ->orderBy('id','desc')
+        ->limit(5)
+        ->get();
+        if ($products->isNotEmpty()) {
+            ?>
+                <li style="font-size: 13px;text-align: center;">Top kết quả tìm được với từ khóa "<?php echo $request->search; ?>"</li>
+            <?php
+            foreach ($products as $product) {
+                ?>
+                <li  style="border-bottom: 1px dotted #ccc;padding-bottom: 10px;">
+                        <div style="float: left;width: 20%;">
+                            <?php foreach ($product->images as $item) {
+                                $image['slug'] = $item->slug;
+                            } ?>
+                            <a href="<?php echo asset('detail/'.$product->id.'/'.$product->slug.'.html'); ?>"><img src="<?php echo asset($image['slug']); ?>" alt="a" ></a>
+                        </div>
+                        <div>
+                            <br><a href="<?php echo asset('detail/'.$product->id.'/'.$product->slug.'.html'); ?>" style="color: #000;"><?php echo $product->name; ?></a>
+                            <br><span style="color: #FFAF02;font-size: 13px;margin-right: 10px;"><?php echo number_format($product->price); ?> ₫</span>
+                            <?php if ($product->sale > 0): ?>
+                                <span><del style="color: #555;"><?php echo number_format($product->price - ($product->price*$product->sale/100)); ?> ₫</del></span>
+                            <?php endif ?>
+                        </div>
+                        <div class="clearfix"></div>
+                </li>
+                <?php
+            }
+        }
+            
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *

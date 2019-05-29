@@ -1,5 +1,5 @@
 @extends('frontend.master')
-@section('title', 'Xác thực mật khẩu')
+@section('title', 'Đổi mật khẩu người dùng')
 @section('content')
 <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
@@ -113,26 +113,28 @@
 		<h3>Hồ Sơ Của Tôi</h3>
 		<p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
 		<div class="container emp-profile">
-	            <form method="post" action="{{route('post-email-confirm-password-user', Auth::user()->id)}}" enctype="multipart/form-data">
+	            <form method="post" action="{{route('update-password-user', Auth::user()->id)}}" enctype="multipart/form-data">
 	            	@csrf
+	            	@method('PUT')
 	                <div class="row">
 	                    <div class="col-md-4">
 	                        <div class="profile-img">
 	                            <img id="avatar" src="{{asset(Auth::user()->avatar)}}" class="avatar img-circle img-thumbnail" alt=""/>
+	                          
 	                        </div>
 	                    </div>
 	                    <div class="col-md-6">
 	                        <div class="profile-head">
 	                                    <h3>
-	                                        Đổi Hộp Thư
+	                                        Đổi Mật Khẩu
 	                                    </h3>
 	                                    <h5 style="color: blue;">
-	                                        Để cập nhật email mới, vui lòng xác nhận bằng cách nhập mật khẩu
+	                                        Vui lòng nhập đủ thông tin để đổi mật khẩu của bạn.
 	                                    </h5>
 	                                    
 	                            <ul class="nav nav-tabs" id="myTab" role="tablist">
 	                                <li class="nav-item">
-	                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Xác thực mật khẩu</a>
+	                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Nhập mật khẩu mới</a>
 	                                </li>
 	                            
 	                            </ul>
@@ -157,29 +159,46 @@
 	                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 								 			<div class="row">
 	                                            <div class="col-md-4">
-	                                                <label>Địa chỉ hộp thư Email</label>
+	                                                <label>Mật khẩu cũ</label>
 	                                            </div>
 	                                            <div class="col-md-8">
-	                                                <span>
-	                                                	{{ substr(Auth::user()->email, 0,2).'*************@gmail.com'}}
-	                                                </span>
+	                                                <input name="password" type="password" value="" style="padding: 5px;" autofocus
+	                                                style="width: 80%;">
+	                                                @if($errors->has('password'))
+						    							<br><span class="" style="color:red;font-size: 13px">{{$errors->first('password')}}</span>
+						    						@endif
+						    						@if(session('error_pass'))
+														<br><span class="" style="color:red;font-size: 13px">{{ session('error_pass') }}</span>
+												 	@endif
 	                                            </div>
-	                                            	
+	                                        </div>
+	                                        <div class="row" style="margin-top: 15px;">
+	                                            <div class="col-md-4">
+	                                                <label>Mật khẩu mới</label>
+	                                            </div>
+	                                            <div class="col-md-8">
+	                                                <input name="password_new" type="password" value="" style="padding: 5px;" autofocus
+	                                                style="width: 80%;">
+	                                                @if($errors->has('password_new'))
+						    							<br><span class="" style="color:red;font-size: 13px">{{$errors->first('password_new')}}</span>
+						    						@endif	
+	                                            </div>
 	                                        </div>
 	                                        <div class="row" style="margin-bottom: 15px;margin-top: 15px;">
 	                                            <div class="col-md-4">
-	                                                <label>Mật khẩu</label>
+	                                                <label>Nhật lại khẩu mới</label>
 	                                            </div>
 	                                            <div class="col-md-8">
-	                                                <input name="password" type="password" value="" style="padding: 5px;" autofocus>
-	                                                @if($errors->has('password'))
-						    							<br><span class="" style="color:red;font-size: 13px">{{$errors->first('password')}}</span>
+	                                                <input name="password_new_confirm" type="password" value="" style="padding: 5px;" autofocus
+	                                                style="width: 80%;">
+	                                                @if($errors->has('password_new_confirm'))
+						    							<br><span class="" style="color:red;font-size: 13px">{{$errors->first('password_new_confirm')}}</span>
 						    						@endif			
 												 	@if(session('fail'))
 														<br><span class="" style="color:red;font-size: 13px">{{ session('fail') }}</span>
 												 	@endif
 	                                                <div style="margin-top: 30px;" >
-	                                                	<button type="submit" style=" background-color: #ee4d2d; color: #fff; border: none; padding: 10px 17px; border-radius: 3px;margin-right: 5px;">Xác nhận</button>
+	                                                	<button type="submit" style=" background-color: #ee4d2d; color: #fff; border: none; padding: 10px 17px; border-radius: 3px;margin-right: 5px;">Đổi mật khẩu</button>
 	                                                	<a href="{{route('profile-user')}}" style=" background-color: #eee; color: #000; border: none; padding: 10px 20px; border-radius: 3px;text-decoration: none;">Quay lại</a>
 	                                               </div>
 	                                            </div>

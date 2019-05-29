@@ -1,5 +1,5 @@
 @extends('frontend.master')
-@section('title', 'Xác thực mật khẩu')
+@section('title', 'Đổi số điện thoại ')
 @section('content')
 <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
@@ -149,7 +149,7 @@
 	                        <div class="profile-work">
 	                            <p style="font-size: 15px">Tài khoản của tôi</p>
 	                            <a href="{{route('profile-user')}}">Hồ sơ</a><br/>
-	                            <a href="">Đổi mật khẩu</a><br/>
+	                            <a href="{{route('view-update-password-user', Auth::user()->id)}}">Đổi mật khẩu</a><br/>
 	                            <a href="">Đơn mua</a><br/>
 	                          	<a href="">Bình luận (3)</a><br/>
 	                        </div>

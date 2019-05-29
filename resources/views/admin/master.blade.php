@@ -33,8 +33,11 @@
 							
 		</div><!-- /.container-fluid -->
 	</nav>
-		
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<div style="margin-left: 25%;margin-top: 10px;">
+			<img src="{{asset(Auth::user()->avatar)}}" class="img-circle" width="120px">
+			<div class="review-block-name"><a href="#">Admin: {{Auth::user()->name}}</a></div>
+		</div>
 		<ul class="nav menu">
 			<li role="presentation" class="divider"></li>
 			<li class="active"><a href="{{ route('home-admin')}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Trang chủ</a></li>

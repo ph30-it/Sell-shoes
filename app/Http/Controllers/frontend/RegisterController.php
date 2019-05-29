@@ -39,6 +39,7 @@ class RegisterController extends Controller
     {
         $data= $request->only('name','email','password');
         $data['password'] = Hash::make($request->password);
+        $data['avatar'] = '/images/avatar/user-default.jpg';
         $user = User::create($data);
         if ($user) {
             return  redirect()->route('login')->with('status', 'Đăng kí thành công. Hãy đăng nhập để tiếp tục');

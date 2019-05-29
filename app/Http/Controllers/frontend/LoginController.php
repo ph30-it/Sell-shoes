@@ -33,7 +33,7 @@ class LoginController extends Controller
         if(Auth::attempt($user_data,$remember)){
             return redirect()->route('home-user');
         }else{
-            return redirect()->back()->with('status', trans('message.login_fail'));
+            return redirect()->back()->with('login_fail', trans('message.login_fail'));
         }
     }
 
