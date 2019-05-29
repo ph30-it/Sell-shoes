@@ -44,5 +44,8 @@ return [
 	//update phone
 	'update_phone_fail' => 'Cật nhật số điện thoại không thành công.',
 	'update_phone_success' => 'Cật nhật số điện thoại thành công.',
+	//update password
+	'update_password_fail' => 'Cật nhật mật khẩu không thành công.',
+	'update_password_success' => 'Cật nhật mật khẩu thành công.',
 ];
 ?>

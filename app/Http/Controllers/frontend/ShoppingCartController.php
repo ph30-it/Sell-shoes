@@ -93,7 +93,7 @@ class ShoppingCartController extends Controller
                 </div>
                 
                 <div class="row" style="margin-top: 10px">
-                    <a href="<?php echo route('shoppingCart-user'); ?>" style="color: #fff;background: #000;text-decoration: none;padding: 7px 20px;margin-right: 10px;border-radius: 0">XEM GIỎ HÀNG</a>
+                    <a href="<?php echo route('shoppingCart-user'); ?>" style="color: #fff;background: #000;text-decoration: none;padding: 7px 20px;margin-right: 10px;margin-left: 30px;border-radius: 0">XEM GIỎ HÀNG</a>
                     <?php if(Cart::getTotal() > 0) { ?>
                     <a href="<?php echo route('show-checkout-user'); ?>" style="color: #fff;background: #f72b3f;text-decoration: none;padding: 7px 20px;border-radius: 0">THANH TOÁN</a>
                     <?php }else{ ?>

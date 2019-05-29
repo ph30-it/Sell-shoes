@@ -3,7 +3,7 @@
 							<div>
 								<table>
 									<tr>
-										<td><img src="{{asset('images/user.png')}}" alt="" style="width:50px;margin-bottom: 20px;margin-right: 20px;" ></td>
+										<td><img src="{{asset(Auth::user()->avatar)}}" class="img-circle" alt="" style="width:50px;margin-bottom: 20px;margin-right: 20px;" ></td>
 										<td>
 											<span>{{Auth::user()->name}} ({{Auth::user()->email}}) </span>
 											<br><a href="{{route('logout')}}">Đăng Xuất</a>

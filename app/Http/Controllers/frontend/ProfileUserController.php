@@ -10,6 +10,8 @@ use App\Http\Requests\ConfirmPasswordChangeEmailRequest;
 use App\Http\Requests\UpdateEmailRequest;
 use App\Http\Requests\UpdatePhoneRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UpdatePasswordRequest;
+use Hash;
 
 class ProfileUserController extends Controller
 {
@@ -108,6 +110,30 @@ class ProfileUserController extends Controller
         }
     }
 
+    public function viewUpdatePassword()
+    {
+        return view('frontend.profile.update-password');
+    }
+
+    public function updatePassword(UpdatePasswordRequest $request,$id)
+    {
+       $user_data = array(
+          'email'  => Auth::user()->email,
+          'password' => $request->password,
+         );
+       
+          if(Auth::attempt($user_data)){
+             $data['password'] = Hash::make($request->password_new);
+             $user = User::where('id',$id)->update($data);
+             if ($user) {
+                 return redirect()->route('profile-user')->with('success', trans('message.update_password_success'));
+             }else{
+                 return back()->with('fail', trans('message.update_password_fail'));
+             }
+        }else{
+            return back()->with('error_pass', 'Mật khẩu cũ không chính xác.');
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *

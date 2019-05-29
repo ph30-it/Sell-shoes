@@ -6,7 +6,9 @@
 					    	<div style="border: 1px solid #ccc; padding: 2%; padding-left: 0; padding-bottom: 0;margin-bottom: 30px;height: 100%">
 					    		<div class="view view-fifth">
 								  	  <div class="top_box" style="position: relative;">
+								  	  	@if($product->sale > 0)
 								  	  	<span style="border-radius: 50px;padding: 7px 4px;background:#ff6517;color:#fff;font-size: 12px;position: absolute; top: 0px;right: 0;">{{$product->sale}}%</span>
+								  	  	@endif
 									  	<h3 class="m_1">
 									  		<a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}" style="color: #000;text-decoration: none;">{{$product->name}}</a>
 									  	</h3>
@@ -24,7 +26,11 @@
 					                       		<div class="info"><a href="{{asset('detail/'.$product->id.'/'.$product->slug.'.html')}}" style="color: #fff;text-decoration: none;">Xem chi tiết</a></div>
 							                  </div>
 					                    </div>
-				                       <div><span style="margin-right: 10px" class="price-del"><del>{{number_format($product->price)}} ₫</del></span><span class="price">{{number_format($product->price - ($product->price*$product->sale/100))}} ₫</span></div>
+				                       @if($product->sale > 0)
+				                       		<div><span style="margin-right: 10px" class="price-del"><del>{{number_format($product->price)}} ₫</del></span><span class="price">{{number_format($product->price - ($product->price*$product->sale/100))}} ₫</span></div>
+				                       	@else
+				                       		<span class="price">{{number_format($product->price)}} ₫</span>
+				                       	@endif
 									   </div>
 									    </div>
 									   

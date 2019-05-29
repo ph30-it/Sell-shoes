@@ -4,6 +4,8 @@ namespace App\Http\Controllers\frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ContactRequest;
+use Mail;
 
 class ContactController extends Controller
 {
@@ -16,6 +18,9 @@ class ContactController extends Controller
     {
         return view('frontend.contact.contact');
     }
+    public function contactDone(){
+        return view('frontend.contact.contact-done');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +29,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -33,9 +38,20 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
-        //
+        //dd($request->all());
+        $data = $request->only('name','email','phone','content');
+        Mail::send('mail.contact-mail', $data, function($message) use ($data){
+            $message->from($data['email']);
+            $message->to('ducmanhcit@gmail.com');
+            $message->subject('[DucManhITShoes.com] Liên hệ từ khách hàng');
+        });
+        Mail::send('mail.reply-contact',$data,function($message) use ($data){
+            $message->from('ducmanhcit@gmail.com',"QV_Watch");
+            $message->to($data['email'])->subject('[DucManhITShoes.com] Cảm ơn bạn đã liên hệ với shop! tin nhắn sẽ được hồi âm trong thời gian sớm nhất');
+       });
+        return redirect()->route('contact-done-user');
     }
 
     /**

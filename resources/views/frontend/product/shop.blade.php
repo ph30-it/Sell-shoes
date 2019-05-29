@@ -10,28 +10,26 @@
 						<div class="row row1 scroll-pane">
 							<div class="col col-4" style="margin: -20px 0;">
 								@foreach($categories as $category)
-								<label class="checkbox"><input type="checkbox" name="categories[]" value="{{$category->id}}" class="filterProduct categoryID" ><i></i>{{$category->name}} ({{count($category->products)}})</label>
+								<label class="checkbox"><input type="checkbox" name="categories[]" value="{{$category->id}}" class="filterProduct categoryID" ><i></i>{{$category->name}}({{count($category->products)}})</label>
 								@endforeach
 						    </div>
 						</div>
 				</section>
-		        <section  class="sky-form">
-					<h4>Brand</h4>
-						<div class="row row1 scroll-pane" >
-							@foreach($brands as $brand)
-								<label class="checkbox"><input type="checkbox" name="brands[]" value="{{$brand->id}}" class="filterProduct brandID"><i></i>{{$brand->name}} ({{count($brand->products)}})</label>
-							@endforeach
+				<section  class="sky-form">              	  
+                   	  <h4>Brand</h4>
+						<div class="row row1 scroll-pane">
+							<div class="col col-4" style="margin: -20px 0;">
+								@foreach($brands as $brand)
+								<label class="checkbox"><input type="checkbox" name="brands[]" value="{{$brand->id}}" class="filterProduct brandID"><i></i>{{$brand->name}}({{count($brand->products)}})</label>
+								@endforeach
+						    </div>
 						</div>
-		       </section>
+				</section>
 		       <section  class="sky-form">
 					<h4>Price</h4>
 						<div class="row row1 scroll-pane">
 							<div class="col col-4">
-								<!-- <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Dưới 1,000,000</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>1,000,000₫ ~ 2,000,000₫</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>2,000,000₫ ~ 3,000,000₫</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>3,000,000₫ ~ 4,000,000₫</label>
-								<label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Trên 5,000,000₫</label> -->
+								
 								<select name="price" id="priceProduct" style="background: #F7F7F7;" >
 									<option value="0-100000000">Tất cả</option>
 									<option value="0-1000000">Dưới 1,000,000</option>
@@ -43,14 +41,6 @@
 							</div>
 						</div>
 		       </section>
-		       <!-- <section  class="sky-form" style="margin-top: -80px;padding-bottom: 20px;">
-					<h4>Size</h4>
-						<div class="row row1 scroll-pane">
-							@foreach($sizes as $size)
-								<label class="checkbox"><input type="checkbox" name="sizes[]" value="{{$size->id}}" class="filterProduct sizeID"><i></i>{{$size->name}}</label>
-							@endforeach
-						</div>
-		       </section> -->
 		</div>
 		<div class="cont" style="width: 77.1%">
 		  <div class="mens-toolbar">
@@ -68,6 +58,10 @@
 	    	<div>
 	    		@if(isset($search))
 	    			<br><h4 style="color:#00CED1;margin-top: -5px">Kết quả tìm được với từ khóa: "{{$search}}"</h4>
+	    		@elseif(isset($categoryName))
+	    			<br><h4 style="margin-top: -5px">Tất cả sản phẩm danh mục {{$categoryName->name}}</h4>
+	    		@elseif(isset($brandName))
+	    			<br><h4 style="margin-top: -5px">Tất cả sản phẩm thương hiệu {{$brandName->name}}</h4>
 	    		@else
 	    			<br><h4 style="margin-top: -5px">Tất cả sản phẩm</h4>
 	    		@endif

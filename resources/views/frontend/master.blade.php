@@ -9,7 +9,10 @@
 <link rel="stylesheet" href="{{asset('css/style10.css')}}">
 <link rel="stylesheet" href="{{asset('css/stylemenu.css')}}">
 <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+<link rel="stylesheet" href="{{asset('css/glyphicons.css')}}">
 <link rel="stylesheet" href="{{asset('css/product.css')}}">
+<link rel="stylesheet" href="{{asset('css/slider-product.css')}}">
+
 <link href="{{asset('css/form.css')}}" rel="stylesheet">
 <link href="{{asset('css/simple-rating.css')}}" rel="stylesheet"> <!-- rating style css -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -17,6 +20,7 @@
 <link rel="stylesheet" href="{{asset('css/etalage.css')}}">
 <link rel="stylesheet" type="text/css"  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="{{asset('css/bootstrap-theme.min.css')}}">
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -180,6 +184,13 @@
 .nentrongsuot ul li a{
     color: #fff;
 }
+#searchInput{
+    position: relative;
+}
+#searchBox{
+    position: absolute;
+    bottom: 0;
+}
 
 </style>
 </head>
@@ -195,8 +206,23 @@
                     <div class="form-w3layouts-grid">
                         <form action="{{route('search-user')}}" method="get" class="newsletter">
                             @csrf
-                            <input class="search" type="search" placeholder="Search..." required="" name="search">
+                            <input class="search" id="liveSearch"  type="text" placeholder="Tìm kiếm..." required="" name="search" autocomplete="off" style="position: relative;">
+                            <ul id="getLiveSearch" style="z-index: 1;background-color: #fff;position: absolute;top: 48%;width: 400px;font-size: 11px;">
+                                <!-- <li  style="border-bottom: 1px dotted #ccc;padding-bottom: 10px;">
+                                        <div style="float: left;width: 20%;">
+                                            <a href=""><img src="{{asset('images/product/giay1.jpg')}}" alt="a" ></a>
+                                        </div>
+                                        <div>
+                                            <br><a href="" style="color: #000;">GIÀY ADIDAS SUPERSTAR "WHITE/BLUE" GOLD STAMP A</a>
+                                            <br><span style="color: #FFAF02;font-size: 13px;margin-right: 10px;">1,955,000 ₫</span><span><del style="color: #555;">1,955,000 ₫</del></span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                </li> -->
+                               
+                                
+                            </ul>
                            <!--  <button class="form-control btn" value="" style="position: absolute; right: 0;"><span class="fa fa-search"></span></button> -->
+                          
                         </form>
                     </div>
                 </div>
@@ -272,26 +298,25 @@
                 <label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
                 <input type="checkbox" id="drop" />
                 <ul class="menu" >
-                    <li class="active"><a href="{{route('home-user')}}" style="text-decoration: none;">Home</a></li>
+                    <li class="active"><a href="{{route('home-user')}}" style="text-decoration: none;">Trang chủ</a></li>
                      @foreach($categories as $category)
                     <li><a href="{{asset('san-pham/'.$category->id.'/'.$category->name)}}" style="text-decoration: none;">{{$category->name}}</a></li>
                     @endforeach
                     <li>
                         <!-- First Tier Drop Down -->
-                        <label for="drop-2" class="toggle">Brand <span class="fa fa-angle-down" aria-hidden="true"></span>
+                        <label for="drop-2" class="toggle">Thương hiệu<span class="fa fa-angle-down" aria-hidden="true"></span>
                         </label>
-                        <a href="#" style="text-decoration: none;">Brand <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                        <a href="#" style="text-decoration: none;">Thương hiệu<span class="fa fa-angle-down" aria-hidden="true"></span></a>
                         <input type="checkbox" id="drop-2" />
                         <ul style="z-index: 1;">
                             @foreach($brands as $brand)
-                            <li><a href="{{asset('san-pham/'.$brand->id.'/'.$brand->name)}}" class="drop-text" style="text-decoration: none;">{{$brand->name}}</a></li>
+                            <li><a href="{{asset('san-pham/'.$brand->id.'/hang/'.$brand->name)}}" class="drop-text" style="text-decoration: none;">{{$brand->name}}</a></li>
                             @endforeach
 
                         </ul>
                     </li>
-                     <li><a href="{{route('list-all-product')}}" style="text-decoration: none;">Shop</a></li>
-                    <li "><a href="events.html" style="text-decoration: none;">Events</a></li>
-                    <li><a href="contact.html"  style="text-decoration: none;">Contact</a></li>
+                     <li><a href="{{route('list-all-product')}}" style="text-decoration: none;">Sản phẩm</a></li>
+                    <li><a href="{{route('contact-user')}}"  style="text-decoration: none;">Liên hệ</a></li>
                 </ul>
             </nav>
             <!-- //nav -->
@@ -344,6 +369,27 @@
     </script>
     <script>
     $(document).ready(function(){
+        //live search ajax
+        $('#liveSearch').on('keyup',function(){
+                var search = $(this).val();
+                if (search == "") {
+                    $('#getLiveSearch').html('');
+                   
+                }else{
+                     $.ajax({
+                        type: 'get',
+                        url: '{{ route('live-search-user') }}',
+                        data: {
+                            search: search,
+                        },
+                        success:function(data){
+                            $('#getLiveSearch').html(data);
+                        }
+                    });
+                }
+               
+            });
+
         $('.deleteCart').click(function(event) {
                 //event.preventDefault();   
                 var cart_id =  $(this).attr('data-idcart'); 

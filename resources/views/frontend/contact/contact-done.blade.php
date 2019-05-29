@@ -4,48 +4,14 @@
       <section class="">
         <img src="{{asset('images/collection_image.jpg')}}" alt="">
         <div class="container">
-            <h3 class="title-w3pvt text-center">Liên Hệ Với Chúng Tôi</h3>
+            <h3 class="title-w3pvt text-center">Cảm Ơn Bạn Đã Liên Hệ Với Chúng Tôi</h3>
+            <h4 class="text-center">Chúng tôi sẽ phản hồi bạn trong thời gian sớm nhất. Thank you very much.</h4>
             <div class="comment-top mt-5 row">
                 <div class="col-lg-2 comment-bottom w3pvt_mail_grid-img">
                     <img class="img-fluid" src="" alt="">
                 </div>
                 <div class="col-lg-7 comment-bottom w3pvt_mail_grid_right">
-                    <form action="{{route('mail-contact-user')}}" method="post">
-                      @csrf
-                        <div class="row">
-                            <div class="col-lg-6 form-group">
-                                <label>Họ tên</label>
-                                <input class="form-control" type="text" name="name" value="{{old('name')}}" autofocus="">
-                               @if($errors->has('name'))
-                                <span style="color: red;font-size: 13px">{{$errors->first('name')}}</span>
-                              @endif
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 form-group">
-                                <label>Email</label>
-                                <input class="form-control" type="email" name="email" value="{{old('email')}}">
-                                @if($errors->has('email'))
-                                  <span style="color: red;font-size: 13px">{{$errors->first('email')}}</span>
-                                @endif
-                            </div>
-                            <div class="col-lg-6 form-group">
-                                <label>Số điện thoại</label>
-                                <input class="form-control" type="text" name="phone" value="{{old('phone')}}">
-                                @if($errors->has('phone'))
-                                  <span style="color: red;font-size: 13px">{{$errors->first('phone')}}</span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Nội dung</label>
-                            <textarea class="form-control" name="content" value="{{old('content')}}" ></textarea>
-                            @if($errors->has('content'))
-                              <span style="color: red;font-size: 13px">{{$errors->first('content')}}</span>
-                            @endif
-                        </div>
-                        <button type="submit" class="read-more btn submit mt-3">Gửi</button>
-                    </form>
+                    
                 </div>
 
             </div>

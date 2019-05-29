@@ -40,6 +40,11 @@
 									{{ session('status') }}
 								</div>
 						 	@endif
+						 	@if(session('login_fail'))
+								<div class="alert alert-danger">
+									{{ session('login_fail') }}
+								</div>
+						 	@endif
 						 	 <div class="sky-form">
 						 	 	<label>
 									<input type="checkbox" value="remember">

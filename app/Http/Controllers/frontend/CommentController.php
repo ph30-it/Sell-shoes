@@ -43,6 +43,7 @@ class CommentController extends Controller
     {
         //chưa đăng nhập
         $data = $request->except('_token');
+        dd($request);
         $data['product_id'] = $id;
         $comment = Comment::create($data);
         if ($comment) {
@@ -55,7 +56,8 @@ class CommentController extends Controller
     public function storeUser(UserCommentRequest $request, $id)
     {
         //user
-        $data = $request->only('content');
+        $data = $request->only('content','rating');
+        //dd($request);
         $data['product_id'] = $id;
         $data['user_id'] = Auth::user()->id;
         $data['name']  = Auth::user()->name;
